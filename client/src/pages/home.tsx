@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -15,22 +14,31 @@ import {
   Database,
   Zap,
   Shield,
-  Users,
   ArrowRight,
   CheckCircle2,
   Menu,
   X,
   Mail,
   MapPin,
-  Phone,
   Loader2,
+  Rocket,
+  BarChart3,
+  Globe,
+  Cpu,
+  Bot,
+  Sparkles,
+  ExternalLink,
+  ChevronRight,
+  Clock,
+  Target,
+  Layers,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
+  transition: { duration: 0.6, ease: "easeOut" },
 };
 
 const staggerContainer = {
@@ -41,6 +49,30 @@ const staggerContainer = {
   },
 };
 
+const glowPulse = {
+  animate: {
+    boxShadow: [
+      "0 0 20px rgba(34, 197, 94, 0.2)",
+      "0 0 40px rgba(34, 197, 94, 0.4)",
+      "0 0 20px rgba(34, 197, 94, 0.2)",
+    ],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+function GlassCard({ children, className = "", glow = false }: { children: React.ReactNode; className?: string; glow?: boolean }) {
+  return (
+    <div className={`relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl ${glow ? 'shadow-[0_0_30px_rgba(34,197,94,0.15)]' : ''} ${className}`}>
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl pointer-events-none" />
+      <div className="relative">{children}</div>
+    </div>
+  );
+}
+
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -50,48 +82,41 @@ function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/60 border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
+          <div className="flex items-center gap-3">
+            <motion.div 
+              className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-400 rounded-xl flex items-center justify-center shadow-lg shadow-primary/25"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
               <Zap className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold" data-testid="text-logo">Roaradd</span>
+            </motion.div>
+            <span className="text-xl font-bold tracking-tight" data-testid="text-logo">Roaradd</span>
           </div>
 
           <nav className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection("services")}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="link-services"
-            >
-              Services
-            </button>
-            <button
-              onClick={() => scrollToSection("about")}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="link-about"
-            >
-              About
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="link-contact"
-            >
-              Contact
-            </button>
+            {["services", "products", "roadmap", "contact"].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item)}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors capitalize"
+                data-testid={`link-${item}`}
+              >
+                {item}
+              </button>
+            ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
+          <div className="flex items-center gap-3">
             <Button
               onClick={() => scrollToSection("contact")}
-              className="hidden sm:flex"
+              className="hidden sm:flex gap-2 bg-gradient-to-r from-primary to-emerald-500 hover:from-primary/90 hover:to-emerald-500/90 shadow-lg shadow-primary/25"
               data-testid="button-get-started"
             >
               Get Started
+              <ArrowRight className="w-4 h-4" />
             </Button>
             <Button
               variant="ghost"
@@ -110,28 +135,19 @@ function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden py-4 border-t"
+            className="md:hidden py-4 border-t border-white/5"
           >
             <nav className="flex flex-col gap-4">
-              <button
-                onClick={() => scrollToSection("services")}
-                className="text-left text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Services
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="text-left text-muted-foreground hover:text-foreground transition-colors"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="text-left text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Contact
-              </button>
-              <Button onClick={() => scrollToSection("contact")} className="w-full">
+              {["services", "products", "roadmap", "contact"].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item)}
+                  className="text-left text-muted-foreground hover:text-foreground transition-colors capitalize"
+                >
+                  {item}
+                </button>
+              ))}
+              <Button onClick={() => scrollToSection("contact")} className="w-full bg-gradient-to-r from-primary to-emerald-500">
                 Get Started
               </Button>
             </nav>
@@ -153,9 +169,11 @@ function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/10" />
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-500/15 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "1s" }} />
+      
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMSIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <motion.div
@@ -164,9 +182,10 @@ function HeroSection() {
           variants={staggerContainer}
           className="text-center"
         >
-          <motion.div variants={fadeInUp}>
-            <Badge variant="secondary" className="mb-6" data-testid="badge-hero">
-              Transforming Ideas into Digital Reality
+          <motion.div variants={fadeInUp} className="mb-6">
+            <Badge className="px-4 py-2 bg-primary/10 border-primary/20 text-primary" data-testid="badge-hero">
+              <Sparkles className="w-3 h-3 mr-2" />
+              Service-Oriented Technology Company
             </Badge>
           </motion.div>
 
@@ -175,57 +194,76 @@ function HeroSection() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
             data-testid="text-hero-title"
           >
-            Build Exceptional
+            Powering Your
             <br />
-            <span className="text-primary">Software Solutions</span>
+            <span className="bg-gradient-to-r from-primary via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+              Digital Future
+            </span>
           </motion.h1>
 
           <motion.p
             variants={fadeInUp}
-            className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8"
+            className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
             data-testid="text-hero-description"
           >
-            Roaradd delivers cutting-edge software development services that empower
-            businesses to thrive in the digital age. From web applications to cloud
-            infrastructure, we bring your vision to life.
+            Roaradd is a service-oriented company delivering cutting-edge software solutions, 
+            innovative products, and strategic technology consulting to transform businesses worldwide.
           </motion.p>
 
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button
               size="lg"
               onClick={scrollToContact}
-              className="gap-2"
+              className="gap-2 bg-gradient-to-r from-primary to-emerald-500 hover:from-primary/90 hover:to-emerald-500/90 shadow-xl shadow-primary/30 text-lg px-8"
               data-testid="button-start-project"
             >
               Start Your Project
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5" />
             </Button>
             <Button
               size="lg"
               variant="outline"
               onClick={scrollToServices}
+              className="gap-2 border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-lg px-8"
               data-testid="button-explore-services"
             >
               Explore Services
             </Button>
           </motion.div>
 
-          <motion.div
-            variants={fadeInUp}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto"
-          >
-            {[
-              { value: "50+", label: "Projects Delivered" },
-              { value: "98%", label: "Client Satisfaction" },
-              { value: "24/7", label: "Support Available" },
-              { value: "5+", label: "Years Experience" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center" data-testid={`stat-${index}`}>
-                <div className="text-2xl sm:text-3xl font-bold text-primary">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+          <motion.div variants={fadeInUp}>
+            <GlassCard className="inline-block px-8 py-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+                {[
+                  { value: "100+", label: "Projects Delivered" },
+                  { value: "99%", label: "Client Satisfaction" },
+                  { value: "24/7", label: "Support Available" },
+                  { value: "10+", label: "Years Experience" },
+                ].map((stat, index) => (
+                  <div key={index} className="text-center" data-testid={`stat-${index}`}>
+                    <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs sm:text-sm text-muted-foreground mt-1">{stat.label}</div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </GlassCard>
           </motion.div>
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2"
+        >
+          <motion.div
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-1.5 h-1.5 bg-primary rounded-full"
+          />
         </motion.div>
       </div>
     </section>
@@ -236,51 +274,47 @@ const services = [
   {
     icon: Code2,
     title: "Custom Software Development",
-    description:
-      "Tailored solutions built from the ground up to meet your unique business requirements and workflows.",
+    description: "Tailored solutions built with cutting-edge technologies to meet your unique business needs.",
     features: ["Full-stack Development", "API Integration", "Legacy Modernization"],
   },
   {
     icon: Smartphone,
     title: "Mobile App Development",
-    description:
-      "Native and cross-platform mobile applications that deliver exceptional user experiences.",
+    description: "Native and cross-platform mobile applications that deliver exceptional user experiences.",
     features: ["iOS & Android", "React Native", "Flutter Development"],
   },
   {
     icon: Cloud,
     title: "Cloud Solutions",
-    description:
-      "Scalable cloud infrastructure and migration services to optimize your operations.",
+    description: "Scalable cloud infrastructure and migration services to optimize your operations.",
     features: ["AWS & Azure", "Cloud Migration", "DevOps & CI/CD"],
   },
   {
     icon: Database,
     title: "Data Engineering",
-    description:
-      "Transform your data into actionable insights with our data engineering expertise.",
+    description: "Transform your data into actionable insights with our data engineering expertise.",
     features: ["Data Pipelines", "Analytics", "Machine Learning"],
   },
   {
     icon: Shield,
     title: "Cybersecurity",
-    description:
-      "Protect your digital assets with comprehensive security assessments and solutions.",
+    description: "Protect your digital assets with comprehensive security assessments and solutions.",
     features: ["Security Audits", "Penetration Testing", "Compliance"],
   },
   {
-    icon: Users,
-    title: "IT Consulting",
-    description:
-      "Strategic technology guidance to help you make informed decisions for your business.",
-    features: ["Digital Strategy", "Tech Assessment", "Roadmap Planning"],
+    icon: Bot,
+    title: "AI & Automation",
+    description: "Leverage artificial intelligence to automate processes and drive innovation.",
+    features: ["AI Integration", "Process Automation", "Chatbots"],
   },
 ];
 
 function ServicesSection() {
   return (
-    <section id="services" className="py-20 sm:py-32 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-24 sm:py-32 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -288,15 +322,20 @@ function ServicesSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <Badge variant="secondary" className="mb-4" data-testid="badge-services">
+          <Badge className="mb-4 px-4 py-2 bg-primary/10 border-primary/20 text-primary" data-testid="badge-services">
+            <Layers className="w-3 h-3 mr-2" />
             Our Services
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4" data-testid="text-services-title">
-            Comprehensive Software Solutions
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6" data-testid="text-services-title">
+            Software Services That
+            <br />
+            <span className="bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">
+              Drive Results
+            </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We offer a full spectrum of software services designed to accelerate your
-            digital transformation journey.
+            We offer comprehensive software development services designed to accelerate your
+            digital transformation journey and achieve measurable outcomes.
           </p>
         </motion.div>
 
@@ -309,26 +348,21 @@ function ServicesSection() {
         >
           {services.map((service, index) => (
             <motion.div key={index} variants={fadeInUp}>
-              <Card
-                className="h-full hover-elevate transition-all duration-300"
-                data-testid={`card-service-${index}`}
-              >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <service.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                  <p className="text-muted-foreground mb-4">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              <GlassCard className="h-full p-6 hover:border-primary/30 transition-all duration-300 group" glow={false}>
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-emerald-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                  <service.icon className="w-7 h-7 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                <p className="text-muted-foreground mb-5">{service.description}</p>
+                <ul className="space-y-2">
+                  {service.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center gap-2 text-sm">
+                      <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
             </motion.div>
           ))}
         </motion.div>
@@ -337,85 +371,231 @@ function ServicesSection() {
   );
 }
 
-function AboutSection() {
-  const values = [
-    {
-      title: "Innovation First",
-      description: "We stay ahead of technology trends to deliver cutting-edge solutions.",
-    },
-    {
-      title: "Client-Centric",
-      description: "Your success is our priority. We work closely with you at every step.",
-    },
-    {
-      title: "Quality Driven",
-      description: "We maintain the highest standards in code quality and best practices.",
-    },
-    {
-      title: "Transparent Process",
-      description: "Clear communication and visibility throughout the project lifecycle.",
-    },
-  ];
-
+function TrackItSection() {
   return (
-    <section id="about" className="py-20 sm:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <Badge variant="secondary" className="mb-4" data-testid="badge-about">
-              About Roaradd
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6" data-testid="text-about-title">
-              Building the Future, One Line of Code at a Time
-            </h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Founded with a passion for technology and innovation, Roaradd has grown into
-              a trusted partner for businesses seeking digital transformation. Our team of
-              experienced developers, designers, and strategists work together to deliver
-              solutions that make a real impact.
-            </p>
-            <p className="text-lg text-muted-foreground mb-8">
-              We believe in the power of technology to transform businesses and improve
-              lives. That's why we're committed to delivering exceptional software solutions
-              that not only meet but exceed our clients' expectations.
-            </p>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              {values.map((value, index) => (
-                <div key={index} className="p-4 rounded-lg bg-muted/50" data-testid={`value-${index}`}>
-                  <h4 className="font-semibold mb-1">{value.title}</h4>
-                  <p className="text-sm text-muted-foreground">{value.description}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 via-accent/20 to-primary/10 p-8 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 mx-auto mb-6 bg-primary rounded-2xl flex items-center justify-center">
-                  <Zap className="w-12 h-12 text-primary-foreground" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Our Mission</h3>
-                <p className="text-muted-foreground max-w-sm">
-                  To empower businesses with innovative software solutions that drive growth,
-                  efficiency, and competitive advantage in the digital era.
+    <section id="products" className="py-24 sm:py-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-emerald-500/5" />
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] -translate-y-1/2" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <GlassCard className="overflow-hidden" glow={true}>
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+              <div className="p-8 lg:p-12">
+                <Badge className="mb-4 px-4 py-2 bg-emerald-500/10 border-emerald-500/20 text-emerald-400">
+                  <Rocket className="w-3 h-3 mr-2" />
+                  Featured Product
+                </Badge>
+                
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                  <span className="bg-gradient-to-r from-primary via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                    TrackIt
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-muted-foreground mb-6">
+                  The ultimate project and task management platform designed for modern teams. 
+                  TrackIt streamlines workflows, enhances collaboration, and delivers actionable 
+                  insights to keep your projects on track.
                 </p>
+
+                <ul className="space-y-4 mb-8">
+                  {[
+                    "Real-time collaboration and task tracking",
+                    "Intuitive Kanban boards and timeline views",
+                    "Powerful analytics and reporting dashboards",
+                    "Seamless integrations with your favorite tools",
+                    "Enterprise-grade security and compliance",
+                  ].map((feature, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-3 h-3 text-primary" />
+                      </div>
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="https://trackit.roaradd.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                  data-testid="link-trackit"
+                >
+                  <Button
+                    size="lg"
+                    className="gap-2 bg-gradient-to-r from-primary to-emerald-500 hover:from-primary/90 hover:to-emerald-500/90 shadow-xl shadow-primary/30"
+                  >
+                    Visit TrackIt
+                    <ExternalLink className="w-4 h-4" />
+                  </Button>
+                </a>
+              </div>
+
+              <div className="relative p-8 lg:p-12 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-emerald-500/5" />
+                <motion.div
+                  animate={glowPulse.animate}
+                  className="relative w-full max-w-md"
+                >
+                  <GlassCard className="p-6">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary to-emerald-500 rounded-xl flex items-center justify-center">
+                        <BarChart3 className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">TrackIt Dashboard</h4>
+                        <p className="text-sm text-muted-foreground">Project Overview</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
+                        <span className="text-sm">Active Tasks</span>
+                        <Badge variant="secondary">24</Badge>
+                      </div>
+                      <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
+                        <span className="text-sm">Completed</span>
+                        <Badge className="bg-primary/20 text-primary">156</Badge>
+                      </div>
+                      <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
+                        <span className="text-sm">Team Members</span>
+                        <Badge variant="secondary">12</Badge>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 h-24 rounded-lg bg-gradient-to-r from-primary/20 via-emerald-500/20 to-teal-500/20 flex items-end p-4">
+                      <div className="flex gap-2 items-end w-full">
+                        {[40, 65, 45, 80, 55, 70, 90, 60, 75, 85].map((height, i) => (
+                          <div
+                            key={i}
+                            className="flex-1 bg-gradient-to-t from-primary to-emerald-400 rounded-t"
+                            style={{ height: `${height}%` }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </GlassCard>
+                </motion.div>
               </div>
             </div>
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/20 rounded-full blur-2xl" />
-            <div className="absolute -top-4 -left-4 w-24 h-24 bg-accent/30 rounded-full blur-2xl" />
+          </GlassCard>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+const roadmapItems = [
+  {
+    icon: Globe,
+    title: "E-Commerce Platform",
+    description: "Full-featured e-commerce solution with AI-powered recommendations and analytics.",
+    status: "Coming Q2 2026",
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    icon: Cpu,
+    title: "IoT Management Suite",
+    description: "Comprehensive platform for managing and monitoring IoT devices at scale.",
+    status: "Coming Q3 2026",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    icon: Bot,
+    title: "AI Assistant Platform",
+    description: "Enterprise AI assistant with custom training and integration capabilities.",
+    status: "Coming Q4 2026",
+    color: "from-orange-500 to-red-500",
+  },
+  {
+    icon: Database,
+    title: "Data Analytics Hub",
+    description: "Unified data analytics platform with real-time insights and visualization.",
+    status: "Coming Q1 2027",
+    color: "from-teal-500 to-green-500",
+  },
+];
+
+function RoadmapSection() {
+  return (
+    <section id="roadmap" className="py-24 sm:py-32 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <Badge className="mb-4 px-4 py-2 bg-primary/10 border-primary/20 text-primary">
+            <Target className="w-3 h-3 mr-2" />
+            Future Services
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+            Our
+            <span className="bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">
+              {" "}Roadmap
+            </span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            We're constantly innovating and expanding our service offerings. 
+            Here's a glimpse of what's coming next.
+          </p>
+        </motion.div>
+
+        <div className="relative">
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent hidden lg:block" />
+          
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="space-y-8"
+          >
+            {roadmapItems.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                className={`flex flex-col lg:flex-row gap-8 items-center ${
+                  index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                }`}
+              >
+                <div className={`flex-1 ${index % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}>
+                  <GlassCard className="p-6 inline-block max-w-md">
+                    <div className={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? "lg:flex-row-reverse" : ""}`}>
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center`}>
+                        <item.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className={index % 2 === 0 ? "lg:text-right" : ""}>
+                        <h3 className="text-xl font-semibold">{item.title}</h3>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="w-3 h-3" />
+                          {item.status}
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground">{item.description}</p>
+                  </GlassCard>
+                </div>
+
+                <div className="relative flex-shrink-0 hidden lg:block">
+                  <div className={`w-4 h-4 rounded-full bg-gradient-to-br ${item.color} shadow-lg`} />
+                  <div className={`absolute top-1/2 ${index % 2 === 0 ? "right-full mr-4" : "left-full ml-4"} -translate-y-1/2 w-8 h-px bg-gradient-to-r ${item.color}`} />
+                </div>
+
+                <div className="flex-1 hidden lg:block" />
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>
@@ -475,8 +655,11 @@ function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-32 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 sm:py-32 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[150px]" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -484,108 +667,115 @@ function ContactSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <Badge variant="secondary" className="mb-4" data-testid="badge-contact">
+          <Badge className="mb-4 px-4 py-2 bg-primary/10 border-primary/20 text-primary" data-testid="badge-contact">
+            <Mail className="w-3 h-3 mr-2" />
             Get in Touch
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4" data-testid="text-contact-title">
-            Let's Build Something Great Together
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6" data-testid="text-contact-title">
+            Let's Build Something
+            <br />
+            <span className="bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">
+              Amazing Together
+            </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Ready to start your next project? Reach out to us and let's discuss how we
-            can help bring your ideas to life.
+            Ready to transform your business? Reach out and let's discuss how Roaradd 
+            can help bring your vision to life.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <Card>
-              <CardContent className="p-6 sm:p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Name *
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        placeholder="John Doe"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        data-testid="input-name"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email *
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="john@example.com"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        data-testid="input-email"
-                      />
-                    </div>
-                  </div>
+            <GlassCard className="p-8">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label htmlFor="company" className="text-sm font-medium">
-                      Company
+                    <label htmlFor="name" className="text-sm font-medium">
+                      Name *
                     </label>
                     <Input
-                      id="company"
-                      name="company"
-                      placeholder="Your Company"
-                      value={formData.company}
+                      id="name"
+                      name="name"
+                      placeholder="John Doe"
+                      value={formData.name}
                       onChange={handleChange}
-                      data-testid="input-company"
+                      required
+                      className="bg-white/5 border-white/10 focus:border-primary"
+                      data-testid="input-name"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      Message *
+                    <label htmlFor="email" className="text-sm font-medium">
+                      Email *
                     </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Tell us about your project..."
-                      rows={5}
-                      value={formData.message}
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={formData.email}
                       onChange={handleChange}
                       required
-                      data-testid="input-message"
+                      className="bg-white/5 border-white/10 focus:border-primary"
+                      data-testid="input-email"
                     />
                   </div>
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={contactMutation.isPending}
-                    data-testid="button-submit-contact"
-                  >
-                    {contactMutation.isPending ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="company" className="text-sm font-medium">
+                    Company
+                  </label>
+                  <Input
+                    id="company"
+                    name="company"
+                    placeholder="Your Company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    className="bg-white/5 border-white/10 focus:border-primary"
+                    data-testid="input-company"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium">
+                    Message *
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell us about your project..."
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="bg-white/5 border-white/10 focus:border-primary resize-none"
+                    data-testid="input-message"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-primary to-emerald-500 hover:from-primary/90 hover:to-emerald-500/90 shadow-lg shadow-primary/25"
+                  disabled={contactMutation.isPending}
+                  data-testid="button-submit-contact"
+                >
+                  {contactMutation.isPending ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </>
+                  )}
+                </Button>
+              </form>
+            </GlassCard>
           </motion.div>
 
           <motion.div
@@ -593,84 +783,59 @@ function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-8"
+            className="space-y-6"
           >
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-medium">Email</div>
-                    <a
-                      href="mailto:hello@roaradd.com"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                      data-testid="link-email"
-                    >
-                      hello@roaradd.com
-                    </a>
-                  </div>
+            <GlassCard className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-6 h-6 text-primary" />
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-medium">Phone</div>
-                    <a
-                      href="tel:+1234567890"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                      data-testid="link-phone"
-                    >
-                      +1 (234) 567-890
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-medium">Location</div>
-                    <span className="text-muted-foreground" data-testid="text-location">
-                      San Francisco, CA
-                    </span>
-                  </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Email Us</h4>
+                  <a
+                    href="mailto:hello@roaradd.com"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                    data-testid="link-email"
+                  >
+                    hello@roaradd.com
+                  </a>
                 </div>
               </div>
-            </div>
+            </GlassCard>
 
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Office Hours</h3>
-              <div className="space-y-2 text-muted-foreground">
-                <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span>9:00 AM - 6:00 PM PST</span>
+            <GlassCard className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-primary" />
                 </div>
-                <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span>10:00 AM - 2:00 PM PST</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span>Closed</span>
+                <div>
+                  <h4 className="font-semibold mb-1">Location</h4>
+                  <span className="text-muted-foreground" data-testid="text-location">
+                    San Francisco, CA & Remote Worldwide
+                  </span>
                 </div>
               </div>
-            </div>
+            </GlassCard>
 
-            <Card className="bg-primary text-primary-foreground">
-              <CardContent className="p-6">
-                <h4 className="text-lg font-semibold mb-2">Need Urgent Support?</h4>
-                <p className="text-primary-foreground/80 mb-4">
-                  Our team is available 24/7 for critical issues and emergency support.
-                </p>
-                <Button variant="secondary" className="w-full" data-testid="button-emergency">
-                  Emergency Contact
-                </Button>
-              </CardContent>
-            </Card>
+            <GlassCard className="p-6" glow={true}>
+              <h4 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-primary" />
+                Why Choose Roaradd?
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  "Expert team with 10+ years of experience",
+                  "Transparent pricing with no hidden costs",
+                  "Agile methodology for faster delivery",
+                  "Dedicated support and maintenance",
+                ].map((item, index) => (
+                  <li key={index} className="flex items-center gap-3 text-muted-foreground">
+                    <ChevronRight className="w-4 h-4 text-primary flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </GlassCard>
           </motion.div>
         </div>
       </div>
@@ -682,47 +847,65 @@ function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-card border-t py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+    <footer className="border-t border-white/5 py-12 relative">
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-400 rounded-xl flex items-center justify-center shadow-lg shadow-primary/25">
                 <Zap className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold">Roaradd</span>
             </div>
-            <p className="text-muted-foreground max-w-sm">
-              Empowering businesses with innovative software solutions. Building the
-              future, one line of code at a time.
+            <p className="text-muted-foreground max-w-sm mb-4">
+              A service-oriented technology company delivering cutting-edge software solutions
+              and innovative products to transform businesses worldwide.
             </p>
+            <div className="flex gap-4">
+              <a href="https://trackit.roaradd.com" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="sm" className="gap-2 border-white/10 bg-white/5">
+                  <BarChart3 className="w-4 h-4" />
+                  TrackIt
+                </Button>
+              </a>
+            </div>
           </div>
+          
           <div>
             <h4 className="font-semibold mb-4">Services</h4>
-            <ul className="space-y-2 text-muted-foreground">
+            <ul className="space-y-2 text-muted-foreground text-sm">
               <li>Custom Development</li>
               <li>Mobile Apps</li>
               <li>Cloud Solutions</li>
-              <li>Data Engineering</li>
+              <li>AI & Automation</li>
+              <li>Cybersecurity</li>
             </ul>
           </div>
+          
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>About Us</li>
-              <li>Careers</li>
-              <li>Blog</li>
-              <li>Contact</li>
+            <h4 className="font-semibold mb-4">Products</h4>
+            <ul className="space-y-2 text-muted-foreground text-sm">
+              <li>
+                <a href="https://trackit.roaradd.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  TrackIt
+                </a>
+              </li>
+              <li className="text-muted-foreground/50">E-Commerce (Coming Soon)</li>
+              <li className="text-muted-foreground/50">IoT Suite (Coming Soon)</li>
+              <li className="text-muted-foreground/50">AI Platform (Coming Soon)</li>
             </ul>
           </div>
         </div>
-        <div className="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        
+        <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground" data-testid="text-copyright">
             {currentYear} Roaradd. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+            <span className="hover:text-foreground cursor-pointer transition-colors">Privacy Policy</span>
+            <span className="hover:text-foreground cursor-pointer transition-colors">Terms of Service</span>
           </div>
         </div>
       </div>
@@ -732,12 +915,13 @@ function Footer() {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
         <HeroSection />
         <ServicesSection />
-        <AboutSection />
+        <TrackItSection />
+        <RoadmapSection />
         <ContactSection />
       </main>
       <Footer />
