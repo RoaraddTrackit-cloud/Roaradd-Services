@@ -1,3 +1,4 @@
+import RoaraddHero from "@/components/RoaraddHero";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -918,7 +919,8 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
-        <HeroSection />
+        <RoaraddHero />
+            <HeroSection />
         <ServicesSection />
         <TrackItSection />
         <RoadmapSection />
