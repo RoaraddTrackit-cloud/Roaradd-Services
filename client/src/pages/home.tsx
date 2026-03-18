@@ -77,7 +77,7 @@ function GlassCard({ children, className = "", glow = false }: { children: React
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id: string) => {     if (id === "it-consulting") { window.location.href = "/it-consulting"; return; }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);
   };
@@ -98,7 +98,7 @@ function Header() {
           </div>
 
           <nav className="hidden md:flex items-center gap-8">
-            {["services", "products", "roadmap", "contact"].map((item) => (
+            {["services", "products", "roadmap", "contact", "it-consulting"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -139,7 +139,7 @@ function Header() {
             className="md:hidden py-4 border-t border-white/5"
           >
             <nav className="flex flex-col gap-4">
-              {["services", "products", "roadmap", "contact"].map((item) => (
+              {["services", "products", "roadmap", "contact", "it-consulting"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
