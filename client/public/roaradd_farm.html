@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoarAdd LLC — Circular Bio-Economy Farm · Loganville, Georgia</title>
+<meta name="description" content="RoarAdd LLC is a USDA-registered circular bio-economy farm in Loganville, Georgia producing premium specialty mushrooms, microgreens, and fresh herbs for Atlanta-area restaurants and grocers.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── ROOT ── */
+:root{
+  --e:#1a1208;--moss:#2d4a1e;--fern:#3d6b2c;--leaf:#5a9e3f;
+  --lime:#a8d96c;--cream:#f5f0e8;--sand:#e8dfc8;--rust:#c4622d;
+  --amber:#e8a030;--mush:#8b6f47;--priv:#1e2d4a;--priv2:#2a3d5e;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--e);color:var(--cream);font-family:'DM Mono',monospace;overflow-x:hidden;cursor:none;}
+.cursor{width:12px;height:12px;background:var(--lime);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:exclusion;transition:width .25s,height .25s;}
+.cring{width:36px;height:36px;border:1px solid var(--lime);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.45;transition:width .25s,height .25s,opacity .25s;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:.3;}
+
+/* ── SHARED NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;}
+nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,8,.95),transparent);backdrop-filter:blur(3px);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;font-style:italic;color:var(--lime);position:relative;z-index:1;text-decoration:none;}
+.nav-logo span{color:var(--amber);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;position:relative;z-index:1;align-items:center;}
+.nav-links a{font-size:.68rem;color:var(--sand);opacity:.65;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:opacity .3s,color .3s;}
+.nav-links a:hover{opacity:1;color:var(--lime);}
+.nav-cta{background:var(--leaf)!important;color:var(--earth)!important;opacity:1!important;padding:.5rem 1.2rem!important;border-radius:2px;}
+.nav-cta:hover{background:var(--lime)!important;}
+.nav-lock{background:rgba(232,160,48,.15)!important;border:1px solid rgba(232,160,48,.3)!important;color:var(--amber)!important;opacity:1!important;padding:.45rem 1rem!important;border-radius:2px;cursor:none;}
+
+/* ── MARQUEE ── */
+.mqwrap{overflow:hidden;background:var(--leaf);padding:.62rem 0;position:relative;z-index:99;}
+.mqtrack{display:flex;animation:mq 24s linear infinite;width:max-content;}
+.mqi{font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);padding:0 2rem;white-space:nowrap;}
+.mqdot{color:var(--e);opacity:.35;font-size:.68rem;}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;padding:8rem 4rem 4rem;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(61,107,44,.35),transparent 70%);top:-100px;left:-100px;animation:d1 18s ease-in-out infinite;}
+.o2{width:400px;height:400px;background:radial-gradient(circle,rgba(196,98,45,.18),transparent 70%);bottom:0;right:0;animation:d2 14s ease-in-out infinite;}
+.o3{width:280px;height:280px;background:radial-gradient(circle,rgba(168,217,108,.1),transparent 70%);top:50%;left:50%;animation:d3 20s ease-in-out infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,40px) scale(1.1)}66%{transform:translate(-30px,80px) scale(.95)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(-80px,-60px)}}
+@keyframes d3{0%,100%{transform:translate(-50%,-50%) scale(1)}25%{transform:translate(-50%,-50%) scale(1.3)}75%{transform:translate(-50%,-50%) scale(.8)}}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(168,217,108,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(168,217,108,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hc{position:relative;z-index:2;max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.htag{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);opacity:.8;margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem;}
+.htag::before{content:'';width:32px;height:1px;background:var(--lime);opacity:.6;}
+.htit{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,5.2rem);font-weight:900;line-height:.95;letter-spacing:-.03em;color:var(--cream);margin-bottom:1.8rem;}
+.htit em{font-style:italic;color:var(--lime);display:block;}
+.hdesc{font-size:.85rem;line-height:1.9;color:var(--sand);opacity:.78;max-width:420px;margin-bottom:2.4rem;}
+.hact{display:flex;gap:1rem;align-items:center;}
+.btnp{background:var(--leaf);color:var(--e);padding:.95rem 2rem;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .3s;position:relative;overflow:hidden;display:inline-block;cursor:none;}
+.btnp::after{content:'';position:absolute;inset:0;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.btnp:hover::after{transform:scaleX(1);}
+.btnp span{position:relative;z-index:1;}
+.btns{color:var(--sand);font-size:.74rem;letter-spacing:.08em;text-decoration:none;display:flex;align-items:center;gap:.6rem;opacity:.65;transition:opacity .3s;cursor:none;}
+.btns:hover{opacity:1;}
+.btns::before{content:'↓';animation:bnc 2s ease-in-out infinite;}
+@keyframes bnc{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+/* Hero diagram */
+.hd{position:relative;width:400px;height:400px;margin:0 auto;}
+.dr1{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(168,217,108,.15);animation:rot 40s linear infinite;}
+.dr2{position:absolute;inset:40px;border-radius:50%;border:1px dashed rgba(168,217,108,.1);animation:rot 28s linear infinite reverse;}
+.dc{position:absolute;inset:100px;border-radius:50%;background:radial-gradient(circle,rgba(61,107,44,.4),rgba(26,18,8,.8));border:1px solid rgba(168,217,108,.28);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.dcl{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;font-style:italic;color:var(--lime);line-height:1.2;}
+.dcs{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sand);opacity:.55;margin-top:.3rem;}
+@keyframes rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.nd{position:absolute;width:76px;height:76px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid;transition:transform .3s;cursor:none;}
+.nd:hover{transform:scale(1.15) !important;}
+.ndi{font-size:1.3rem;margin-bottom:.2rem;}
+.ndl{font-size:.53rem;opacity:.75;line-height:1.3;}
+.n1{background:rgba(139,111,71,.2);border-color:rgba(139,111,71,.5);top:10px;left:50%;transform:translateX(-50%);}
+.n2{background:rgba(232,160,48,.15);border-color:rgba(232,160,48,.4);right:10px;top:50%;transform:translateY(-50%);}
+.n3{background:rgba(90,158,63,.15);border-color:rgba(90,158,63,.4);bottom:10px;left:50%;transform:translateX(-50%);}
+.n4{background:rgba(45,74,30,.3);border-color:rgba(168,217,108,.3);left:10px;top:50%;transform:translateY(-50%);}
+.aw{position:absolute;font-size:.7rem;color:var(--lime);opacity:.38;}
+.a1{top:108px;right:90px;transform:rotate(45deg);}
+.a2{bottom:90px;right:90px;transform:rotate(135deg);}
+.a3{bottom:90px;left:90px;transform:rotate(225deg);}
+.a4{top:108px;left:90px;transform:rotate(315deg);}
+
+/* ── STATS ── */
+.strip{background:var(--moss);padding:1.8rem 4rem;display:grid;grid-template-columns:repeat(5,1fr);position:relative;z-index:2;border-top:1px solid rgba(168,217,108,.1);border-bottom:1px solid rgba(168,217,108,.1);}
+.si{padding:1.3rem 1rem;border-right:1px solid rgba(168,217,108,.08);text-align:center;}
+.si:last-child{border-right:none;}
+.sn{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--lime);line-height:1;margin-bottom:.35rem;}
+.sl{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);opacity:.55;line-height:1.4;}
+
+/* ── GENERIC SECTION STYLES ── */
+.pw{padding:6rem 4rem;max-width:1200px;margin:0 auto;position:relative;z-index:2;}
+.sbg{background:linear-gradient(135deg,rgba(45,74,30,.28),transparent);border-radius:4px;border:1px solid rgba(168,217,108,.07);padding:5rem;max-width:1200px;margin:0 auto;position:relative;z-index:2;}
+.slbl{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--lime);opacity:.65;margin-bottom:.9rem;display:flex;align-items:center;gap:1rem;}
+.slbl::after{content:'';flex:1;height:1px;background:rgba(168,217,108,.18);}
+.stit{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.2vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.4rem;}
+.stit em{font-style:italic;color:var(--lime);}
+.darkbg{background:rgba(26,18,8,.88);border-top:1px solid rgba(168,217,108,.06);border-bottom:1px solid rgba(168,217,108,.06);padding:5.5rem 4rem;position:relative;z-index:2;}
+.di{max-width:1200px;margin:0 auto;}
+
+/* ── SYSTEM ── */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start;margin-top:3.5rem;}
+.fsteps{display:flex;flex-direction:column;}
+.fs{display:grid;grid-template-columns:56px 1fr;gap:1.4rem;align-items:start;position:relative;}
+.fs:not(:last-child)::after{content:'';position:absolute;left:27px;top:56px;width:1px;height:100%;background:linear-gradient(to bottom,rgba(168,217,108,.28),rgba(168,217,108,.04));}
+.fn{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;font-style:italic;flex-shrink:0;position:relative;z-index:1;}
+.fn1{background:rgba(139,111,71,.28);color:var(--mush);border:1px solid rgba(139,111,71,.38);}
+.fn2{background:rgba(168,217,108,.12);color:var(--lime);border:1px solid rgba(168,217,108,.28);}
+.fn3{background:rgba(232,160,48,.12);color:var(--amber);border:1px solid rgba(232,160,48,.28);}
+.fn4{background:rgba(61,107,44,.28);color:var(--leaf);border:1px solid rgba(61,107,44,.38);}
+.fc{padding:.75rem 0 1.8rem;}
+.ft{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:.45rem;}
+.fd{font-size:.8rem;line-height:1.8;color:var(--sand);opacity:.68;}
+.ftag{display:inline-block;margin-top:.55rem;padding:.18rem .65rem;border:1px solid rgba(168,217,108,.18);border-radius:20px;font-size:.6rem;letter-spacing:.1em;color:var(--lime);opacity:.75;}
+
+/* ── PRODUCTS ── */
+.pcol{display:flex;flex-direction:column;gap:1.4rem;}
+.pcard{background:rgba(26,18,8,.58);border:1px solid rgba(168,217,108,.1);border-radius:3px;padding:1.7rem;transition:border-color .3s,background .3s;position:relative;overflow:hidden;cursor:none;}
+.pcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
+.pm::before{background:var(--mush);}
+.pg::before{background:var(--leaf);}
+.ph::before{background:var(--amber);}
+.pcard:hover{border-color:rgba(168,217,108,.22);background:rgba(45,74,30,.18);}
+.phdr{display:flex;justify-content:space-between;align-items:start;margin-bottom:.7rem;}
+.pnm{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--cream);}
+.pico{font-size:1.5rem;}
+.ppr{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--lime);margin-bottom:.25rem;}
+.ppl{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sand);opacity:.45;}
+.pdesc{font-size:.76rem;line-height:1.7;color:var(--sand);opacity:.62;margin-top:.75rem;}
+.pvars{display:flex;gap:.38rem;flex-wrap:wrap;margin-top:.7rem;}
+.vtag{padding:.18rem .55rem;background:rgba(168,217,108,.07);border:1px solid rgba(168,217,108,.14);border-radius:2px;font-size:.58rem;letter-spacing:.07em;color:var(--lime);}
+
+/* ── CREDIBILITY ── */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.8rem;}
+.ccard{padding:1.9rem;border:1px solid rgba(168,217,108,.09);border-radius:3px;transition:transform .3s,border-color .3s;cursor:none;position:relative;}
+.ccard:hover{transform:translateY(-4px);border-color:rgba(168,217,108,.25);}
+.cbadge{position:absolute;top:1rem;right:1rem;border-radius:20px;padding:.18rem .55rem;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;}
+.cba{background:rgba(90,158,63,.18);color:var(--leaf);border:1px solid rgba(90,158,63,.28);}
+.cbp{background:rgba(232,160,48,.14);color:var(--amber);border:1px solid rgba(232,160,48,.28);}
+.cico{font-size:1.9rem;margin-bottom:.9rem;}
+.ctit{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--cream);margin-bottom:.55rem;}
+.cdesc{font-size:.76rem;line-height:1.7;color:var(--sand);opacity:.62;}
+
+/* ── USDA CARDS (no $ amounts) ── */
+.ugrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.8rem;}
+.uc{padding:1.7rem;border:1px solid rgba(168,217,108,.09);border-radius:3px;transition:transform .3s,border-color .3s;cursor:none;position:relative;overflow:hidden;}
+.uc:hover{transform:translateY(-3px);border-color:rgba(168,217,108,.22);}
+.uc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.ua::before{background:var(--leaf);}
+.up::before{background:var(--amber);}
+.upl::before{background:rgba(168,217,108,.18);}
+.ust{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.45rem;}
+.usta{color:var(--leaf);}
+.ustp{color:var(--amber);}
+.ustpl{color:var(--sand);opacity:.4;}
+.upr{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sand);opacity:.4;margin-bottom:.38rem;}
+.unm{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--cream);margin-bottom:.55rem;line-height:1.3;}
+.uds{font-size:.73rem;line-height:1.7;color:var(--sand);opacity:.58;}
+
+/* ── SUSTAINABILITY ── */
+.sugrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:2.8rem;}
+.sucard{padding:1.9rem;border:1px solid rgba(168,217,108,.09);border-radius:3px;text-align:center;background:rgba(45,74,30,.13);}
+.suico{font-size:2.4rem;margin-bottom:.75rem;}
+.sunum{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:var(--lime);margin-bottom:.28rem;}
+.sulbl{font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:var(--sand);opacity:.55;line-height:1.5;}
+.sunote{font-size:.66rem;color:var(--lime);opacity:.5;margin-top:.38rem;}
+
+/* ── BUYER FORM ── */
+.bsec{background:linear-gradient(135deg,var(--moss),var(--e));padding:5.5rem 4rem;position:relative;z-index:2;}
+.bi{max-width:960px;margin:0 auto;}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:2.8rem;}
+.bwhy li{font-size:.8rem;line-height:1.8;color:var(--sand);opacity:.78;margin-bottom:.55rem;list-style:none;padding-left:1.2rem;position:relative;}
+.bwhy li::before{content:'→';position:absolute;left:0;color:var(--lime);opacity:.65;}
+.bform{background:rgba(26,18,8,.68);border:1px solid rgba(168,217,108,.13);border-radius:4px;padding:2.4rem;}
+.bform h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--cream);margin-bottom:.45rem;}
+.bform p{font-size:.72rem;color:var(--sand);opacity:.55;margin-bottom:1.6rem;line-height:1.6;}
+.fg{margin-bottom:1.05rem;}
+.flbl{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);opacity:.65;display:block;margin-bottom:.38rem;}
+.fi,.fsel,.fta{width:100%;background:rgba(168,217,108,.04);border:1px solid rgba(168,217,108,.13);border-radius:2px;padding:.72rem .95rem;color:var(--cream);font-family:'DM Mono',monospace;font-size:.78rem;outline:none;transition:border-color .3s;cursor:none;}
+.fi:focus,.fsel:focus,.fta:focus{border-color:rgba(168,217,108,.38);}
+.fsel option{background:var(--e);}
+.fta{resize:vertical;min-height:72px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+.fsub{width:100%;background:var(--leaf);color:var(--e);border:none;padding:.95rem;font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;cursor:none;transition:background .3s;margin-top:.38rem;}
+.fsub:hover{background:var(--lime);}
+.fnote{font-size:.58rem;color:var(--sand);opacity:.35;margin-top:.65rem;text-align:center;}
+.fsuccess{display:none;text-align:center;padding:2rem;}
+.fsico{font-size:2.8rem;margin-bottom:.9rem;}
+.fstit{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--lime);margin-bottom:.45rem;}
+.fsmsg{font-size:.78rem;color:var(--sand);opacity:.65;}
+
+/* ── TEAM ── */
+.tgrid2{display:grid;grid-template-columns:1fr 1fr;gap:1.9rem;margin-top:2.8rem;}
+.tmcard{padding:2.4rem;border:1px solid rgba(168,217,108,.09);border-radius:3px;background:rgba(26,18,8,.48);position:relative;overflow:hidden;}
+.tmcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,var(--leaf),transparent);}
+.trole{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);opacity:.65;margin-bottom:.45rem;}
+.tname{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:var(--cream);margin-bottom:.95rem;}
+.tbio{font-size:.78rem;line-height:1.8;color:var(--sand);opacity:.68;}
+.tskills{display:flex;gap:.38rem;flex-wrap:wrap;margin-top:.95rem;}
+.sklt{padding:.22rem .65rem;background:rgba(168,217,108,.07);border:1px solid rgba(168,217,108,.14);border-radius:2px;font-size:.58rem;letter-spacing:.07em;color:var(--lime);}
+
+/* ── PARTNERS ── */
+.prow{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:2rem;}
+.pitem{text-align:center;opacity:.35;transition:opacity .3s;cursor:none;}
+.pitem:hover{opacity:.72;}
+.pnm{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);}
+.psub{font-size:.55rem;color:var(--sand);margin-top:.18rem;letter-spacing:.07em;}
+
+/* ── TIMELINE ── */
+.tlgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 4rem;}
+.tl{position:relative;margin-top:3.5rem;padding-left:2.8rem;}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--lime),rgba(168,217,108,.08));}
+.ti{position:relative;padding:0 0 2.4rem 2.8rem;}
+.ti::before{content:'';position:absolute;left:-5px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(168,217,108,.13);}
+.ti.done::before{background:var(--leaf);}
+.ti.urg::before{background:var(--rust);animation:pls 2s infinite;}
+@keyframes pls{0%,100%{box-shadow:0 0 0 4px rgba(196,98,45,.14)}50%{box-shadow:0 0 0 8px rgba(196,98,45,.04)}}
+.tdate{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:.28rem;}
+.tev{font-family:'Syne',sans-serif;font-size:.93rem;font-weight:700;color:var(--cream);margin-bottom:.28rem;}
+.tdet{font-size:.74rem;color:var(--sand);opacity:.55;line-height:1.6;}
+
+/* ── CTA ── */
+.ctawrap{padding:0 4rem;margin-bottom:6rem;position:relative;z-index:2;}
+.ctasec{background:linear-gradient(135deg,var(--moss),var(--e));border-radius:4px;border:1px solid rgba(168,217,108,.13);padding:4.5rem;text-align:center;max-width:880px;margin:0 auto;position:relative;overflow:hidden;}
+.ctasec::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(168,217,108,.06),transparent 50%),radial-gradient(circle at 80% 50%,rgba(196,98,45,.04),transparent 50%);}
+.ctaey{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--lime);opacity:.75;margin-bottom:1.4rem;}
+.ctatit{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.8vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:1.4rem;position:relative;}
+.ctadesc{font-size:.84rem;line-height:1.8;color:var(--sand);opacity:.68;max-width:480px;margin:0 auto 2.4rem;position:relative;}
+.ctabtns{display:flex;gap:1.1rem;justify-content:center;position:relative;flex-wrap:wrap;}
+.btno{padding:.9rem 1.9rem;border:1px solid rgba(168,217,108,.38);color:var(--lime);font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .3s;cursor:none;}
+.btno:hover{background:rgba(168,217,108,.08);}
+.crow{display:flex;justify-content:center;gap:2.8rem;margin-top:2.8rem;padding-top:1.8rem;border-top:1px solid rgba(168,217,108,.08);flex-wrap:wrap;}
+.citem{text-align:center;}
+.clbl{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);opacity:.55;margin-bottom:.28rem;}
+.cval{font-size:.78rem;color:var(--cream);opacity:.78;}
+
+/* ── FOOTER ── */
+footer{background:rgba(0,0,0,.38);border-top:1px solid rgba(168,217,108,.07);padding:2.4rem 4rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;flex-wrap:wrap;gap:1rem;}
+.flogo{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;font-style:italic;color:var(--lime);}
+.fcopy{font-size:.64rem;color:var(--sand);opacity:.35;letter-spacing:.05em;}
+.fuei{font-size:.62rem;color:var(--lime);opacity:.42;letter-spacing:.1em;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.1s;}.rd2{transition-delay:.2s;}.rd3{transition-delay:.3s;}.rd4{transition-delay:.4s;}
+
+/* ══════════════════════════════════════════════
+   PRIVATE DASHBOARD STYLES
+   ══════════════════════════════════════════════ */
+#login-overlay{position:fixed;inset:0;background:rgba(10,8,4,.97);z-index:9000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.login-box{background:rgba(30,45,74,.9);border:1px solid rgba(168,217,108,.2);border-radius:8px;padding:3rem;max-width:420px;width:90%;text-align:center;}
+.login-logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;font-style:italic;color:var(--lime);margin-bottom:.4rem;}
+.login-logo span{color:var(--amber);}
+.login-sub{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sand);opacity:.5;margin-bottom:2rem;}
+.login-input{width:100%;background:rgba(168,217,108,.05);border:1px solid rgba(168,217,108,.2);border-radius:4px;padding:.9rem 1.2rem;color:var(--cream);font-family:'DM Mono',monospace;font-size:.9rem;outline:none;text-align:center;letter-spacing:.2em;margin-bottom:1rem;transition:border-color .3s;}
+.login-input:focus{border-color:rgba(168,217,108,.5);}
+.login-btn{width:100%;background:var(--leaf);color:var(--e);border:none;padding:1rem;font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:background .3s;margin-bottom:1rem;}
+.login-btn:hover{background:var(--lime);}
+.login-err{color:var(--rust);font-size:.72rem;min-height:1rem;margin-bottom:.5rem;}
+.login-note{font-size:.65rem;color:var(--sand);opacity:.35;line-height:1.6;}
+.login-public{font-size:.7rem;color:var(--lime);opacity:.65;cursor:pointer;margin-top:1rem;display:block;text-decoration:none;transition:opacity .3s;}
+.login-public:hover{opacity:1;}
+
+/* Dashboard page */
+#dashboard{display:none;position:fixed;inset:0;background:var(--priv);z-index:8000;overflow-y:auto;}
+.db-nav{background:rgba(30,45,74,.95);border-bottom:1px solid rgba(168,217,108,.12);padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(4px);}
+.db-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;font-style:italic;color:var(--lime);}
+.db-logo span{color:var(--amber);}
+.db-badge{background:rgba(232,160,48,.15);border:1px solid rgba(232,160,48,.3);color:var(--amber);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .8rem;border-radius:20px;}
+.db-logout{background:rgba(196,98,45,.15);border:1px solid rgba(196,98,45,.3);color:var(--rust);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .9rem;border-radius:2px;cursor:pointer;transition:background .3s;}
+.db-logout:hover{background:rgba(196,98,45,.25);}
+.db-body{padding:3rem;max-width:1300px;margin:0 auto;}
+.db-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--cream);margin-bottom:.4rem;}
+.db-sub{font-size:.75rem;color:var(--sand);opacity:.5;margin-bottom:2.5rem;letter-spacing:.05em;}
+
+/* KPI bar */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2.5rem;}
+.kpi{background:rgba(42,61,94,.6);border:1px solid rgba(168,217,108,.1);border-radius:6px;padding:1.4rem;text-align:center;}
+.kpi-n{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--lime);line-height:1;}
+.kpi-l{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sand);opacity:.5;margin-top:.35rem;line-height:1.4;}
+
+/* DB grid */
+.db-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-bottom:2.5rem;}
+.db-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:2.5rem;}
+.db-card{background:rgba(42,61,94,.5);border:1px solid rgba(168,217,108,.1);border-radius:6px;padding:1.8rem;}
+.db-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;}
+.db-card-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--cream);}
+.db-card-badge{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .6rem;border-radius:20px;}
+.badge-done{background:rgba(90,158,63,.18);color:var(--leaf);border:1px solid rgba(90,158,63,.28);}
+.badge-prog{background:rgba(232,160,48,.14);color:var(--amber);border:1px solid rgba(232,160,48,.28);}
+.badge-todo{background:rgba(196,98,45,.14);color:var(--rust);border:1px solid rgba(196,98,45,.28);}
+.badge-plan{background:rgba(168,217,108,.08);color:var(--lime);border:1px solid rgba(168,217,108,.18);}
+table{width:100%;border-collapse:collapse;}
+th{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);opacity:.65;padding:.6rem .8rem;text-align:left;border-bottom:1px solid rgba(168,217,108,.12);}
+td{font-size:.78rem;color:var(--sand);opacity:.82;padding:.65rem .8rem;border-bottom:1px solid rgba(168,217,108,.06);}
+td:first-child{color:var(--cream);font-weight:500;}
+.td-g{color:var(--lime) !important;font-weight:500 !important;opacity:1 !important;}
+.td-a{color:var(--amber) !important;font-weight:500 !important;opacity:1 !important;}
+.td-r{color:var(--rust) !important;font-weight:500 !important;opacity:1 !important;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(168,217,108,.03);}
+
+/* Action items */
+.ai-item{display:flex;align-items:start;gap:.9rem;padding:.9rem 0;border-bottom:1px solid rgba(168,217,108,.06);}
+.ai-item:last-child{border-bottom:none;}
+.ai-check{width:18px;height:18px;border-radius:3px;border:1px solid rgba(168,217,108,.28);background:transparent;cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--lime);}
+.ai-check.done{background:rgba(90,158,63,.2);border-color:var(--leaf);}
+.ai-text{font-size:.78rem;line-height:1.6;color:var(--sand);opacity:.78;}
+.ai-text.done{text-decoration:line-through;opacity:.38;}
+.ai-due{font-size:.6rem;letter-spacing:.1em;color:var(--rust);white-space:nowrap;}
+
+/* Contact list */
+.cl-item{padding:.8rem 0;border-bottom:1px solid rgba(168,217,108,.06);}
+.cl-item:last-child{border-bottom:none;}
+.cl-org{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;color:var(--cream);margin-bottom:.2rem;}
+.cl-det{font-size:.72rem;color:var(--sand);opacity:.6;line-height:1.7;}
+.cl-det a{color:var(--lime);opacity:.8;text-decoration:none;}
+.cl-det a:hover{opacity:1;}
+
+/* LOI tracker */
+.loi-item{padding:.9rem;background:rgba(26,18,8,.3);border-radius:4px;border:1px solid rgba(168,217,108,.08);margin-bottom:.7rem;}
+.loi-biz{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:var(--cream);margin-bottom:.25rem;}
+.loi-det{font-size:.72rem;color:var(--sand);opacity:.6;}
+.loi-status{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.35rem;display:inline-block;padding:.18rem .55rem;border-radius:20px;}
+.ls-contacted{background:rgba(232,160,48,.12);color:var(--amber);border:1px solid rgba(232,160,48,.25);}
+.ls-pending{background:rgba(196,98,45,.12);color:var(--rust);border:1px solid rgba(196,98,45,.25);}
+.ls-signed{background:rgba(90,158,63,.15);color:var(--leaf);border:1px solid rgba(90,158,63,.25);}
+
+/* Notes area */
+.notes-area{width:100%;background:rgba(26,18,8,.4);border:1px solid rgba(168,217,108,.12);border-radius:4px;padding:1rem;color:var(--cream);font-family:'DM Mono',monospace;font-size:.78rem;line-height:1.7;resize:vertical;min-height:120px;outline:none;}
+.notes-area:focus{border-color:rgba(168,217,108,.3);}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--priv);}
+::-webkit-scrollbar-thumb{background:var(--fern);border-radius:2px;}
+
+@media(max-width:900px){
+  .hc,.sgrid,.cgrid,.ugrid,.bgrid,.frow,.tlgrid,.tgrid2,.sugrid,.kpi-row,.db-grid,.db-grid3{grid-template-columns:1fr;}
+  .hd{display:none;}
+  .strip{grid-template-columns:repeat(3,1fr);}
+  nav,footer,.pw,.sbg,.darkbg,.bsec,.ctawrap,.db-body{padding-left:1.5rem;padding-right:1.5rem;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="cur2"></div>
+
+<!-- ════════════════════════════════════
+     LOGIN OVERLAY
+     ════════════════════════════════════ -->
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-logo">Roar<span>Add</span></div>
+    <div class="login-sub">Owner Dashboard · Private Access</div>
+    <input type="password" class="login-input" id="pw-input" placeholder="· · · · · · · ·" onkeydown="if(event.key==='Enter')tryLogin()">
+    <div class="login-err" id="pw-err"></div>
+    <button class="login-btn" onclick="tryLogin()">Access Dashboard</button>
+    <div class="login-note">This portal is for authorized owners and USDA officials only.<br>Contact RoarAdd LLC for access credentials.</div>
+    <a class="login-public" onclick="closeLogin()">← View public website instead</a>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PRIVATE DASHBOARD
+     ════════════════════════════════════ -->
+<div id="dashboard">
+  <div class="db-nav">
+    <div class="db-logo">Roar<span>Add</span> <span style="font-family:'DM Mono';font-size:.75rem;color:var(--sand);opacity:.5;font-style:normal;font-weight:400;margin-left:.5rem">Owner Dashboard</span></div>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <div class="db-badge">🔒 Private · Authorized Access Only</div>
+      <button class="db-logout" onclick="logout()">Sign Out</button>
+    </div>
+  </div>
+  <div class="db-body">
+    <div class="db-title">RoarAdd LLC — Private Operations Dashboard</div>
+    <div class="db-sub">UEI: KG9XV8M5P4L3 · Loganville, Walton County, Georgia · Last updated: March 21, 2026</div>
+
+    <!-- KPIs -->
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-n">$409k</div><div class="kpi-l">Total CAPEX<br>Budget</div></div>
+      <div class="kpi"><div class="kpi-n">$250k+</div><div class="kpi-l">Target External<br>Funding</div></div>
+      <div class="kpi"><div class="kpi-n">$264k+</div><div class="kpi-l">Projected Yr 1<br>Revenue</div></div>
+      <div class="kpi"><div class="kpi-n">$57k</div><div class="kpi-l">VAPG Grant<br>Requested</div></div>
+      <div class="kpi"><div class="kpi-n">Dec '26</div><div class="kpi-l">First Harvest<br>Target</div></div>
+    </div>
+
+    <!-- Grants & Loans -->
+    <div class="db-grid">
+      <div class="db-card">
+        <div class="db-card-head">
+          <div class="db-card-title">Grant & Loan Status</div>
+          <span class="db-card-badge badge-prog">Active Applications</span>
+        </div>
+        <table>
+          <tr><th>Program</th><th>Amount</th><th>Deadline</th><th>Status</th></tr>
+          <tr><td>SAM.gov UEI</td><td class="td-g">KG9XV8M5P4L3</td><td>Done</td><td class="td-g">✅ Active</td></tr>
+          <tr><td>USDA REAP Solar</td><td class="td-a">$27,500</td><td class="td-r">Mar 31</td><td class="td-a">🔄 In Progress</td></tr>
+          <tr><td>USDA VAPG Working Capital</td><td class="td-a">$57,000</td><td class="td-r">Apr 22</td><td class="td-a">🔄 In Progress</td></tr>
+          <tr><td>GA Helene Block Grant</td><td>TBD</td><td class="td-r">Apr 27</td><td class="td-r">☐ To Apply</td></tr>
+          <tr><td>GA Organics Climate Smart</td><td>Mini-grant</td><td class="td-r">Apr 27</td><td class="td-r">☐ To Apply</td></tr>
+          <tr><td>Farmer Bridge Assistance</td><td>TBD</td><td class="td-r">Apr 17</td><td class="td-r">☐ To Apply</td></tr>
+          <tr><td>USDA EQIP Cost-Share</td><td>$7,750</td><td>Apr 30</td><td class="td-r">☐ Pending</td></tr>
+          <tr><td>FSA Farm Ownership Loan</td><td>$148,500</td><td>May 1</td><td class="td-r">☐ Pending</td></tr>
+          <tr><td>FSA Microloan (Equipment)</td><td>$73,500</td><td>Apr 15</td><td class="td-r">☐ Pending</td></tr>
+          <tr><td>IRS 30% ITC Solar Credit</td><td>$16,500</td><td>Jan 2027</td><td>○ Planned</td></tr>
+          <tr><td>GA GATE Card</td><td>6–8% tax saving</td><td class="td-r">Apr 1</td><td class="td-r">☐ To Apply</td></tr>
+        </table>
+      </div>
+
+      <div class="db-card">
+        <div class="db-card-head">
+          <div class="db-card-title">CAPEX & Funding Stack</div>
+          <span class="db-card-badge badge-plan">$409k Total</span>
+        </div>
+        <table>
+          <tr><th>Line Item</th><th>Cost</th><th>Source</th></tr>
+          <tr><td>Building Shell + Slab</td><td>$165,000</td><td>FSA Loan</td></tr>
+          <tr><td>Site Clearing + Utility</td><td>$18,000</td><td>FSA Loan</td></tr>
+          <tr><td>45 kW Solar Array</td><td>$55,000</td><td>REAP + Equity</td></tr>
+          <tr><td>100 kWh Battery Bank</td><td>$18,000</td><td>Equity</td></tr>
+          <tr><td>HVAC — 3 Zones</td><td>$22,000</td><td>EQIP + Equity</td></tr>
+          <tr><td>CO₂ Duct + HEPA System</td><td>$8,000</td><td>Working Capital</td></tr>
+          <tr><td>Mushroom Fruiting Racks</td><td>$12,000</td><td>FSA Microloan</td></tr>
+          <tr><td>LED Hydroponic Racks</td><td>$38,000</td><td>FSA Microloan</td></tr>
+          <tr><td>Walk-in Cooler</td><td>$12,000</td><td>VAPG/Equity</td></tr>
+          <tr><td>20% Contingency</td><td>$73,700</td><td>Reserve</td></tr>
+          <tr><td>3-Mo Operating Reserve</td><td>$18,000</td><td>FSA Microloan</td></tr>
+          <tr><td>Owner Yr1 Salary</td><td>$40,000</td><td>Personal</td></tr>
+          <tr><td style="font-weight:700">TOTAL</td><td class="td-g" style="font-weight:700">$409,200</td><td></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Revenue + Actions -->
+    <div class="db-grid">
+      <div class="db-card">
+        <div class="db-card-head">
+          <div class="db-card-title">3-Year Revenue Projections</div>
+          <span class="db-card-badge badge-plan">Conservative Scenario</span>
+        </div>
+        <table>
+          <tr><th>Stream</th><th>Year 1 (2027)</th><th>Year 2 (2028)</th><th>Year 3 (2029)</th></tr>
+          <tr><td>Mushrooms</td><td>$43,200</td><td>$74,880</td><td>$109,200</td></tr>
+          <tr><td>Microgreens</td><td>$144,000</td><td>$216,720</td><td>$303,600</td></tr>
+          <tr><td>Herbs & Greens</td><td>$45,000</td><td>$60,000</td><td>$77,000</td></tr>
+          <tr><td style="font-weight:700">Gross Revenue</td><td class="td-g">$232,200</td><td class="td-g">$351,600</td><td class="td-g">$489,800</td></tr>
+          <tr><td>Total OPEX</td><td>$144,900</td><td>$158,100</td><td>$175,400</td></tr>
+          <tr><td style="font-weight:700">Net Profit</td><td class="td-g">$87,300</td><td class="td-g">$193,500</td><td class="td-g">$314,400</td></tr>
+        </table>
+      </div>
+
+      <div class="db-card">
+        <div class="db-card-head">
+          <div class="db-card-title">This Weekend — Action Items</div>
+          <span class="db-card-badge badge-prog">March 21–22, 2026</span>
+        </div>
+        <div id="ai-list">
+          <div class="ai-item"><div class="ai-check done" onclick="toggleAI(this)">✓</div><div><div class="ai-text done">Register on GA FarmLink (gafarmlink.org)</div><div class="ai-due">✅ Done</div></div></div>
+          <div class="ai-item"><div class="ai-check done" onclick="toggleAI(this)">✓</div><div><div class="ai-text done">Create farmers.gov account + file AD-2047</div><div class="ai-due">✅ Done</div></div></div>
+          <div class="ai-item"><div class="ai-check done" onclick="toggleAI(this)">✓</div><div><div class="ai-text done">Request SCORE mentor at score.org/usda</div><div class="ai-due">✅ Done</div></div></div>
+          <div class="ai-item"><div class="ai-check done" onclick="toggleAI(this)">✓</div><div><div class="ai-text done">Submit Legal Rep Request on rdapply.usda.gov</div><div class="ai-due">✅ Done</div></div></div>
+          <div class="ai-item"><div class="ai-check done" onclick="toggleAI(this)">✓</div><div><div class="ai-text done">Start VAPG application on vapg.rd.usda.gov</div><div class="ai-due">✅ Done</div></div></div>
+          <div class="ai-item"><div class="ai-check" onclick="toggleAI(this)"></div><div><div class="ai-text">Email Georgia Organics for feasibility study help</div><div class="ai-due">⚠️ Due: Tonight</div></div></div>
+          <div class="ai-item"><div class="ai-check" onclick="toggleAI(this)"></div><div><div class="ai-text">Apply for GATE Card at agr.georgia.gov/licensing</div><div class="ai-due">⚠️ Due: Apr 1</div></div></div>
+          <div class="ai-item"><div class="ai-check" onclick="toggleAI(this)"></div><div><div class="ai-text">Apply Georgia Organics Climate Smart Farmer program</div><div class="ai-due">⚠️ Due: Apr 27</div></div></div>
+          <div class="ai-item"><div class="ai-check" onclick="toggleAI(this)"></div><div><div class="ai-text">Call USDA FSA Georgia (706) 546-2266 — Down Payment Loan + Farm Number</div><div class="ai-due">📅 Monday Mar 23</div></div></div>
+          <div class="ai-item"><div class="ai-check" onclick="toggleAI(this)"></div><div><div class="ai-text">Enter all 11 VAPG expense items using cheat sheet</div><div class="ai-due">📅 This weekend</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buyer LOI + Contacts -->
+    <div class="db-grid">
+      <div class="db-card">
+        <div class="db-card-head">
+          <div class="db-card-title">Buyer LOI Tracker</div>
+          <span class="db-card-badge badge-todo">0 / 5 Signed · Need 3 by Apr 10</span>
+        </div>
+        <div class="loi-item"><div class="loi-biz">[Atlanta Restaurant 1]</div><div class="loi-det">Chef · Microgreens + Herbs · 20 trays/wk @ $45</div><span class="loi-status ls-pending">☐ Not Contacted</span></div>
+        <div class="loi-item"><div class="loi-biz">[Atlanta Restaurant 2]</div><div class="loi-det">Chef · Lion's Mane Mushrooms · 15 lbs/wk @ $14</div><span class="loi-status ls-pending">☐ Not Contacted</span></div>
+        <div class="loi-item"><div class="loi-biz">[Local Grocery / Co-op]</div><div class="loi-det">Produce Buyer · Mixed Microgreens · 30 trays/wk @ $38</div><span class="loi-status ls-pending">☐ Not Contacted</span></div>
+        <div class="loi-item"><div class="loi-biz">[Farmers Market Vendor]</div><div class="loi-det">Contact · Oyster + Shiitake · 20 lbs/wk @ $12</div><span class="loi-status ls-pending">☐ Not Contacted</span></div>
+        <div class="loi-item"><div class="loi-biz">[Corporate Cafeteria / Hospital]</div><div class="loi-det">Food Service Mgr · Full Line · TBD</div><span class="loi-status ls-pending">☐ Not Contacted</span></div>
+        <div style="margin-top:1rem;font-size:.7rem;color:var(--rust);opacity:.8;">🔴 Buyer LOIs are your single most important VAPG asset. Email 5 Atlanta chefs today.</div>
+      </div>
+
+      <div class="db-card">
+        <div class="db-card-head">
+          <div class="db-card-title">Key Contacts</div>
+        </div>
+        <div class="cl-item"><div class="cl-org">USDA FSA Georgia State Office</div><div class="cl-det">Farm Loan Programs · <a href="tel:7065462266">(706) 546-2266</a><br>Call re: Down Payment Loan + Farm Number<br>farmers.gov → Service Center Locator</div></div>
+        <div class="cl-item"><div class="cl-org">GA FarmLink / Athens Land Trust</div><div class="cl-det"><a href="tel:7066130300">(706) 613-0300</a> · <a href="/cdn-cgi/l/email-protection#f69f989099b697829e9398859a9798928284838582d8998491"><span class="__cf_email__" data-cfemail="432a2d252c0322372b262d302f222d2737313630376d2c3124">[email&#160;protected]</span></a><br>Land listing in review — check status</div></div>
+        <div class="cl-item"><div class="cl-org">USDA RD Georgia (REAP / VAPG)</div><div class="cl-det"><a href="tel:18006706553">1-800-670-6553</a> · rd.usda.gov/ga<br>REAP paused — confirm FY2026 window Monday</div></div>
+        <div class="cl-item"><div class="cl-org">Georgia Organics</div><div class="cl-det"><a href="/cdn-cgi/l/email-protection#026463706f6770716770746b6167714265676d70656b636d7065636c6b61712c6d7065"><span class="__cf_email__" data-cfemail="83e5e2f1eee6f1f0e6f1f5eae0e6f0c3e4e6ecf1e4eae2ecf1e4e2edeae0f0adecf1e4">[email&#160;protected]</span></a><br>Email sent re: feasibility study — await response</div></div>
+        <div class="cl-item"><div class="cl-org">GA Dept of Agriculture</div><div class="cl-det"><a href="tel:4046563600">(404) 656-3600</a> · agr.georgia.gov<br>GATE Card + Helene Block Grant + Conservation Fund</div></div>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="db-card" style="margin-bottom:2rem;">
+      <div class="db-card-head">
+        <div class="db-card-title">Running Notes (editable)</div>
+        <span class="db-card-badge badge-prog">Auto-saves in browser</span>
+      </div>
+      <textarea class="notes-area" id="notes-area" placeholder="Add notes here — call outcomes, FSA conversation details, buyer conversations, etc. Notes are saved in your browser.">Mar 21, 2026 — UEI registered: KG9XV8M5P4L3. GA FarmLink listing submitted (in review). SCORE mentor requested. VAPG application started on vapg.rd.usda.gov. Georgia Organics email sent for feasibility study. Business plan PDF built for VAPG upload.
+
+Mar 21, 2026 — REAP NOTE: USDA RD currently not accepting REAP applications — FY2026 window pending. Confirm Monday when window opens.
+
+Mar 21, 2026 — VAPG: entered entity details, products (mushrooms, microgreens, herbs), methodologies, expenses ($57k/$57k). Need: feasibility study from Georgia Organics, buyer LOIs before April 22.
+</textarea>
+    </div>
+
+    <div style="text-align:center;font-size:.65rem;color:var(--sand);opacity:.28;padding-bottom:2rem;">
+      RoarAdd LLC Private Dashboard · Authorized Access Only · Do not share URL or credentials · UEI: KG9XV8M5P4L3
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PUBLIC WEBSITE
+     ════════════════════════════════════ -->
+<div id="public-site">
+<nav>
+  <a href="#" class="nav-logo">Roar<span>Add</span></a>
+  <ul class="nav-links">
+    <li><a href="#system">The System</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#credibility">Why Us</a></li>
+    <li><a href="#buyers">Become a Buyer</a></li>
+    <li><a href="#" onclick="showLogin()" class="nav-lock">🔒 Owner Login</a></li>
+    <li><a href="#buyers" class="nav-cta">Partner With Us</a></li>
+  </ul>
+</nav>
+
+<div class="mqwrap">
+  <div class="mqtrack">
+    <span class="mqi">Circular Bio-Economy</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Climate-Smart Agriculture</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Zero-Waste Growing System</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Atlanta Farm-to-Table</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">USDA Registered · UEI: KG9XV8M5P4L3</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Women-Owned Beginning Farm</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">GAP Certification Pursuing</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Year-Round Production</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Circular Bio-Economy</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Climate-Smart Agriculture</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Zero-Waste Growing System</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Atlanta Farm-to-Table</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">USDA Registered · UEI: KG9XV8M5P4L3</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Women-Owned Beginning Farm</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">GAP Certification Pursuing</span><span class="mqdot"> ✦ </span>
+    <span class="mqi">Year-Round Production</span><span class="mqdot"> ✦ </span>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="hgrid"></div>
+  <div class="hc">
+    <div>
+      <div class="htag">Loganville, Georgia · Est. 2026 · USDA Registered</div>
+      <h1 class="htit">Where waste<br>becomes<em>abundance.</em></h1>
+      <p class="hdesc">A one-acre circular bio-economy farm where every molecule has purpose. Mushroom CO₂ feeds microgreens. Solar powers everything. Rainwater closes the loop. Premium produce for Atlanta's finest tables.</p>
+      <div class="hact">
+        <a href="#buyers" class="btnp"><span>Become a Buyer</span></a>
+        <a href="#system" class="btns">Explore the system</a>
+      </div>
+    </div>
+    <div class="hd">
+      <div class="dr1"></div><div class="dr2"></div>
+      <div class="dc"><div class="dcl">Circular<br>Bio-Farm</div><div class="dcs">1 Acre · 3 Systems</div></div>
+      <div class="nd n1"><div class="ndi">🍄</div><div class="ndl">Mushroom<br>Room</div></div>
+      <div class="nd n2"><div class="ndi">☀️</div><div class="ndl">45kW<br>Solar</div></div>
+      <div class="nd n3"><div class="ndi">🌱</div><div class="ndl">Micro-<br>greens</div></div>
+      <div class="nd n4"><div class="ndi">💧</div><div class="ndl">Rain<br>Water</div></div>
+      <div class="aw a1">→</div><div class="aw a2">→</div><div class="aw a3">→</div><div class="aw a4">→</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="si"><div class="sn" data-target="90" data-suffix="%">0%</div><div class="sl">Less Water<br>Than Conventional</div></div>
+  <div class="si"><div class="sn" data-target="20" data-suffix="%">0%</div><div class="sl">CO₂ Recycling<br>Yield Boost</div></div>
+  <div class="si"><div class="sn" data-target="3" data-suffix="">0</div><div class="sl">Integrated<br>Production Systems</div></div>
+  <div class="si"><div class="sn" data-target="45" data-suffix="kW">0kW</div><div class="sl">Solar Array<br>Capacity</div></div>
+  <div class="si"><div class="sn" data-target="100" data-suffix="kWh">0kWh</div><div class="sl">Battery Storage<br>Capacity</div></div>
+</div>
+
+<div style="padding:6rem 4rem;position:relative;z-index:2;">
+<div class="sbg reveal" id="system">
+  <div class="slbl">The Science</div>
+  <h2 class="stit">One roof. One loop.<br><em>Zero waste.</em></h2>
+  <div class="sgrid">
+    <div class="fsteps">
+      <div class="fs reveal rd1"><div class="fn fn1">1</div><div class="fc"><div class="ft">Mushrooms Breathe Out</div><div class="fd">Oyster, Lion's Mane, and Shiitake fruiting rooms produce excess CO₂. Instead of venting it, we capture every molecule and put it to work.</div><span class="ftag">+CO₂ capture</span></div></div>
+      <div class="fs reveal rd2"><div class="fn fn2">2</div><div class="fc"><div class="ft">HEPA-Filtered Transfer</div><div class="fd">CO₂-rich air passes through HEPA H13 + UVC sterilization before routing to the microgreens zone — eliminating all spore contamination risk.</div><span class="ftag">biosecurity maintained</span></div></div>
+      <div class="fs reveal rd3"><div class="fn fn3">3</div><div class="fc"><div class="ft">Microgreens Feast</div><div class="fd">Elevated CO₂ (1,200–1,500 ppm target) boosts photosynthesis by 15–20%. Microgreens grow faster and denser with higher nutritional value — zero chemical inputs.</div><span class="ftag">+15–20% yield boost</span></div></div>
+      <div class="fs reveal rd4"><div class="fn fn4">4</div><div class="fc"><div class="ft">Solar Closes the Loop</div><div class="fd">A 45kW roof-mounted array with 100kWh battery storage powers every system 24/7. The walk-in cooler pre-cools during peak solar hours — acting as a thermal battery.</div><span class="ftag">net-zero energy Year 2</span></div></div>
+    </div>
+    <div class="pcol" id="products">
+      <div class="pcard pm reveal rd1"><div class="phdr"><div><div class="pnm">Specialty Mushrooms</div><div class="ppr">$12–18<span style="font-size:.85rem;color:var(--sand);opacity:.5">/lb</span></div><div class="ppl">Wholesale · Chef Direct</div></div><div class="pico">🍄</div></div><div class="pvars"><span class="vtag">Oyster</span><span class="vtag">Lion's Mane</span><span class="vtag">Shiitake</span><span class="vtag">Year-Round</span></div><div class="pdesc">Premium specialty varieties in sealed, climate-controlled fruiting rooms. 3–4× commodity price. Consistent year-round supply for Atlanta's top kitchens.</div></div>
+      <div class="pcard pg reveal rd2"><div class="phdr"><div><div class="pnm">Branded Microgreens</div><div class="ppr">$40–65<span style="font-size:.85rem;color:var(--sand);opacity:.5">/tray</span></div><div class="ppl">Wholesale · Retail</div></div><div class="pico">🌱</div></div><div class="pvars"><span class="vtag">CO₂-Boosted</span><span class="vtag">Same-Day Delivery</span><span class="vtag">Cut-to-Order</span></div><div class="pdesc">Multi-tier LED hydroponic racks with CO₂ enhancement. Cut-to-order, cold-chain delivered to Atlanta chefs within 24 hours of harvest.</div></div>
+      <div class="pcard ph reveal rd3"><div class="phdr"><div><div class="pnm">Fresh Herb Bundles</div><div class="ppr">$6–12<span style="font-size:.85rem;color:var(--sand);opacity:.5">/bundle</span></div><div class="ppl">Wholesale · Farmers Market</div></div><div class="pico">🌿</div></div><div class="pvars"><span class="vtag">Basil</span><span class="vtag">Cilantro</span><span class="vtag">Specialty Varieties</span></div><div class="pdesc">Controlled-environment greenhouse + high tunnel. Peak aromatic maturity, hand-harvested and branded for Atlanta restaurants and grocers.</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="darkbg" id="credibility">
+  <div class="di">
+    <div class="slbl">Why RoarAdd</div>
+    <h2 class="stit reveal">Built to the<br><em>highest standards.</em></h2>
+    <div class="cgrid">
+      <div class="ccard reveal rd1"><div class="cbadge cba">Active</div><div class="cico">🏛️</div><div class="ctit">USDA Federally Registered</div><div class="cdesc">Fully registered on SAM.gov with active UEI (KG9XV8M5P4L3). Enrolled on farmers.gov with completed AD-2047. Eligible for all USDA programs.</div></div>
+      <div class="ccard reveal rd2"><div class="cbadge cbp">Pursuing</div><div class="cico">🔬</div><div class="ctit">GAP Certification in Process</div><div class="cdesc">Good Agricultural Practices audit scheduled Q3 2026 through UGA Extension. Required by Atlanta restaurant chains and grocery buyers before first delivery.</div></div>
+      <div class="ccard reveal rd3"><div class="cico">⚡</div><div class="ctit">Climate-Smart by Design</div><div class="cdesc">45kW solar array, 100kWh battery storage, closed-loop rainwater harvesting, and zero-pesticide production. Designed to achieve net-zero energy by Year 2.</div></div>
+      <div class="ccard reveal rd1"><div class="cico">🎓</div><div class="ctit">Expert Mentorship Network</div><div class="cdesc">Actively engaged with SBA SCORE agricultural mentorship, Georgia Organics Climate Smart Farmer Program, and UGA CEA technical advisors.</div></div>
+      <div class="ccard reveal rd2"><div class="cico">🔄</div><div class="ctit">Peer-Reviewed Design</div><div class="cdesc">Farm design reviewed by CEA specialists. All technical concerns fully addressed — CO₂ routing, solar sizing, vapor barriers — documented in formal technical checklist.</div></div>
+      <div class="ccard reveal rd3"><div class="cico">👩‍🌾</div><div class="ctit">Women-Owned Business</div><div class="cdesc">RoarAdd LLC is majority owned (51%) by a woman managing member. Eligible for USDA priority points for women-owned beginning farm operations.</div></div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:5.5rem 4rem;background:linear-gradient(135deg,rgba(45,74,30,.12),transparent);position:relative;z-index:2;" id="grants">
+  <div class="di">
+    <div class="slbl">Government Support</div>
+    <h2 class="stit reveal">Backed by <em>multiple</em><br>USDA programs.</h2>
+    <div class="ugrid">
+      <div class="uc ua reveal rd1"><div class="ust usta">● Active</div><div class="upr">SAM.gov · USDA</div><div class="unm">Federal Program Registration</div><div class="uds">Registered with active UEI on SAM.gov. AD-2047 on file. Eligible for all federal agricultural assistance programs.</div></div>
+      <div class="uc up reveal rd2"><div class="ust ustp">● In Progress</div><div class="upr">USDA Rural Development</div><div class="unm">REAP Renewable Energy Grant</div><div class="uds">Rural Energy for America Program — solar array installation subsidy for agricultural operations. Supports our 45kW net-zero system.</div></div>
+      <div class="uc up reveal rd3"><div class="ust ustp">● In Progress</div><div class="upr">USDA Rural Development</div><div class="unm">Value-Added Producer Grant</div><div class="uds">Working capital grant for emerging market development — packaging, marketing, food safety certification, and Atlanta buyer development.</div></div>
+      <div class="uc upl reveal rd1"><div class="ust ustpl">○ Planned</div><div class="upr">USDA Farm Service Agency</div><div class="unm">Beginning Farmer Loan Programs</div><div class="uds">FSA Farm Ownership and Microloan programs for beginning farmers. Pursuing preferential Beginning Farmer rates through local Georgia FSA office.</div></div>
+      <div class="uc upl reveal rd2"><div class="ust ustpl">○ Planned</div><div class="upr">USDA NRCS</div><div class="unm">EQIP Conservation Cost-Share</div><div class="uds">Environmental Quality Incentives Program cost-share for high tunnel, water conservation, and climate-smart agricultural practices.</div></div>
+      <div class="uc upl reveal rd3"><div class="ust ustpl">○ Planned</div><div class="upr">IRS · Georgia Dept of Agriculture</div><div class="unm">ITC Tax Credit + GATE Card</div><div class="uds">Federal 30% Investment Tax Credit for solar system. Georgia Agriculture Tax Exemption for equipment and production inputs.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="pw">
+  <div class="slbl">Environmental Impact</div>
+  <h2 class="stit reveal">Numbers that<br><em>matter.</em></h2>
+  <div class="sugrid">
+    <div class="sucard reveal rd1"><div class="suico">💧</div><div class="sunum">90%</div><div class="sulbl">Less Water Than<br>Conventional Irrigation</div><div class="sunote">Closed-loop rainwater system</div></div>
+    <div class="sucard reveal rd2"><div class="suico">♻️</div><div class="sunum">100%</div><div class="sulbl">Circular Nutrient<br>Utilization</div><div class="sunote">Spent substrate → compost</div></div>
+    <div class="sucard reveal rd3"><div class="suico">🌞</div><div class="sunum">~85%</div><div class="sulbl">Solar Self-Sufficiency<br>Target by Year 2</div><div class="sunote">45kW + 100kWh storage</div></div>
+    <div class="sucard reveal rd4"><div class="suico">🧪</div><div class="sunum">Zero</div><div class="sulbl">Synthetic Pesticides<br>or Herbicides</div><div class="sunote">CEA = no chemicals needed</div></div>
+  </div>
+</div>
+
+<div class="darkbg" id="team">
+  <div class="di">
+    <div class="slbl">The Team</div>
+    <h2 class="stit reveal">Precision <em>applied</em><br>to the land.</h2>
+    <div class="tgrid2">
+      <div class="tmcard reveal rd1"><div class="trole">Managing Member · Farm Operations (49%)</div><div class="tname">Kalyan Modium</div><div class="tbio">Systems engineering and technology management background (IT/SAFe). Transitioning full-time into precision controlled environment agriculture. Responsible for day-to-day farm operations, growing systems, harvest scheduling, biosecurity, and USDA program compliance.</div><div class="tskills"><span class="sklt">Systems Engineering</span><span class="sklt">CEA Operations</span><span class="sklt">USDA Compliance</span><span class="sklt">Biosecurity</span></div></div>
+      <div class="tmcard reveal rd2"><div class="trole">Managing Member · Business &amp; Marketing (51%)</div><div class="tname">Smitha Modium</div><div class="tbio">Majority owner and co-operator of RoarAdd LLC. Responsible for buyer relationships, product packaging, brand development, food safety oversight, financial management, and all market development across Atlanta-area restaurants, grocery co-ops, and farmers markets.</div><div class="tskills"><span class="sklt">Business Management</span><span class="sklt">Marketing &amp; Sales</span><span class="sklt">Food Safety</span><span class="sklt">Buyer Relations</span></div></div>
+    </div>
+    <div style="margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid rgba(168,217,108,.07);">
+      <div class="slbl">Supported &amp; Advised By</div>
+      <div class="prow">
+        <div class="pitem"><div class="pnm">USDA FSA</div><div class="psub">Farm Service Agency</div></div>
+        <div class="pitem"><div class="pnm">USDA NRCS</div><div class="psub">Natural Resources</div></div>
+        <div class="pitem"><div class="pnm">SBA SCORE</div><div class="psub">Mentor Program</div></div>
+        <div class="pitem"><div class="pnm">Georgia Organics</div><div class="psub">Climate Smart Program</div></div>
+        <div class="pitem"><div class="pnm">UGA Extension</div><div class="psub">CEA Advisory</div></div>
+        <div class="pitem"><div class="pnm">GA FarmLink</div><div class="psub">Athens Land Trust</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bsec" id="buyers">
+  <div class="bi">
+    <div class="slbl">Buyer Interest</div>
+    <h2 class="stit reveal">Ready to source<br><em>locally grown</em> excellence?</h2>
+    <div class="bgrid">
+      <div>
+        <p style="font-size:.82rem;line-height:1.9;color:var(--sand);opacity:.74;margin-bottom:1.9rem;">RoarAdd LLC is building its Atlanta buyer network ahead of our December 2026 first harvest. Express your interest now to secure priority access to our premium product lines.</p>
+        <ul class="bwhy">
+          <li>Year-round supply — no seasonal gaps or import dependency</li>
+          <li>Same-day delivery within 50 miles of Loganville, Georgia</li>
+          <li>Cut-to-order microgreens — harvested morning of delivery</li>
+          <li>GAP certified (pursuing) — meets major buyer food safety requirements</li>
+          <li>Wholesale pricing locked for LOI partners at launch rates</li>
+          <li>Support a climate-smart, women-owned Georgia farm</li>
+          <li>USDA-registered operation — full traceability and compliance</li>
+        </ul>
+        <div style="margin-top:1.9rem;padding:1.4rem;border:1px solid rgba(168,217,108,.13);border-radius:3px;background:rgba(45,74,30,.18);">
+          <div style="font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);opacity:.65;margin-bottom:.45rem;">First Harvest Target</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;color:var(--cream);">December 2026</div>
+          <div style="font-size:.72rem;color:var(--sand);opacity:.55;margin-top:.28rem;">Holiday season launch · Atlanta metro delivery</div>
+        </div>
+      </div>
+      <div class="bform">
+        <div id="fcon">
+          <h3>Express Buyer Interest</h3>
+          <p>Complete this form to receive product updates and priority wholesale pricing at launch.</p>
+          <div class="fg"><label class="flbl">Business Name</label><input type="text" class="fi" placeholder="Restaurant / Grocery / Institution"></div>
+          <div class="frow">
+            <div class="fg"><label class="flbl">Your Name</label><input type="text" class="fi" placeholder="Contact name"></div>
+            <div class="fg"><label class="flbl">Role</label><input type="text" class="fi" placeholder="Chef / Buyer / Manager"></div>
+          </div>
+          <div class="fg"><label class="flbl">Email</label><input type="email" class="fi" id="femail" placeholder="your@email.com"></div>
+          <div class="fg"><label class="flbl">Phone</label><input type="tel" class="fi" placeholder="(xxx) xxx-xxxx"></div>
+          <div class="fg"><label class="flbl">Product Interest</label>
+            <select class="fsel">
+              <option value="">Select products of interest</option>
+              <option>Specialty Mushrooms (Oyster, Lion's Mane, Shiitake)</option>
+              <option>Branded Microgreens</option>
+              <option>Fresh Herb Bundles</option>
+              <option>Full Product Line (All Three)</option>
+            </select>
+          </div>
+          <div class="fg"><label class="flbl">Est. Weekly Volume</label>
+            <select class="fsel">
+              <option value="">Approximate weekly order</option>
+              <option>Small (5–15 trays or 5–10 lbs/wk)</option>
+              <option>Medium (15–30 trays or 10–25 lbs/wk)</option>
+              <option>Large (30+ trays or 25+ lbs/wk)</option>
+              <option>Institutional / Let's discuss</option>
+            </select>
+          </div>
+          <div class="fg"><label class="flbl">Notes</label><textarea class="fta" placeholder="Specific requirements, certifications needed, delivery days..."></textarea></div>
+          <button class="fsub" onclick="subForm()">Submit Buyer Interest →</button>
+          <div class="fnote">Confidential. RoarAdd LLC will contact you within 48 hours.</div>
+        </div>
+        <div class="fsuccess" id="fsuc"><div class="fsico">🌱</div><div class="fstit">Interest Received!</div><div class="fsmsg">Thank you! We'll be in touch within 48 hours to discuss wholesale partnership terms and priority pricing for our December 2026 launch.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pw" id="timeline">
+  <div class="slbl">Project Roadmap</div>
+  <h2 class="stit reveal">From application<br>to <em>first harvest.</em></h2>
+  <div class="tlgrid">
+    <div class="tl">
+      <div class="ti done"><div class="tdate">March 21, 2026</div><div class="tev">✅ SAM.gov UEI Registered</div><div class="tdet">UEI: KG9XV8M5P4L3 · All federal programs unlocked</div></div>
+      <div class="ti done"><div class="tdate">March 21, 2026</div><div class="tev">✅ GA FarmLink Registered</div><div class="tdet">Land seeker listing active · farmers.gov enrolled</div></div>
+      <div class="ti done"><div class="tdate">March 21, 2026</div><div class="tev">✅ SCORE Mentor Requested</div><div class="tdet">SBA agricultural mentorship · FSA experience pathway</div></div>
+      <div class="ti urg"><div class="tdate">Coming Soon</div><div class="tev">REAP Grant Submission</div><div class="tdet">Solar renewable energy grant · USDA Rural Development</div></div>
+      <div class="ti urg"><div class="tdate">April 2026</div><div class="tev">VAPG Grant Submission</div><div class="tdet">Value-added producer working capital grant</div></div>
+      <div class="ti"><div class="tdate">April 2026</div><div class="tev">Georgia State Programs</div><div class="tdet">Helene Block Grant · GATE Card · GA Organics Climate Smart</div></div>
+    </div>
+    <div class="tl">
+      <div class="ti"><div class="tdate">May 2026</div><div class="tev">FSA Loan Applications</div><div class="tdet">Beginning Farmer ownership loan + microloan for equipment</div></div>
+      <div class="ti"><div class="tdate">June 2026</div><div class="tev">Building Shell Complete</div><div class="tdet">40×120 ft steel structure · one slab · one permit</div></div>
+      <div class="ti"><div class="tdate">July 2026</div><div class="tev">Solar Construction Starts</div><div class="tdet">45kW array begins · ITC tax credit qualification</div></div>
+      <div class="ti"><div class="tdate">October 2026</div><div class="tev">All Systems Commissioned</div><div class="tdet">CO₂ ducting · HEPA filtration · LED racks · automation</div></div>
+      <div class="ti"><div class="tdate">November 2026</div><div class="tev">First Inoculation &amp; Seeding</div><div class="tdet">Mushrooms + 10 microgreen varieties · 14-day test run</div></div>
+      <div class="ti done" style="padding-bottom:0;"><div class="tdate">December 2026</div><div class="tev">🌱 First Harvest &amp; Delivery</div><div class="tdet">Holiday season launch · Atlanta buyer deliveries begin</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="ctawrap" id="contact">
+  <div class="ctasec reveal">
+    <div class="ctaey">Partner · Invest · Procure</div>
+    <h2 class="ctatit">Let's grow<br><em>together.</em></h2>
+    <p class="ctadesc">Whether you're a chef, grocer, investor, or community partner — RoarAdd LLC is building something worth being part of. Reach out to start the conversation.</p>
+    <div class="ctabtns">
+      <a href="/cdn-cgi/l/email-protection#523a373e3e3d12203d33203336367c313d3f" class="btnp"><span>Start a Conversation</span></a>
+      <a href="#buyers" class="btno">Express Buyer Interest</a>
+    </div>
+    <div class="crow">
+      <div class="citem"><div class="clbl">Location</div><div class="cval">Loganville, GA · Walton County</div></div>
+      <div class="citem"><div class="clbl">Products</div><div class="cval">Mushrooms · Microgreens · Herbs</div></div>
+      <div class="citem"><div class="clbl">USDA UEI</div><div class="cval">KG9XV8M5P4L3</div></div>
+      <div class="citem"><div class="clbl">First Harvest</div><div class="cval">December 2026</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="flogo">RoarAdd LLC</div>
+  <div class="fcopy">© 2026 RoarAdd LLC · Circular Bio-Economy Farm · Loganville, Walton County, Georgia · USDA Registered</div>
+  <div class="fuei">UEI: KG9XV8M5P4L3</div>
+</footer>
+</div><!-- /public-site -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function ar(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(ar);})();
+document.querySelectorAll('a,button,.pcard,.ccard,.uc,.sucard,.tmcard,.nd,.loi-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';cur2.style.width='58px';cur2.style.height='58px';cur2.style.opacity='.22';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';cur2.style.width='36px';cur2.style.height='36px';cur2.style.opacity='.45';});
+});
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── COUNTERS ── */
+function ac(el){const t=parseInt(el.dataset.target),s=el.dataset.suffix||'',d=1800,st=performance.now();(function u(n){const p=Math.min((n-st)/d,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(e*t)+s;if(p<1)requestAnimationFrame(u);})(performance.now());}
+const co=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){ac(x.target);co.unobserve(x.target);}}),{threshold:.5});
+document.querySelectorAll('.sn[data-target]').forEach(el=>co.observe(el));
+
+/* ── SMOOTH NAV ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+
+/* ── BUYER FORM ── */
+function subForm(){const e=document.getElementById('femail');if(e&&!e.value.includes('@')){e.style.borderColor='rgba(196,98,45,.6)';e.focus();return;}document.getElementById('fcon').style.display='none';document.getElementById('fsuc').style.display='block';}
+
+/* ── AUTH ──
+   IMPORTANT: Change this password before publishing!
+   For production, use a proper backend. This is a simple client-side gate.
+*/
+const PASS = 'RoarAdd2026!';
+
+function showLogin(){document.getElementById('login-overlay').style.display='flex';document.getElementById('pw-input').focus();}
+function closeLogin(){document.getElementById('login-overlay').style.display='none';}
+
+function tryLogin(){
+  const v=document.getElementById('pw-input').value;
+  const err=document.getElementById('pw-err');
+  if(v===PASS){
+    document.getElementById('login-overlay').style.display='none';
+    document.getElementById('public-site').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    loadNotes();
+    err.textContent='';
+  } else {
+    err.textContent='Incorrect password. Try again.';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+function logout(){
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('public-site').style.display='block';
+  document.getElementById('login-overlay').style.display='none';
+}
+
+/* ── ACTION ITEMS ── */
+function toggleAI(el){
+  const txt=el.nextElementSibling.querySelector('.ai-text');
+  const isDone=el.classList.contains('done');
+  el.classList.toggle('done');
+  el.textContent=isDone?'':'✓';
+  txt.classList.toggle('done');
+}
+
+/* ── NOTES (localStorage) ── */
+function loadNotes(){
+  const saved=localStorage.getItem('roaradd-notes');
+  if(saved)document.getElementById('notes
