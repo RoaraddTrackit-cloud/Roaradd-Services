@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { AlertTriangle, ArrowRight, Bot, CheckCircle2, Globe, Key, Lock, Network, Server, ShieldCheck, Zap } from "lucide-react";
+import { AlertTriangle, ArrowRight, Bot, Building2, CheckCircle2, Globe, Key, LayoutDashboard, Leaf, Lock, Network, Server, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -173,11 +173,31 @@ export default function AIP() {
 
         {/* CROSS-LINK */}
         <section className="py-16 border-t border-white/5">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <p className="text-muted-foreground mb-4">Want AIP integrated into your existing infrastructure?</p>
-            <Button variant="outline" asChild>
-              <Link href="/services/it-consulting">Talk to our IT Consulting team <ArrowRight className="w-4 h-4 ml-2" /></Link>
-            </Button>
+          <div className="max-w-5xl mx-auto px-6">
+            <p className="text-center text-muted-foreground mb-8">AIP works best as part of the full RoarAdd ecosystem.</p>
+            <div className="grid sm:grid-cols-3 gap-6">
+              <div className="glass-panel rounded-2xl p-6 border border-white/10 text-center">
+                <LayoutDashboard className="w-7 h-7 text-primary mx-auto mb-3" />
+                <p className="text-sm text-muted-foreground mb-3">AIP integrates natively with Trackit — expose your analytics to AI agents automatically.</p>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/trackit">Explore Trackit <ArrowRight className="w-4 h-4 ml-1" /></Link>
+                </Button>
+              </div>
+              <div className="glass-panel rounded-2xl p-6 border border-white/10 text-center">
+                <Leaf className="w-7 h-7 text-green-400 mx-auto mb-3" />
+                <p className="text-sm text-muted-foreground mb-3">Let AI agents query your farm data — yield reports, inventory, and field status via AIP.</p>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/farm">Explore Farm <ArrowRight className="w-4 h-4 ml-1" /></Link>
+                </Button>
+              </div>
+              <div className="glass-panel rounded-2xl p-6 border border-white/10 text-center">
+                <Building2 className="w-7 h-7 text-blue-400 mx-auto mb-3" />
+                <p className="text-sm text-muted-foreground mb-3">Want AIP integrated into your existing infrastructure? Our team handles the implementation.</p>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/services/it-consulting">Talk to IT Consulting <ArrowRight className="w-4 h-4 ml-1" /></Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </section>
       </main>
