@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, Building2, CheckCircle2, Cloud, Cpu, Database, Globe, LayoutDashboard, Shield, Users } from "lucide-react";
+import { ArrowRight, Building2, CheckCircle2, Cloud, Cpu, Database, Globe, LayoutDashboard, Linkedin, Shield, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +19,45 @@ const process = [
   { step: "02", title: "Assessment & Proposal", desc: "Our team audits your current systems and delivers a clear proposal with scope, timeline, and pricing." },
   { step: "03", title: "Implementation", desc: "We execute the plan with weekly check-ins, full documentation, and a dedicated project manager." },
   { step: "04", title: "Handover & Support", desc: "Your team gets full ownership with training and optional ongoing support packages." },
+];
+
+const team = [
+  {
+    name: "Marcus T.",
+    role: "Principal IT Consultant",
+    bio: "15+ years delivering enterprise infrastructure across healthcare, fintech, and logistics. Led cloud migrations for organizations with 500+ seat deployments.",
+    expertise: ["Cloud Architecture", "Enterprise IT", "GCP"],
+    initials: "MT",
+    color: "from-blue-500/30 to-blue-500/10 border-blue-500/30",
+    textColor: "text-blue-400",
+  },
+  {
+    name: "Priya S.",
+    role: "AI & Data Systems Lead",
+    bio: "Former senior data engineer at a Fortune 500. Specializes in designing AI-powered data pipelines and integrating machine learning into existing workflows.",
+    expertise: ["AI Integration", "Data Architecture", "Vertex AI"],
+    initials: "PS",
+    color: "from-purple-500/30 to-purple-500/10 border-purple-500/30",
+    textColor: "text-purple-400",
+  },
+  {
+    name: "Jordan K.",
+    role: "Security & Compliance Expert",
+    bio: "Certified in CISSP and ISO 27001. Has conducted 80+ IT security audits across regulated industries — finance, healthcare, and government.",
+    expertise: ["IT Security", "Compliance", "SOC 2"],
+    initials: "JK",
+    color: "from-red-500/30 to-red-500/10 border-red-500/30",
+    textColor: "text-red-400",
+  },
+  {
+    name: "Alex R.",
+    role: "RoarAdd Product Integrations Lead",
+    bio: "Deep expertise in deploying Trackit and Farm across enterprise clients. Your dedicated point of contact for all RoarAdd ecosystem implementations.",
+    expertise: ["Trackit", "Farm", "System Integration"],
+    initials: "AR",
+    color: "from-green-500/30 to-green-500/10 border-green-500/30",
+    textColor: "text-green-400",
+  },
 ];
 
 export default function ITConsulting() {
@@ -75,6 +114,41 @@ export default function ITConsulting() {
           </div>
         </section>
 
+        {/* TEAM BIOS */}
+        <section className="py-24 border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">The people behind the work</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Real practitioners — not generalists. Our team brings hands-on experience from industries like fintech, healthcare, agriculture, and enterprise tech.
+              </p>
+            </motion.div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {team.map((member, i) => (
+                <motion.div key={member.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                  <Card className="glass-panel h-full border border-white/10 hover:border-white/20 transition-all">
+                    <CardHeader className="pb-4">
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${member.color} border flex items-center justify-center mb-4`}>
+                        <span className={`text-xl font-black ${member.textColor}`}>{member.initials}</span>
+                      </div>
+                      <CardTitle className="text-lg leading-snug">{member.name}</CardTitle>
+                      <p className={`text-sm font-medium ${member.textColor}`}>{member.role}</p>
+                      <CardDescription className="mt-2 leading-relaxed">{member.bio}</CardDescription>
+                    </CardHeader>
+                    <div className="px-6 pb-6">
+                      <div className="flex flex-wrap gap-1.5">
+                        {member.expertise.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* SERVICES */}
         <section className="py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-6">
@@ -119,7 +193,7 @@ export default function ITConsulting() {
           </div>
         </section>
 
-        {/* CTA + CROSS-LINK */}
+        {/* CTA */}
         <section className="py-24 border-t border-white/5">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's talk about your project</h2>
@@ -127,11 +201,19 @@ export default function ITConsulting() {
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
               Book Free Consultation <ArrowRight className="w-4 h-4" />
             </Button>
-            <div className="mt-12 pt-8 border-t border-white/5">
-              <p className="text-muted-foreground mb-4">Interested in AI-to-AI capabilities for your business?</p>
-              <Button variant="outline" asChild>
-                <Link href="/services/aip">Explore AIP — AI to AI <ArrowRight className="w-4 h-4 ml-2" /></Link>
-              </Button>
+            <div className="mt-12 pt-8 border-t border-white/5 grid sm:grid-cols-2 gap-6 text-left">
+              <div className="glass-panel rounded-2xl p-6 border border-white/10">
+                <p className="text-sm text-muted-foreground mb-3">Want Trackit deployed at scale across your org?</p>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/trackit">See Trackit Enterprise <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                </Button>
+              </div>
+              <div className="glass-panel rounded-2xl p-6 border border-white/10">
+                <p className="text-sm text-muted-foreground mb-3">Interested in AI-to-AI capabilities for your business?</p>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/services/aip">Explore AIP — AI to AI <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
