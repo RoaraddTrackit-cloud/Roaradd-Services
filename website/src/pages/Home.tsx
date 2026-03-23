@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, Bot, Building2, Cpu, Globe, LayoutDashboard, Leaf, Network, ShieldCheck, Users, Zap } from "lucide-react";
+import { ArrowRight, BookOpen, Bot, Building2, Cpu, FileText, Globe, LayoutDashboard, Leaf, Network, ShieldCheck, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -192,7 +192,109 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* RESOURCES */}
+        <section id="resources" className="py-24 border-t border-white/5 bg-secondary/20">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">Resources</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Guides, case studies, and documentation to help you get the most from the RoarAdd ecosystem.</p>
+            </motion.div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: BookOpen,
+                  color: "text-primary",
+                  bg: "from-primary/20 to-primary/5 border-primary/20",
+                  label: "Blog",
+                  title: "Insights & Updates",
+                  desc: "Deep dives into product updates, AI trends, farm tech innovations, and enterprise IT strategy from the RoarAdd team.",
+                  cta: "Read the Blog",
+                },
+                {
+                  icon: FileText,
+                  color: "text-blue-400",
+                  bg: "from-blue-500/20 to-blue-500/5 border-blue-500/20",
+                  label: "Case Studies",
+                  title: "Real Results",
+                  desc: "See how businesses use Trackit for analytics, Farm for operations, and our IT Consulting team to transform their technology stack.",
+                  cta: "View Case Studies",
+                },
+                {
+                  icon: Globe,
+                  color: "text-green-400",
+                  bg: "from-green-500/20 to-green-500/5 border-green-500/20",
+                  label: "Documentation",
+                  title: "Docs & API Reference",
+                  desc: "Technical guides for integrating Trackit, setting up Farm, and connecting to the AIP gateway. Built for developers.",
+                  cta: "Open Docs",
+                },
+              ].map((item, i) => (
+                <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                  <Card className="glass-panel h-full hover:border-white/20 transition-all group cursor-pointer">
+                    <CardHeader>
+                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.bg} border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <item.icon className={`w-6 h-6 ${item.color}`} />
+                      </div>
+                      <Badge variant="secondary" className="w-fit text-xs mb-2">{item.label}</Badge>
+                      <CardTitle className="text-xl">{item.title}</CardTitle>
+                      <CardDescription className="leading-relaxed">{item.desc}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className={`flex items-center gap-2 ${item.color} font-medium text-sm group-hover:gap-3 transition-all`}>
+                        {item.cta} <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* COMPANY */}
+        <section id="company" className="py-24 border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                <Badge variant="outline" className="mb-6 py-1 px-3 bg-primary/10 border-primary/20 text-primary text-xs uppercase tracking-widest">About Us</Badge>
+                <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+                  We build the tools <span className="text-gradient">we wish existed.</span>
+                </h2>
+                <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
+                  RoarAdd started with a simple idea: the next generation of business tools should be interconnected, AI-native, and built by people who actually understand the industries they serve.
+                </p>
+                <p className="text-muted-foreground mb-10 leading-relaxed">
+                  From Trackit's real-time analytics to Farm's field-level data management to AIP's AI-to-AI gateway — every product and service in our ecosystem is designed to work together and grow with you.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button variant="outline" asChild>
+                    <Link href="/services/it-consulting">Meet Our Team <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                  </Button>
+                  <Button variant="ghost" asChild>
+                    <Link href="/services/it-consulting">Contact Us</Link>
+                  </Button>
+                </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { value: "12+", label: "Industries Served" },
+                    { value: "4", label: "Core Products & Services" },
+                    { value: "500+", label: "Enterprise Seats Deployed" },
+                    { value: "100%", label: "Human-in-the-Loop for High-Risk AI" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="glass-panel rounded-2xl p-6 border border-white/10 text-center">
+                      <p className="text-3xl font-extrabold text-white mb-2">{stat.value}</p>
+                      <p className="text-sm text-muted-foreground leading-snug">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* FINAL CTA */}
         <section className="py-24 border-t border-white/5">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
