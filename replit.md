@@ -2,7 +2,22 @@
 
 ## Overview
 
-Roaradd is a software services company website built as a full-stack TypeScript application. The project features a React frontend with a modern component library and an Express.js backend with PostgreSQL database support. The site serves as a marketing and contact platform for the company's digital solutions and software development services.
+Roaradd is a multi-page software services company website built as a full-stack TypeScript application. The project features a React frontend with a modern component library and an Express.js backend with PostgreSQL database support. The site is a full marketing platform with individual pages for each product and service.
+
+## Site Structure
+
+### Pages
+- `/` — Homepage: hero, stats, product previews, service previews, CTA
+- `/products/trackit` — TrackIt product page (project tracking tool, links to trackit.roaradd.com)
+- `/products/farm` — Farm product page (smart agriculture management)
+- `/services/it-consulting` — IT Consulting service page
+- `/services/aip` — AIP (AI Integration Platform) service page
+- `/future` — Future of Future page (free worldwide SMS initiative)
+- `/why-roaradd` — Company mission, values, differentiators, testimonials
+- `/contact` — Detailed contact page with full form (name, email, company, phone, subject, message)
+
+### Shared Components
+- `client/src/components/layout.tsx` — Shared Header (with dropdown nav), Footer, GlassCard, PageWrapper components
 
 ## User Preferences
 
