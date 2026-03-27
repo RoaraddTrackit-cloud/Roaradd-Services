@@ -7,7 +7,6 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import TrackItPage from "@/pages/products/trackit";
 import FarmPage from "@/pages/products/farm";
-import ITConsultingPage from "@/pages/services/it-consulting";
 import AIPPage from "@/pages/services/aip";
 import FuturePage from "@/pages/future";
 import WhyRoaraddPage from "@/pages/why-roaradd";
@@ -19,7 +18,6 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/products/trackit" component={TrackItPage} />
       <Route path="/products/farm" component={FarmPage} />
-      <Route path="/services/it-consulting" component={ITConsultingPage} />
       <Route path="/services/aip" component={AIPPage} />
       <Route path="/future" component={FuturePage} />
       <Route path="/why-roaradd" component={WhyRoaraddPage} />
