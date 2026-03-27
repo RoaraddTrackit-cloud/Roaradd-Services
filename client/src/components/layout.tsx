@@ -23,7 +23,7 @@ const navItems = [
   {
     label: "Services",
     children: [
-      { label: "IT Consulting", href: "/services/it-consulting", description: "Strategic technology advisory" },
+      { label: "IT Consulting", href: "/#it-consulting", description: "Strategic technology advisory" },
       { label: "AIP", href: "/services/aip", description: "AI integration platform" },
     ],
   },
@@ -224,7 +224,7 @@ export function Footer() {
           <div>
             <p className="text-sm font-semibold mb-4">Services</p>
             <ul className="space-y-2">
-              <li><Link href="/services/it-consulting"><span className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">IT Consulting</span></Link></li>
+              <li><a href="/#it-consulting"><span className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">IT Consulting</span></a></li>
               <li><Link href="/services/aip"><span className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">AIP</span></Link></li>
             </ul>
           </div>
