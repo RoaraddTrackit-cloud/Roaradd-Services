@@ -1,4 +1,5 @@
-import { Link } from "wouter";
+import RoaraddHero from "@/components/RoaraddHero";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PageWrapper, GlassCard } from "@/components/layout";
 import { motion } from "framer-motion";
@@ -41,12 +42,10 @@ const itConsultingServices = [
   { icon: Lightbulb, title: "Technology Evaluation", description: "Unbiased assessment of technologies and vendors to ensure you invest in the right tools." },
 ];
 
-const itProcess = [
-  { step: "01", title: "Discovery", description: "Deep dive into your current IT landscape, business objectives, and pain points." },
-  { step: "02", title: "Analysis", description: "Assess gaps, risks, and opportunities across your technology stack and processes." },
-  { step: "03", title: "Strategy", description: "Deliver a clear, actionable IT roadmap aligned with your business priorities." },
-  { step: "04", title: "Implementation", description: "Work alongside your team to execute the strategy and ensure successful outcomes." },
-];
+  const scrollToSection = (id: string) => {     if (id === "it-consulting") { window.location.href = "/it-consulting"; return; }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMobileMenuOpen(false);
+  };
 
 export default function Home() {
   return (
@@ -96,17 +95,25 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
-        </section>
 
-        {/* ─── Initiative Pillars ─── */}
-        <section className="py-16 border-y border-white/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-8"
+          <nav className="hidden md:flex items-center gap-8">
+            {["services", "products", "roadmap", "contact", "it-consulting"].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item)}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors capitalize"
+                data-testid={`link-${item}`}
+              >
+                {item}
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <Button
+              onClick={() => scrollToSection("contact")}
+              className="hidden sm:flex gap-2 bg-gradient-to-r from-primary to-emerald-500 hover:from-primary/90 hover:to-emerald-500/90 shadow-lg shadow-primary/25"
+              data-testid="button-get-started"
             >
               {[
                 {
@@ -155,32 +162,19 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                {
-                  name: "TrackIt",
-                  tag: "Live",
-                  description: "A modern project and task tracking platform that keeps teams aligned and ships consistently on schedule.",
-                  href: "/products/trackit",
-                  external: "https://trackit.roaradd.com",
-                  icon: Code2,
-                  color: "from-primary to-emerald-400",
-                },
-                {
-                  name: "Farm",
-                  tag: "Live",
-                  description: "Smart agricultural management platform helping farmers optimize yields and manage their resources with data.",
-                  href: "/products/farm",
-                  external: null,
-                  icon: Globe,
-                  color: "from-emerald-400 to-teal-500",
-                },
-              ].map((product) => (
-                <motion.div
-                  key={product.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden py-4 border-t border-white/5"
+          >
+            <nav className="flex flex-col gap-4">
+              {["services", "products", "roadmap", "contact", "it-consulting"].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item)}
+                  className="text-left text-muted-foreground hover:text-foreground transition-colors capitalize"
                 >
                   <GlassCard className="p-8 h-full hover:border-primary/20 transition-all duration-300 group" glow>
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${product.color} flex items-center justify-center mb-6 shadow-lg`}>
@@ -442,6 +436,23 @@ export default function Home() {
           </div>
         </section>
       </div>
-    </PageWrapper>
+    </footer>
+  );
+}
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <Header />
+      <main>
+        <RoaraddHero />
+            <HeroSection />
+        <ServicesSection />
+        <TrackItSection />
+        <RoadmapSection />
+        <ContactSection />
+      </main>
+      <Footer />
+    </div>
   );
 }
