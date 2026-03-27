@@ -5,20 +5,26 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
-import ITConsulting from "@/pages/it-consulting";
-import Farm from "@/pages/farm";
-
+import TrackItPage from "@/pages/products/trackit";
+import FarmPage from "@/pages/products/farm";
+import AIPPage from "@/pages/services/aip";
+import FuturePage from "@/pages/future";
+import WhyRoaraddPage from "@/pages/why-roaradd";
+import ContactPage from "@/pages/contact";
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/it-consulting" component={ITConsulting} />
-            <Route path="/farm" component={Farm} />
+      <Route path="/products/trackit" component={TrackItPage} />
+      <Route path="/products/farm" component={FarmPage} />
+      <Route path="/services/aip" component={AIPPage} />
+      <Route path="/future" component={FuturePage} />
+      <Route path="/why-roaradd" component={WhyRoaraddPage} />
+      <Route path="/contact" component={ContactPage} />
       <Route component={NotFound} />
     </Switch>
   );
 }
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -29,5 +35,4 @@ function App() {
     </QueryClientProvider>
   );
 }
-
 export default App;
