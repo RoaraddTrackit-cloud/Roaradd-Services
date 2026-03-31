@@ -11,6 +11,7 @@ import AIPPage from "@/pages/services/aip";
 import FuturePage from "@/pages/future";
 import WhyRoaraddPage from "@/pages/why-roaradd";
 import ContactPage from "@/pages/contact";
+
 function Router() {
   return (
     <Switch>
@@ -25,6 +26,7 @@ function Router() {
     </Switch>
   );
 }
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -35,4 +37,5 @@ function App() {
     </QueryClientProvider>
   );
 }
+
 export default App;
