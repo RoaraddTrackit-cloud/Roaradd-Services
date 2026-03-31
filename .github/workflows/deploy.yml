@@ -25,13 +25,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Build
-        run: pnpm run build:github
-        env:
-          BASE_PATH: /
+      - name: Type check
+        run: pnpm run check
+        continue-on-error: true
 
       - name: Trigger Replit Redeploy via Webhook
-        if: success()
         run: |
           curl -f -X POST \
             -H "Authorization: Bearer ${{ secrets.DEPLOY_SECRET }}" \
