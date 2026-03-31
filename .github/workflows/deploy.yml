@@ -30,11 +30,11 @@ jobs:
         env:
           BASE_PATH: /
 
-      - name: Trigger Replit Redeploy
+      - name: Trigger Replit Redeploy via Webhook
         if: success()
         run: |
-          curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.REPLIT_TOKEN }}" \
+          curl -f -X POST \
+            -H "Authorization: Bearer ${{ secrets.DEPLOY_SECRET }}" \
             -H "Content-Type: application/json" \
-            https://replit.com/api/v1/deployments/${{ secrets.REPLIT_DEPLOYMENT_ID }}/redeploy
+            https://roaradd-services.replit.app/api/deploy-webhook
         continue-on-error: true
