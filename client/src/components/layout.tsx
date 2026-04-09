@@ -250,7 +250,7 @@ export function Footer() {
             </span>
             <span className="flex items-center gap-1.5">
               <Mail className="w-3.5 h-3.5" />
-              hello@roaradd.com
+              Contactus@roaradd.com
             </span>
           </div>
         </div>

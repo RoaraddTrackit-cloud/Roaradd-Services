@@ -1,23 +1,15 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Link } from "wouter";
 import { PageWrapper, GlassCard } from "@/components/layout";
-import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { motion } from "framer-motion";
 import {
   Mail,
-  MapPin,
   Phone,
+  MapPin,
   Clock,
-  Send,
-  Loader2,
   MessageSquare,
   Users,
   Zap,
-  CheckCircle2,
+  ChevronLeft,
 } from "lucide-react";
 
 const fadeInUp = {
@@ -34,269 +26,127 @@ const contactReasons = [
 ];
 
 export default function ContactPage() {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
-      return apiRequest("POST", "/api/contact", data);
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. We'll get back to you within 24 hours.",
-      });
-      setFormData({ name: "", email: "", company: "", phone: "", subject: "", message: "" });
-    },
-    onError: () => {
-      toast({
-        title: "Something went wrong",
-        description: "Please try again or email us directly at hello@roaradd.com",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in your name, email, and message.",
-        variant: "destructive",
-      });
-      return;
-    }
-    contactMutation.mutate(formData);
-  };
-
   return (
     <PageWrapper>
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute top-20 right-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
         {/* Hero */}
-        <section className="py-24 sm:py-28">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeInUp} className="text-center max-w-2xl mx-auto mb-16">
+        <section className="py-24 sm:py-32">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div {...fadeInUp}>
+              <Link href="/">
+                <button
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+                  data-testid="link-back-home"
+                >
+                  <ChevronLeft className="w-4 h-4" /> Back to Home
+                </button>
+              </Link>
+
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-6">
                 <MessageSquare className="w-3.5 h-3.5" />
                 Let's Talk
               </div>
-              <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-6">
-                Contact Us
-              </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                Whether you have a project in mind, need strategic advice, or just want to learn more about what we do — we'd love to hear from you.
-              </p>
-            </motion.div>
 
-            {/* Contact Reasons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-              {contactReasons.map((reason, i) => (
-                <motion.div
-                  key={reason.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <GlassCard className="p-5 text-center h-full hover:border-primary/20 transition-all duration-300">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-3">
-                      <reason.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-sm mb-1">{reason.label}</h3>
-                    <p className="text-xs text-muted-foreground">{reason.description}</p>
-                  </GlassCard>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Main Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Contact Info */}
-              <div className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <GlassCard className="p-6">
-                    <h2 className="font-semibold mb-5">Get in touch</h2>
-                    <div className="space-y-4">
-                      {[
-                        { icon: Mail, label: "Email", value: "hello@roaradd.com" },
-                        { icon: Phone, label: "Phone", value: "+1 (555) 000-0000" },
-                        { icon: MapPin, label: "Location", value: "Global — Remote First" },
-                        { icon: Clock, label: "Response Time", value: "Within 24 hours" },
-                      ].map((item) => (
-                        <div key={item.label} className="flex items-start gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <item.icon className="w-4 h-4 text-primary" />
-                          </div>
-                          <div>
-                            <p className="text-xs text-muted-foreground">{item.label}</p>
-                            <p className="text-sm font-medium">{item.value}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </GlassCard>
-
-                  <GlassCard className="p-6 mt-6">
-                    <h3 className="font-semibold mb-3">What happens next?</h3>
-                    <div className="space-y-3">
-                      {[
-                        "We review your message within 24 hours",
-                        "We schedule a discovery call",
-                        "We send a tailored proposal",
-                        "We get to work!",
-                      ].map((step, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <div className="w-5 h-5 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <span className="text-xs text-primary font-semibold">{i + 1}</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground">{step}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </GlassCard>
-                </motion.div>
+              <div className="max-w-2xl mb-14">
+                <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-5">
+                  Contact Us
+                </h1>
+                <p className="text-xl text-muted-foreground leading-relaxed">
+                  Whether you have a project in mind, need strategic advice, or just want to learn more — reach out and we'll get back to you promptly.
+                </p>
               </div>
 
-              {/* Contact Form */}
+              {/* Primary contact card */}
               <motion.div
-                className="lg:col-span-2"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="mb-14"
               >
-                <GlassCard className="p-8" glow>
-                  <h2 className="font-semibold text-lg mb-6">Send us a message</h2>
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <label className="text-sm font-medium">Name *</label>
-                        <Input
-                          placeholder="Your full name"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="bg-white/5 border-white/10 focus:border-primary/50 placeholder:text-muted-foreground/50"
-                          data-testid="input-name"
-                        />
-                      </div>
-                      <div className="space-y-1.5">
-                        <label className="text-sm font-medium">Email *</label>
-                        <Input
-                          type="email"
-                          placeholder="your@email.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="bg-white/5 border-white/10 focus:border-primary/50 placeholder:text-muted-foreground/50"
-                          data-testid="input-email"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <label className="text-sm font-medium">Company</label>
-                        <Input
-                          placeholder="Your company name"
-                          value={formData.company}
-                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                          className="bg-white/5 border-white/10 focus:border-primary/50 placeholder:text-muted-foreground/50"
-                          data-testid="input-company"
-                        />
-                      </div>
-                      <div className="space-y-1.5">
-                        <label className="text-sm font-medium">Phone</label>
-                        <Input
-                          type="tel"
-                          placeholder="+1 (555) 000-0000"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="bg-white/5 border-white/10 focus:border-primary/50 placeholder:text-muted-foreground/50"
-                          data-testid="input-phone"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-sm font-medium">Subject</label>
-                      <Input
-                        placeholder="What is this regarding?"
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="bg-white/5 border-white/10 focus:border-primary/50 placeholder:text-muted-foreground/50"
-                        data-testid="input-subject"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-sm font-medium">Message *</label>
-                      <Textarea
-                        placeholder="Tell us about your project, challenge, or question..."
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="bg-white/5 border-white/10 focus:border-primary/50 placeholder:text-muted-foreground/50 min-h-[140px] resize-none"
-                        data-testid="textarea-message"
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      size="lg"
-                      disabled={contactMutation.isPending}
-                      className="w-full gap-2 bg-gradient-to-r from-primary to-emerald-500 hover:from-primary/90 hover:to-emerald-500/90 shadow-lg shadow-primary/25 text-black font-semibold"
-                      data-testid="button-submit"
+                <GlassCard className="p-8 sm:p-12" glow>
+                  <h2 className="text-2xl font-bold mb-8 text-center">Get in touch</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">
+                    <a
+                      href="mailto:Contactus@roaradd.com"
+                      className="group flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
+                      data-testid="link-email"
                     >
-                      {contactMutation.isPending ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-4 h-4" />
-                          Send Message
-                        </>
-                      )}
-                    </Button>
-                  </form>
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                        <Mail className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-muted-foreground mb-0.5">Email us at</p>
+                        <p className="font-semibold text-sm leading-snug group-hover:text-primary transition-colors" data-testid="text-email">
+                          Contactus@roaradd.com
+                        </p>
+                      </div>
+                    </a>
+
+                    <a
+                      href="tel:+917345460143"
+                      className="group flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-300"
+                      data-testid="link-phone"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
+                        <Phone className="w-6 h-6 text-emerald-400" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-muted-foreground mb-0.5">Call us at</p>
+                        <p className="font-semibold text-sm group-hover:text-emerald-400 transition-colors" data-testid="text-phone">
+                          +91 73454 60143
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground">
+                    <span className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4" />
+                      Global — Remote First
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <Clock className="w-4 h-4" />
+                      Typical response within 24 hours
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                      Currently accepting new clients
+                    </span>
+                  </div>
                 </GlassCard>
               </motion.div>
-            </div>
-          </div>
-        </section>
 
-        {/* Availability */}
-        <section className="py-16 border-t border-white/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <GlassCard className="p-8">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle2 className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Currently accepting new clients</p>
-                    <p className="text-sm text-muted-foreground">We have capacity for 3 new projects this quarter.</p>
-                  </div>
+              {/* Reason cards */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-xl font-bold mb-5 text-center text-muted-foreground">How can we help?</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {contactReasons.map((reason, i) => (
+                    <motion.div
+                      key={reason.label}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.08 }}
+                    >
+                      <GlassCard className="p-5 text-center h-full hover:border-primary/20 transition-all duration-300">
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-3">
+                          <reason.icon className="w-5 h-5 text-primary" />
+                        </div>
+                        <h3 className="font-semibold text-sm mb-1">{reason.label}</h3>
+                        <p className="text-xs text-muted-foreground">{reason.description}</p>
+                      </GlassCard>
+                    </motion.div>
+                  ))}
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  Available now — Typical response within 24 hours
-                </div>
-              </div>
-            </GlassCard>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
       </div>
