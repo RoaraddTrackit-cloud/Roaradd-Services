@@ -86,7 +86,7 @@ export default function ContactPage() {
                     </a>
 
                     <a
-                      href="tel:+917345460143"
+                      href="tel:+17345460143"
                       className="group flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-300"
                       data-testid="link-phone"
                     >
