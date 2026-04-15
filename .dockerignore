@@ -1,8 +1,0 @@
-node_modules
-.git
-.replit
-replit.md
-*.md
-dist
-.env
-.cache
