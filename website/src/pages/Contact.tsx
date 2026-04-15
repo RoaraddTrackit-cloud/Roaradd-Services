@@ -4,7 +4,6 @@ import { ArrowRight, Bot, Building2, LayoutDashboard, Leaf, Mail, MapPin, Messag
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
 export default function Contact() {
@@ -39,11 +38,23 @@ export default function Contact() {
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-5">
                       <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="space-y-2"><Label>Full Name</Label><Input placeholder="Your name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required className="bg-white/5 border-white/10" /></div>
-                        <div className="space-y-2"><Label>Email</Label><Input type="email" placeholder="you@company.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required className="bg-white/5 border-white/10" /></div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-white">Full Name</label>
+                          <Input placeholder="Your name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required className="bg-white/5 border-white/10" />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-white">Email</label>
+                          <Input type="email" placeholder="you@company.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required className="bg-white/5 border-white/10" />
+                        </div>
                       </div>
-                      <div className="space-y-2"><Label>Company (optional)</Label><Input placeholder="Your company" value={form.company} onChange={e => setForm({...form, company: e.target.value})} className="bg-white/5 border-white/10" /></div>
-                      <div className="space-y-2"><Label>Message</Label><textarea placeholder="Tell us about your project..." value={form.message} onChange={e => setForm({...form, message: e.target.value})} required rows={5} className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none" /></div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-white">Company (optional)</label>
+                        <Input placeholder="Your company" value={form.company} onChange={e => setForm({...form, company: e.target.value})} className="bg-white/5 border-white/10" />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-white">Message</label>
+                        <textarea placeholder="Tell us about your project..." value={form.message} onChange={e => setForm({...form, message: e.target.value})} required rows={5} className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none" />
+                      </div>
                       <Button type="submit" variant="gradient" size="lg" className="w-full gap-2">Send Message <ArrowRight className="w-4 h-4" /></Button>
                     </form>
                   )}
@@ -57,6 +68,25 @@ export default function Contact() {
                 <div className="glass-panel rounded-2xl p-6 border border-white/10">
                   <div className="flex items-center gap-3 mb-2"><MapPin className="w-5 h-5 text-green-400" /><h3 className="font-semibold text-white">Location</h3></div>
                   <p className="text-muted-foreground">Loganville, GA, United States</p>
+                </div>
+                <div className="glass-panel rounded-2xl p-6 border border-white/10">
+                  <h3 className="font-semibold text-white mb-4">What can we help with?</h3>
+                  <div className="space-y-2">
+                    {[
+                      { icon: LayoutDashboard, color: "text-primary", name: "Trackit", href: "/trackit" },
+                      { icon: Leaf, color: "text-green-400", name: "Farm", href: "/farm" },
+                      { icon: Building2, color: "text-blue-400", name: "IT Consulting", href: "/services/it-consulting" },
+                      { icon: Bot, color: "text-purple-400", name: "AIP", href: "/services/aip" },
+                    ].map(item => (
+                      <Link key={item.name} href={item.href}>
+                        <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
+                          <item.icon className={`w-4 h-4 ${item.color}`} />
+                          <span className="text-sm text-muted-foreground group-hover:text-white transition-colors">{item.name}</span>
+                          <ArrowRight className="w-3 h-3 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
