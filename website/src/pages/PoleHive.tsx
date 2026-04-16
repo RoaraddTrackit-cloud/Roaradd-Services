@@ -58,12 +58,8 @@ export default function PoleHive() {
         {/* Product Image */}
         <section className="pb-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-video flex items-center justify-center">
-              <img src="/images/polehive-hero-sunrise.png" alt="PoleHive One smart beehive mounted on pole with solar cone" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
-                <Sun className="w-12 h-12 mb-3 opacity-20" />
-                <p className="text-sm opacity-40">PoleHive Hero Shot</p>
-              </div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-video flex items-center justify-center relative">
+              <img src="/generated-image (2).png" alt="PoleHive One smart beehive mounted on pole with solar cone" className="w-full h-full object-cover" />
             </motion.div>
           </div>
         </section>
@@ -98,11 +94,7 @@ export default function PoleHive() {
               <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">Hive Chamber Architecture</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold mb-8">Internal Systems Diagram</h2>
               <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-[2/1] flex items-center justify-center relative">
-                <img src="/images/polehive-internal-cutaway.png" alt="PoleHive One internal systems diagram showing chambers and sensors" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
-                  <Rocket className="w-12 h-12 mb-3 opacity-20" />
-                  <p className="text-sm opacity-40">Internal Cutaway Diagram</p>
-                </div>
+                <img src="/generated-image (1).png" alt="PoleHive One internal systems diagram showing chambers and sensors" className="w-full h-full object-cover" />
               </div>
             </motion.div>
           </div>
@@ -136,11 +128,7 @@ export default function PoleHive() {
               <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">Data Analytics Ecosystem</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold mb-8">Sensor Network & App View</h2>
               <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-[2/1] flex items-center justify-center relative">
-                <img src="/images/polehive-ecosystem-dashboard.png" alt="PoleHive sensor ecosystem with mobile app and cloud analytics" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
-                  <Leaf className="w-12 h-12 mb-3 opacity-20" />
-                  <p className="text-sm opacity-40">Ecosystem Dashboard Diagram</p>
-                </div>
+                <img src="/generated-image.png" alt="PoleHive sensor ecosystem with mobile app and cloud analytics" className="w-full h-full object-cover" />
               </div>
             </motion.div>
           </div>
