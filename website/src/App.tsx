@@ -14,6 +14,8 @@ import AIP from "@/pages/AIP";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Ideas from "@/pages/Ideas";
+import SolarEye from "@/pages/SolarEye";
+import PoleHive from "@/pages/PoleHive";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -114,7 +116,6 @@ function Navbar() {
               <Link href="/about" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Users className="w-4 h-4 text-yellow-400" /> About Us</Link>
               <Link href="/contact" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Mail className="w-4 h-4 text-pink-400" /> Contact</Link>
               <Link href="/ideas" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Lightbulb className="w-4 h-4 text-yellow-400" /> Ideas Lab</Link>
-              <div className="pt-3 pb-1"><Button size="sm" variant="gradient" className="w-full" asChild><Link href="/ideas">💡 Ideas Lab</Link></Button></div>
             </div>
           </motion.div>
         )}
@@ -182,6 +183,8 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/ideas" component={Ideas} />
+        <Route path="/ideas/solareye" component={SolarEye} />
+        <Route path="/ideas/polehive" component={PoleHive} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
