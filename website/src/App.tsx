@@ -16,6 +16,9 @@ import Contact from "@/pages/Contact";
 import Ideas from "@/pages/Ideas";
 import SolarEye from "@/pages/SolarEye";
 import PoleHive from "@/pages/PoleHive";
+import Blog from "@/pages/Blog";
+import CaseStudies from "@/pages/CaseStudies";
+import Whitepapers from "@/pages/Whitepapers";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -185,6 +188,9 @@ function Router() {
         <Route path="/ideas" component={Ideas} />
         <Route path="/ideas/solareye" component={SolarEye} />
         <Route path="/ideas/polehive" component={PoleHive} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/case-studies" component={CaseStudies} />
+        <Route path="/whitepapers" component={Whitepapers} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
