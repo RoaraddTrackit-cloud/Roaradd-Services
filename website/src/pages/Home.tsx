@@ -62,37 +62,27 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
-      {/* Background grid */}
       <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
-
-      {/* Floating orbs */}
       <FloatingOrb className="top-20 left-1/4 w-[500px] h-[500px] bg-primary/10 blur-[120px]" />
       <FloatingOrb className="top-40 right-1/4 w-[400px] h-[400px] bg-purple-500/8 blur-[100px]" />
       <FloatingOrb className="bottom-1/3 left-1/3 w-[300px] h-[300px] bg-blue-500/8 blur-[80px]" />
-
       <main>
-        {/* HERO */}
         <section className="relative min-h-screen flex items-center pt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-24 text-center w-full">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
               <Badge variant="outline" className="mb-6 py-1.5 px-4 bg-primary/10 border-primary/20 text-primary uppercase tracking-widest text-xs">
                 The RoarAdd Ecosystem
               </Badge>
-
               <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[1.05] mb-6">
                 <span className="text-gradient">Roar</span>Add
               </h1>
-
               <p className="text-lg md:text-xl text-muted-foreground mb-3 max-w-2xl mx-auto leading-relaxed">
                 Products and services built for the next generation of business.
               </p>
-
               <RotatingTagline />
-
               <p className="text-muted-foreground mt-4 mb-12 max-w-xl mx-auto text-sm">
                 One ecosystem. Multiple solutions.
               </p>
-
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Button size="lg" variant="gradient" asChild className="gap-2 group">
                   <Link href="/trackit">Explore Trackit <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></Link>
@@ -101,8 +91,6 @@ export default function Home() {
                   <Link href="/services/aip">Discover AIP</Link>
                 </Button>
               </div>
-
-              {/* Trust indicators */}
               <div className="mt-16 flex flex-wrap justify-center gap-6 sm:gap-10 text-center">
                 {[
                   { value: "12+", label: "Industries" },
@@ -120,7 +108,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PRODUCTS */}
         <section className="py-20 sm:py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
@@ -152,7 +139,6 @@ export default function Home() {
                   </Card>
                 </Link>
               </motion.div>
-
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                 <Link href="/farm">
                   <Card className="glass-panel h-full hover:border-green-500/40 transition-all cursor-pointer group">
@@ -181,7 +167,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SERVICES */}
         <section className="py-20 sm:py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
@@ -213,7 +198,6 @@ export default function Home() {
                   </Card>
                 </Link>
               </motion.div>
-
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
                 <Link href="/services/aip">
                   <Card className="glass-panel h-full hover:border-purple-500/40 transition-all cursor-pointer group">
@@ -242,36 +226,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WHY ROARADD */}
-        <section className="py-20 sm:py-24 border-t border-white/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">Why RoarAdd?</h2>
-            </motion.div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-              {[
-                { icon: Zap, color: "text-yellow-400", title: "Built for Speed", desc: "From idea to deployment — our products ship fast and our consulting delivers results without endless delays." },
-                { icon: Network, color: "text-primary", title: "Interconnected Ecosystem", desc: "Our products and services are designed to work together. Trackit integrates into consulting. AIP enhances everything." },
-                { icon: ShieldCheck, color: "text-green-400", title: "Human-Centered Safety", desc: "Even in our most automated services, human-in-the-loop controls ensure you're always in command." },
-                { icon: Globe, color: "text-blue-400", title: "Google Cloud Native", desc: "Built on world-class infrastructure — Vertex AI, Cloud SQL, and IAM — for security and scale." },
-                { icon: Users, color: "text-pink-400", title: "Real Expertise", desc: "Our consultants have shipped enterprise systems across industries. We bring hands-on experience, not just advice." },
-                { icon: Cpu, color: "text-purple-400", title: "AI-First Design", desc: "From Trackit's analytics to AIP's agent gateway, AI is baked into every layer — not bolted on later." },
-              ].map((item, i) => (
-                <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.07 }}>
-                  <Card className="glass-panel h-full hover:border-white/20 transition-all">
-                    <CardHeader>
-                      <item.icon className={`w-8 h-8 ${item.color} mb-3`} />
-                      <CardTitle className="text-lg">{item.title}</CardTitle>
-                      <CardDescription>{item.desc}</CardDescription>
-                    </CardHeader>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* RESOURCES */}
         <section id="resources" className="py-20 sm:py-24 border-t border-white/5 bg-secondary/20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
@@ -280,33 +234,34 @@ export default function Home() {
             </motion.div>
             <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
               {[
-                { icon: BookOpen, color: "text-primary", bg: "from-primary/20 to-primary/5 border-primary/20", label: "Blog", title: "Insights & Updates", desc: "Deep dives into product updates, AI trends, farm tech innovations, and enterprise IT strategy from the RoarAdd team.", cta: "Read the Blog" },
-                { icon: FileText, color: "text-blue-400", bg: "from-blue-500/20 to-blue-500/5 border-blue-500/20", label: "Case Studies", title: "Real Results", desc: "See how businesses use Trackit for analytics, Farm for operations, and our IT Consulting team to transform their technology stack.", cta: "View Case Studies" },
-                { icon: Globe, color: "text-green-400", bg: "from-green-500/20 to-green-500/5 border-green-500/20", label: "Documentation", title: "Docs & API Reference", desc: "Technical guides for integrating Trackit, setting up Farm, and connecting to the AIP gateway. Built for developers.", cta: "Open Docs" },
+                { icon: BookOpen, color: "text-primary", bg: "from-primary/20 to-primary/5 border-primary/20", label: "Blog", title: "Insights & Updates", desc: "Deep dives into product updates, AI trends, farm tech innovations, and enterprise IT strategy from the RoarAdd team.", cta: "Read the Blog", href: "/blog" },
+                { icon: FileText, color: "text-blue-400", bg: "from-blue-500/20 to-blue-500/5 border-blue-500/20", label: "Case Studies", title: "Real Results", desc: "See how businesses use Trackit for analytics, Farm for operations, and our IT Consulting team to transform their technology stack.", cta: "View Case Studies", href: "/case-studies" },
+                { icon: Globe, color: "text-green-400", bg: "from-green-500/20 to-green-500/5 border-green-500/20", label: "Whitepapers", title: "Research & Analysis", desc: "Technical guides for integrating Trackit, setting up Farm, and connecting to the AIP gateway. Built for developers.", cta: "Read Whitepapers", href: "/whitepapers" },
               ].map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                  <Card className="glass-panel h-full hover:border-white/20 transition-all group cursor-pointer">
-                    <CardHeader>
-                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.bg} border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                        <item.icon className={`w-6 h-6 ${item.color}`} />
-                      </div>
-                      <Badge variant="secondary" className="w-fit text-xs mb-2">{item.label}</Badge>
-                      <CardTitle className="text-xl">{item.title}</CardTitle>
-                      <CardDescription className="leading-relaxed">{item.desc}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className={`flex items-center gap-2 ${item.color} font-medium text-sm group-hover:gap-3 transition-all`}>
-                        {item.cta} <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <Link href={item.href}>
+                    <Card className="glass-panel h-full hover:border-white/20 transition-all group cursor-pointer">
+                      <CardHeader>
+                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.bg} border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                          <item.icon className={`w-6 h-6 ${item.color}`} />
+                        </div>
+                        <Badge variant="secondary" className="w-fit text-xs mb-2">{item.label}</Badge>
+                        <CardTitle className="text-xl">{item.title}</CardTitle>
+                        <CardDescription className="leading-relaxed">{item.desc}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className={`flex items-center gap-2 ${item.color} font-medium text-sm group-hover:gap-3 transition-all`}>
+                          {item.cta} <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* COMPANY */}
         <section id="company" className="py-20 sm:py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -346,7 +301,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FINAL CTA */}
         <section className="py-20 sm:py-24 border-t border-white/5">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
