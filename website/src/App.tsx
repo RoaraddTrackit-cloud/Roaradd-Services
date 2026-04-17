@@ -75,12 +75,12 @@ function Navbar() {
   const products = [
     { href: "/trackit", icon: LayoutDashboard, name: "Trackit", desc: "Smart analytics & tracking" },
     { href: "/farm", icon: Leaf, name: "Farm", desc: "Modern farm management" },
+        { href: "/ideas/polehive", icon: Hexagon, name: "Hive AI", desc: "Pollinator intelligence platform" },
   ];
   const services = [
     { href: "/services/it-consulting", icon: Building2, name: "IT Consulting", desc: "Cloud, enterprise & strategy" },
     { href: "/services/aip", icon: Bot, name: "AIP — AI to AI", desc: "Agent-to-agent gateway" },
   ];
-      { href: "/ideas/polehive", icon: Hexagon, name: "Hive AI", desc: "Pollinator intelligence platform" },
   const company = [
     { href: "/about", icon: Users, name: "About Us", desc: "Our story & team" },
     { href: "/contact", icon: Mail, name: "Contact", desc: "Get in touch" },
