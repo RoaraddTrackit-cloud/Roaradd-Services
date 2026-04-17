@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <title>RoarAdd</title>
   <script>
-    // GitHub Pages SPA redirect — preserves path for React Router (wouter)
-    var l = window.location;
-    var seg = l.pathname.split('/').slice(1);
-    l.replace(
-      l.protocol + '//' + l.hostname +
-      (l.port ? ':' + l.port : '') +
-      l.pathname.split('/').slice(0, 1).join('/') +
-      '/?p=/' + seg.slice(0).join('/').replace(/&/g, '~and~') +
-      (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-      l.hash
+    // GitHub Pages SPA 404 redirect — stores current path and redirects to /
+    sessionStorage.redirect = location.href;
+    window.location.replace(
+      location.protocol + '//' + location.hostname +
+      (location.port ? ':' + location.port : '') + '/'
     );
   </script>
 </head>
