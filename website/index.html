@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>RoarAdd.com Website</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <script>
+      // SPA redirect handler for GitHub Pages
+      (function(){
+        var r = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (r && r !== location.href) {
+          history.replaceState(null, null, r);
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
