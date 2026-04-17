@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Building2, ChevronDown, LayoutDashboard, Leaf, Lightbulb, Mail, Menu, Network, Users, X } from "lucide-react";
+import { Bot, Building2, ChevronDown, LayoutDashboard,  Hexagon,Leaf, Lightbulb, Mail, Menu, Network, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Home from "@/pages/Home";
 import Trackit from "@/pages/Trackit";
@@ -80,6 +80,7 @@ function Navbar() {
     { href: "/services/it-consulting", icon: Building2, name: "IT Consulting", desc: "Cloud, enterprise & strategy" },
     { href: "/services/aip", icon: Bot, name: "AIP — AI to AI", desc: "Agent-to-agent gateway" },
   ];
+      { href: "/ideas/polehive", icon: Hexagon, name: "Hive AI", desc: "Pollinator intelligence platform" },
   const company = [
     { href: "/about", icon: Users, name: "About Us", desc: "Our story & team" },
     { href: "/contact", icon: Mail, name: "Contact", desc: "Get in touch" },
@@ -164,11 +165,9 @@ function Footer() {
           <p>© {new Date().getFullYear()} RoarAdd LLC. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/contact" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/contact" className="hover:text-white transition-colors">Terms of Service</Link>
-            <Link href="/services/aip" className="hover:text-white transition-colors">API Status</Link>
+            <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>            <Link href="/services/aip" className="hover:text-white transition-colors">API Status</Link>
           </div>
-        </div>
-      </div>
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>      </div>
     </footer>
   );
 }
