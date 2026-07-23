@@ -111,11 +111,35 @@ export default function Home() {
         <section className="py-20 sm:py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Products</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Purpose-built software that solves real problems.</p>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Products & Hardware</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Purpose-built hardware and software engineered for high-performance scale.</p>
             </motion.div>
-            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <Link href="/photonic-cpo">
+                  <Card className="glass-panel h-full hover:border-cyan-500/40 transition-all cursor-pointer group">
+                    <CardHeader>
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 border border-cyan-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <Cpu className="w-7 h-7 text-cyan-400" />
+                      </div>
+                      <Badge className="w-fit mb-2 bg-cyan-500/10 text-cyan-400 border-cyan-500/20">Optics Hardware</Badge>
+                      <CardTitle className="text-2xl">Photonic-CPO v4</CardTitle>
+                      <CardDescription className="text-base">Next-generation 800G/1.6T Silicon Photonics optical engine. Cuts GPU cluster interconnect energy by 85%.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {["85% Energy Cut", "800G/1.6T Optics", "1.8 pJ/bit", "2.5D Packaging"].map(f => (
+                          <Badge key={f} variant="secondary" className="text-xs">{f}</Badge>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-2 text-cyan-400 font-medium text-sm group-hover:gap-3 transition-all">
+                        Learn More <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                 <Link href="/trackit">
                   <Card className="glass-panel h-full hover:border-primary/40 transition-all cursor-pointer group">
                     <CardHeader>

@@ -16,6 +16,7 @@ const navItems = [
   {
     label: "Products",
     children: [
+      { label: "Photonic-CPO v4", href: "/products/photonic-cpo", description: "800G/1.6T Silicon Photonics Interconnects" },
       { label: "TrackIt", href: "/products/trackit", description: "Project & task tracking platform" },
       { label: "Farm", href: "/products/farm", description: "Smart agricultural management" },
     ],

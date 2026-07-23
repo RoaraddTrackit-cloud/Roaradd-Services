@@ -155,8 +155,17 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
+                {
+                  name: "Photonic-CPO v4",
+                  tag: "Hardware Optics",
+                  description: "Next-gen 800G/1.6T Silicon Photonics Co-Packaged Optics engine delivering 85% energy reduction for AI GPU clusters.",
+                  href: "/products/photonic-cpo",
+                  external: null,
+                  icon: Zap,
+                  color: "from-cyan-400 to-primary",
+                },
                 {
                   name: "TrackIt",
                   tag: "Live",
