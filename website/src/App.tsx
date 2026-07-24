@@ -4,10 +4,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Building2, ChevronDown, Cpu, LayoutDashboard, Hexagon, Leaf, Lightbulb, Mail, Menu, Network, Users, X } from "lucide-react";
+import { Bot, Building2, ChevronDown, Cpu, LayoutDashboard, Hexagon, Leaf, Lightbulb, Mail, Menu, Network, Pill, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Home from "@/pages/Home";
 import PhotonicCPO from "@/pages/PhotonicCPO";
+import PharmaTrade from "@/pages/PharmaTrade";
 import Trackit from "@/pages/Trackit";
 import Farm from "@/pages/Farm";
 import ITConsulting from "@/pages/ITConsulting";
@@ -75,6 +76,7 @@ function Navbar() {
   }, []);
   const products = [
     { href: "/photonic-cpo", icon: Cpu, name: "Photonic-CPO v4", desc: "800G/1.6T Silicon Optics" },
+    { href: "/pharma-trade", icon: Pill, name: "Pharma Trade Arbitrage", desc: "FDA Shortage & Biopharma Trade" },
     { href: "/trackit", icon: LayoutDashboard, name: "Trackit", desc: "Smart analytics & tracking" },
     { href: "/farm", icon: Leaf, name: "Farm", desc: "Modern farm management" },
         { href: "/ideas/polehive", icon: Hexagon, name: "Hive AI", desc: "Pollinator intelligence platform" },
@@ -114,6 +116,7 @@ function Navbar() {
               <Link href="/" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all">Home</Link>
               <div className="pt-2 pb-1 px-3 text-xs font-semibold text-muted-foreground/50 uppercase tracking-widest">Products</div>
               <Link href="/photonic-cpo" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Cpu className="w-4 h-4 text-cyan-400" /> Photonic-CPO v4</Link>
+              <Link href="/pharma-trade" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Pill className="w-4 h-4 text-emerald-400" /> Pharma Trade</Link>
               <Link href="/trackit" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><LayoutDashboard className="w-4 h-4 text-primary" /> Trackit</Link>
               <Link href="/farm" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Leaf className="w-4 h-4 text-green-400" /> Farm</Link>
               <div className="pt-2 pb-1 px-3 text-xs font-semibold text-muted-foreground/50 uppercase tracking-widest">Services</div>
@@ -144,6 +147,7 @@ function Footer() {
             <h4 className="text-sm font-semibold text-white mb-4">Products</h4>
             <ul className="space-y-2">
               <li><Link href="/photonic-cpo" className="text-sm text-muted-foreground hover:text-white transition-colors">Photonic-CPO v4</Link></li>
+              <li><Link href="/pharma-trade" className="text-sm text-muted-foreground hover:text-white transition-colors">Pharma Trade</Link></li>
               <li><Link href="/trackit" className="text-sm text-muted-foreground hover:text-white transition-colors">Trackit</Link></li>
               <li><Link href="/farm" className="text-sm text-muted-foreground hover:text-white transition-colors">Farm</Link></li>
             </ul>
@@ -185,6 +189,8 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/photonic-cpo" component={PhotonicCPO} />
         <Route path="/products/photonic-cpo" component={PhotonicCPO} />
+        <Route path="/pharma-trade" component={PharmaTrade} />
+        <Route path="/products/pharma-trade" component={PharmaTrade} />
         <Route path="/trackit" component={Trackit} />
         <Route path="/farm" component={Farm} />
         <Route path="/services/it-consulting" component={ITConsulting} />
