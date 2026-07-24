@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Bot, Building2, ChevronDown, Cpu, LayoutDashboard, Hexagon, Leaf, Lightbulb, Mail, Menu, Network, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Home from "@/pages/Home";
