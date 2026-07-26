@@ -44,8 +44,9 @@ function Dropdown({ label, items }: { label: string; items: { href: string; icon
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, y: 8, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.97 }} transition={{ duration: 0.15 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl p-2 z-50">
-            {items.map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
+            {items.map((item) => {
+              const isExternal = item.href.startsWith("http");
+              const content = (
                 <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
                   <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
                     <item.icon className="w-4 h-4 text-primary" />
@@ -55,8 +56,17 @@ function Dropdown({ label, items }: { label: string; items: { href: string; icon
                     <p className="text-xs text-muted-foreground">{item.desc}</p>
                   </div>
                 </div>
-              </Link>
-            ))}
+              );
+              return isExternal ? (
+                <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
+                  {content}
+                </a>
+              ) : (
+                <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
+                  {content}
+                </Link>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
