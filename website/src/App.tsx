@@ -227,65 +227,15 @@ function Router() {
   );
 }
 
-import React from "react";
-
-class GlobalErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
-  constructor(props: { children: React.ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("Global Error Boundary caught an exception:", error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="min-h-screen bg-[#0f172a] text-white flex flex-col items-center justify-center p-6 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 border border-primary/40">
-            <Network className="w-8 h-8 text-primary" />
-          </div>
-          <h1 className="text-3xl font-bold mb-3">RoarAdd.com</h1>
-          <p className="text-muted-foreground max-w-md mb-6">
-            Session cache updated. Click below to load the live showcase.
-          </p>
-          <Button
-            onClick={() => {
-              try {
-                sessionStorage.clear();
-                localStorage.clear();
-              } catch (e) {}
-              window.location.href = window.location.origin + "/";
-            }}
-            variant="gradient"
-          >
-            Reload Home Showcase
-          </Button>
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
-
-function App() {
+export default function App() {
   return (
-    <GlobalErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <WouterRouter>
-            <Router />
-          </WouterRouter>
-          <Toaster />
-        </TooltipProvider>
-      </QueryClientProvider>
-    </GlobalErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <WouterRouter>
+          <Router />
+        </WouterRouter>
+        <Toaster />
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 }
-
-export default App;
