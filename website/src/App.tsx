@@ -89,6 +89,7 @@ function Navbar() {
     { href: "/about", icon: Users, name: "About Us", desc: "Our story & team" },
     { href: "/contact", icon: Mail, name: "Contact", desc: "Get in touch" },
     { href: "/ideas", icon: Lightbulb, name: "Ideas Lab", desc: "Concepts & innovations" },
+    { href: "https://roaradd-os-dashboard-378702570224.us-central1.run.app/", icon: ShieldCheck, name: "Employee Portal", desc: "Executive Control Tower login" },
   ];
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-white/8 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/20" : "border-b border-white/5 bg-background/60 backdrop-blur-xl"}`}>
@@ -104,6 +105,11 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <Button size="sm" variant="ghost" asChild><Link href="/contact">Contact</Link></Button>
           <Button size="sm" variant="gradient" asChild><Link href="/ideas">💡 Ideas Lab</Link></Button>
+          <a href="https://roaradd-os-dashboard-378702570224.us-central1.run.app/" target="_blank" rel="noopener noreferrer">
+            <Button size="sm" variant="outline" className="border-primary/40 hover:bg-primary/10 text-primary gap-1.5">
+              🔐 Employee Portal
+            </Button>
+          </a>
         </div>
         <button className="md:hidden text-muted-foreground hover:text-white p-2 rounded-lg hover:bg-white/5 transition-all" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -126,6 +132,7 @@ function Navbar() {
               <Link href="/about" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Users className="w-4 h-4 text-yellow-400" /> About Us</Link>
               <Link href="/contact" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Mail className="w-4 h-4 text-pink-400" /> Contact</Link>
               <Link href="/ideas" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Lightbulb className="w-4 h-4 text-yellow-400" /> Ideas Lab</Link>
+              <a href="https://roaradd-os-dashboard-378702570224.us-central1.run.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-primary hover:bg-white/5 transition-all"><ShieldCheck className="w-4 h-4 text-primary" /> Employee Portal</a>
             </div>
           </motion.div>
         )}
@@ -165,7 +172,7 @@ function Footer() {
               <li><Link href="/about" className="text-sm text-muted-foreground hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-white transition-colors">Contact</Link></li>
               <li><Link href="/ideas" className="text-sm text-muted-foreground hover:text-white transition-colors">Ideas Lab</Link></li>
-              <li><a href="mailto:kalyan.modium@roaradd.com" className="text-sm text-muted-foreground hover:text-white transition-colors">Careers</a></li>
+              <li><a href="https://roaradd-os-dashboard-378702570224.us-central1.run.app/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-white transition-colors">Employee Portal</a></li>
             </ul>
           </div>
         </div>
