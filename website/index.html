@@ -3,44 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
     <title>RoarAdd.com Website</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script type="text/javascript">
-      // Clean query parameter path handler for GitHub Pages SPA
-      (function() {
-        try {
-          var params = new URLSearchParams(window.location.search);
-          var p = params.get('p');
-          if (p) {
-            window.history.replaceState(null, null, decodeURIComponent(p));
-          }
-        } catch (e) {}
-      })();
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body className="bg-[#0f172a] text-white">
+  <body class="bg-[#0f172a] text-white">
     <div id="root"></div>
-    <script>
-      // Fail-safe auto-recovery if React bundle fails to mount or is blocked by stale CDN cache
-      window.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-          var root = document.getElementById('root');
-          if (root && (!root.children || root.children.length === 0)) {
-            console.warn('React failed to mount within 1.2s. Purging CDN cache and reloading...');
-            if (!window.location.search.includes('nc=')) {
-              var sep = window.location.search ? '&' : '?';
-              window.location.href = window.location.pathname + window.location.search + sep + 'nc=' + Date.now() + window.location.hash;
-            }
-          }
-        }, 1200);
-      });
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
