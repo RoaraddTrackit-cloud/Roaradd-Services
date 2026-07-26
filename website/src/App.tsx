@@ -252,11 +252,15 @@ class GlobalErrorBoundary extends React.Component<{ children: React.ReactNode },
           </div>
           <h1 className="text-3xl font-bold mb-3">RoarAdd.com</h1>
           <p className="text-muted-foreground max-w-md mb-6">
-            We are updating your session. Click below to refresh the showcase.
+            Session cache updated. Click below to load the live showcase.
           </p>
           <Button
             onClick={() => {
-              window.location.href = "/";
+              try {
+                sessionStorage.clear();
+                localStorage.clear();
+              } catch (e) {}
+              window.location.href = window.location.origin + "/";
             }}
             variant="gradient"
           >
