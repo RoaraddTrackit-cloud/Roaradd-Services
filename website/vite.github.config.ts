@@ -21,8 +21,10 @@ export default defineConfig({
     dedupe: ["react", "react-dom"],
   },
   root: path.resolve(__dirname),
+  publicDir: path.resolve(__dirname, "public"),
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
+    assetsDir: "assets",
   },
 });
