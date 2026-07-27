@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.github.config.ts --host 0.0.0.0",
-    "build:github": "vite build --config vite.github.config.ts",
+    "build:github": "vite build --config vite.github.config.ts && cp dist/public/index.html dist/public/404.html",
     "preview": "vite preview --config vite.github.config.ts --host 0.0.0.0"
   },
   "devDependencies": {
