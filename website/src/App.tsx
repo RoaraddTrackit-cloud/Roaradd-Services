@@ -204,6 +204,7 @@ function Router() {
       <Navbar />
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/index.html" component={Home} />
         <Route path="/photonic-cpo" component={PhotonicCPO} />
         <Route path="/products/photonic-cpo" component={PhotonicCPO} />
         <Route path="/pharma-trade" component={PharmaTrade} />
@@ -220,7 +221,7 @@ function Router() {
         <Route path="/blog" component={Blog} />
         <Route path="/case-studies" component={CaseStudies} />
         <Route path="/whitepapers" component={Whitepapers} />
-        <Route component={NotFound} />
+        <Route component={Home} />
       </Switch>
       <Footer />
     </>
