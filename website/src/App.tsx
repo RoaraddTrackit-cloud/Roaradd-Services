@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Building2, ChevronDown, Cpu, LayoutDashboard, Hexagon, Leaf, Lightbulb, Mail, Menu, Network, Pill, Users, X } from "lucide-react";
+import { Bot, Building2, ChevronDown, Cpu, LayoutDashboard, Hexagon, Leaf, Lightbulb, Lock, Mail, Menu, Network, Pill, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Home from "@/pages/Home";
 import PhotonicCPO from "@/pages/PhotonicCPO";
@@ -25,28 +25,25 @@ import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
 
-function Dropdown({ label, items }: { label: string; items: { href: string; icon: React.ElementType; name: string; desc: string }[] }) {
+function Dropdown({ label, items }: { label: string; items: { href: string; icon: any; name: string; desc: string }[] }) {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
   return (
-    <div className="relative" ref={ref}>
-      <button onClick={() => setOpen(!open)} className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-white transition-colors">
-        {label}
-        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-white transition-colors py-2">
+        {label} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180 text-primary" : ""}`} />
       </button>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0, y: 8, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.97 }} transition={{ duration: 0.15 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl p-2 z-50">
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.96 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full left-0 w-64 p-2 rounded-2xl border border-white/10 bg-background/95 backdrop-blur-2xl shadow-2xl shadow-black/50 z-50 space-y-1"
+          >
             {items.map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
-                <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
+              item.href.startsWith("http") ? (
+                <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group">
                   <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
                     <item.icon className="w-4 h-4 text-primary" />
                   </div>
@@ -54,8 +51,20 @@ function Dropdown({ label, items }: { label: string; items: { href: string; icon
                     <p className="text-sm font-medium text-white">{item.name}</p>
                     <p className="text-xs text-muted-foreground">{item.desc}</p>
                   </div>
-                </div>
-              </Link>
+                </a>
+              ) : (
+                <Link key={item.name} href={item.href}>
+                  <div className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group cursor-pointer">
+                    <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
+                      <item.icon className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-white">{item.name}</p>
+                      <p className="text-xs text-muted-foreground">{item.desc}</p>
+                    </div>
+                  </div>
+                </Link>
+              )
             ))}
           </motion.div>
         )}
@@ -78,8 +87,7 @@ function Navbar() {
     { href: "/photonic-cpo", icon: Cpu, name: "Photonic-CPO v4", desc: "800G/1.6T Silicon Optics" },
     { href: "/pharma-trade", icon: Pill, name: "Pharma Trade Arbitrage", desc: "FDA Shortage & Biopharma Trade" },
     { href: "/trackit", icon: LayoutDashboard, name: "Trackit", desc: "Smart analytics & tracking" },
-    { href: "/farm", icon: Leaf, name: "Farm", desc: "Modern farm management" },
-        { href: "/ideas/polehive", icon: Hexagon, name: "Hive AI", desc: "Pollinator intelligence platform" },
+    { href: "/farm", icon: Leaf, name: "Farm", desc: "Circular hydroponics & mycelium" },
   ];
   const services = [
     { href: "/services/it-consulting", icon: Building2, name: "IT Consulting", desc: "Cloud, enterprise & strategy" },
@@ -89,6 +97,7 @@ function Navbar() {
     { href: "/about", icon: Users, name: "About Us", desc: "Our story & team" },
     { href: "/contact", icon: Mail, name: "Contact", desc: "Get in touch" },
     { href: "/ideas", icon: Lightbulb, name: "Ideas Lab", desc: "Concepts & innovations" },
+    { href: "https://recruit.roaradd.com/login", icon: Lock, name: "Employee Portal", desc: "Recruitment & Control Gateway" },
   ];
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-white/8 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/20" : "border-b border-white/5 bg-background/60 backdrop-blur-xl"}`}>
@@ -102,7 +111,7 @@ function Navbar() {
           <Dropdown label="Company" items={company} />
         </div>
         <div className="hidden md:flex items-center gap-3">
-          <Button size="sm" variant="ghost" asChild><Link href="/contact">Contact</Link></Button>
+          <a href="https://recruit.roaradd.com/login" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3 py-1.5 rounded-xl border border-purple-500/30 text-purple-300 hover:bg-purple-500/10 transition-all flex items-center gap-1.5">🔐 Employee Login</a>
           <Button size="sm" variant="gradient" asChild><Link href="/ideas">💡 Ideas Lab</Link></Button>
         </div>
         <button className="md:hidden text-muted-foreground hover:text-white p-2 rounded-lg hover:bg-white/5 transition-all" onClick={() => setMobileOpen(!mobileOpen)}>
