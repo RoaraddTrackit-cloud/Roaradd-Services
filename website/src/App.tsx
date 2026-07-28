@@ -44,9 +44,8 @@ function Dropdown({ label, items }: { label: string; items: { href: string; icon
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, y: 8, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.97 }} transition={{ duration: 0.15 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl p-2 z-50">
-            {items.map((item) => {
-              const isExternal = item.href.startsWith("http");
-              const content = (
+            {items.map((item) => (
+              <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
                 <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
                   <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
                     <item.icon className="w-4 h-4 text-primary" />
@@ -56,17 +55,8 @@ function Dropdown({ label, items }: { label: string; items: { href: string; icon
                     <p className="text-xs text-muted-foreground">{item.desc}</p>
                   </div>
                 </div>
-              );
-              return isExternal ? (
-                <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
-                  {content}
-                </a>
-              ) : (
-                <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
-                  {content}
-                </Link>
-              );
-            })}
+              </Link>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
@@ -99,7 +89,6 @@ function Navbar() {
     { href: "/about", icon: Users, name: "About Us", desc: "Our story & team" },
     { href: "/contact", icon: Mail, name: "Contact", desc: "Get in touch" },
     { href: "/ideas", icon: Lightbulb, name: "Ideas Lab", desc: "Concepts & innovations" },
-    { href: "https://roaradd-os-dashboard-378702570224.us-central1.run.app/", icon: ShieldCheck, name: "Employee Portal", desc: "Executive Control Tower login" },
   ];
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "border-b border-white/8 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/20" : "border-b border-white/5 bg-background/60 backdrop-blur-xl"}`}>
@@ -115,11 +104,6 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <Button size="sm" variant="ghost" asChild><Link href="/contact">Contact</Link></Button>
           <Button size="sm" variant="gradient" asChild><Link href="/ideas">💡 Ideas Lab</Link></Button>
-          <a href="https://roaradd-os-dashboard-378702570224.us-central1.run.app/" target="_blank" rel="noopener noreferrer">
-            <Button size="sm" variant="outline" className="border-primary/40 hover:bg-primary/10 text-primary gap-1.5">
-              🔐 Employee Portal
-            </Button>
-          </a>
         </div>
         <button className="md:hidden text-muted-foreground hover:text-white p-2 rounded-lg hover:bg-white/5 transition-all" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -142,7 +126,6 @@ function Navbar() {
               <Link href="/about" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Users className="w-4 h-4 text-yellow-400" /> About Us</Link>
               <Link href="/contact" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Mail className="w-4 h-4 text-pink-400" /> Contact</Link>
               <Link href="/ideas" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-all"><Lightbulb className="w-4 h-4 text-yellow-400" /> Ideas Lab</Link>
-              <a href="https://roaradd-os-dashboard-378702570224.us-central1.run.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-primary hover:bg-white/5 transition-all"><ShieldCheck className="w-4 h-4 text-primary" /> Employee Portal</a>
             </div>
           </motion.div>
         )}
@@ -182,7 +165,7 @@ function Footer() {
               <li><Link href="/about" className="text-sm text-muted-foreground hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-white transition-colors">Contact</Link></li>
               <li><Link href="/ideas" className="text-sm text-muted-foreground hover:text-white transition-colors">Ideas Lab</Link></li>
-              <li><a href="https://roaradd-os-dashboard-378702570224.us-central1.run.app/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-white transition-colors">Employee Portal</a></li>
+              <li><a href="mailto:kalyan.modium@roaradd.com" className="text-sm text-muted-foreground hover:text-white transition-colors">Careers</a></li>
             </ul>
           </div>
         </div>
@@ -204,7 +187,6 @@ function Router() {
       <Navbar />
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/index.html" component={Home} />
         <Route path="/photonic-cpo" component={PhotonicCPO} />
         <Route path="/products/photonic-cpo" component={PhotonicCPO} />
         <Route path="/pharma-trade" component={PharmaTrade} />
@@ -221,14 +203,14 @@ function Router() {
         <Route path="/blog" component={Blog} />
         <Route path="/case-studies" component={CaseStudies} />
         <Route path="/whitepapers" component={Whitepapers} />
-        <Route component={Home} />
+        <Route component={NotFound} />
       </Switch>
       <Footer />
     </>
   );
 }
 
-export default function App() {
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -240,3 +222,5 @@ export default function App() {
     </QueryClientProvider>
   );
 }
+
+export default App;
