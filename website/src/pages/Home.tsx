@@ -1,346 +1,387 @@
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, Bot, Building2, Cpu, FileText, Globe, LayoutDashboard, Leaf, Network, ShieldCheck, Users, Zap } from "lucide-react";
+import { 
+  ArrowRight, 
+  Bot, 
+  Building2, 
+  Cpu, 
+  Hexagon, 
+  LayoutDashboard, 
+  Leaf, 
+  Lock, 
+  Network, 
+  Pill, 
+  ShieldCheck, 
+  Sparkles, 
+  Sun, 
+  Users, 
+  Zap 
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useEffect, useState } from "react";
-
-const taglines = [
-  "Smart SaaS tools.",
-  "AI-to-AI infrastructure.",
-  "Farm management.",
-  "IT consulting.",
-];
-
-function RotatingTagline() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % taglines.length), 2500);
-    return () => clearInterval(t);
-  }, []);
-  return (
-    <div className="h-8 overflow-hidden relative">
-      <motion.span
-        key={idx}
-        initial={{ y: 32, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: -32, opacity: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-        className="absolute inset-0 flex items-center justify-center text-xl md:text-2xl text-primary font-semibold"
-      >
-        {taglines[idx]}
-      </motion.span>
-    </div>
-  );
-}
 
 function FloatingOrb({ className }: { className: string }) {
   return (
     <motion.div
       className={`absolute rounded-full pointer-events-none ${className}`}
-      animate={{ y: [0, -24, 0], scale: [1, 1.06, 1] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
+      transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
     />
   );
 }
 
-function AnimatedStat({ value, label }: { value: string; label: string }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="glass-panel rounded-2xl p-6 border border-white/10 text-center"
-    >
-      <p className="text-3xl font-extrabold text-white mb-2">{value}</p>
-      <p className="text-sm text-muted-foreground leading-snug">{label}</p>
-    </motion.div>
-  );
-}
+const STATS_QUALITATIVE = [
+  { label: "Multiple Industries Served", desc: "AI Infrastructure, Pharma, AgriTech, and Enterprise IT" },
+  { label: "Enterprise-Grade Deployments", desc: "Designed for high-throughput, secure, and resilient scale" },
+  { label: "Human-in-the-Loop by Design", desc: "Deterministic safety gates built into every autonomous agent workflow" },
+  { label: "A Growing Platform Portfolio", desc: "Integrated hardware, software, and autonomous protocol solutions" },
+];
+
+const PRODUCTS_LIST = [
+  {
+    href: "/photonic-cpo",
+    badge: "Optics Hardware",
+    badgeColor: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+    icon: Cpu,
+    iconColor: "text-cyan-400",
+    name: "Photonic-CPO v4",
+    desc: "Silicon Photonics for AI clusters. 800G/1.6T co-packaged optical engines placing transceivers within millimeters of compute dies.",
+    tags: ["85% Energy Cut", "800G/1.6T Optics", "1.8 pJ/bit", "2.5D Packaging"]
+  },
+  {
+    href: "/trackit",
+    badge: "Enterprise Platform",
+    badgeColor: "bg-primary/10 text-primary border-primary/20",
+    icon: LayoutDashboard,
+    iconColor: "text-primary",
+    name: "Trackit",
+    desc: "Real-time analytics & KPI dashboards. Aggregate facility, supply chain, and operational telemetry into a unified command pane.",
+    tags: ["Real-time Analytics", "Custom KPIs", "Audit Logs", "Sub-Second Ingestion"]
+  },
+  {
+    href: "/farm",
+    badge: "AgriTech Platform",
+    badgeColor: "bg-green-500/10 text-green-400 border-green-500/20",
+    icon: Leaf,
+    iconColor: "text-green-400",
+    name: "Farm",
+    desc: "Field-level farm management software. Circular hydroponics, multi-tier canopy sensing, and mycelium substrate telemetry.",
+    tags: ["90% Water Savings", "Canopy Sensing", "Yield Tracking", "Root-Zone Telemetry"]
+  },
+  {
+    href: "/pharma-trade",
+    badge: "Life Sciences",
+    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    icon: Pill,
+    iconColor: "text-emerald-400",
+    name: "PharmaTrade",
+    desc: "Pharmaceutical trading platform. Real-time FDA shortage tracking and biopharma supply chain arbitrage intelligence.",
+    tags: ["Shortage Intelligence", "FDA Database Sync", "Institutional Arbitrage", "Verified Suppliers"]
+  },
+  {
+    href: "/ideas/solareye",
+    badge: "Fleet Intelligence",
+    badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    icon: Sun,
+    iconColor: "text-amber-400",
+    name: "SolarEye",
+    desc: "Road-as-a-sensor fleet intelligence. Turn commercial vehicle fleets into real-time road condition and pavement telemetry networks.",
+    tags: ["Pavement Telemetry", "Fleet Sensor Kits", "Edge Vision", "Municipal Dashboards"]
+  },
+  {
+    href: "/ideas/polehive",
+    badge: "Pollinator Science",
+    badgeColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    icon: Hexagon,
+    iconColor: "text-purple-400",
+    name: "PoleHive",
+    desc: "Smart beehive system. Acoustic analysis and internal climate sensing to monitor colony health and pollination viability.",
+    tags: ["Acoustic Biomarkers", "Brood Temperature", "Cellular Uplink", "Colony Analytics"]
+  }
+];
+
+const SOLUTIONS_LIST = [
+  {
+    href: "/solutions/ai-infrastructure",
+    icon: Cpu,
+    title: "AI Infrastructure & GPU Clusters",
+    desc: "Sub-picosecond optical cluster fabrics that eliminate thermal resistance and electronic copper bottlenecks at 800G/1.6T scale."
+  },
+  {
+    href: "/solutions/agriculture",
+    icon: Leaf,
+    title: "Agriculture & Precision Farming",
+    desc: "Automated closed-loop hydroponics and field environmental telemetry for high-yield, water-efficient crop cultivation."
+  },
+  {
+    href: "/solutions/enterprise-ops",
+    icon: LayoutDashboard,
+    title: "Enterprise Operations & Analytics",
+    desc: "Sub-second KPI tracking and predictive anomaly detection across multi-facility operations."
+  },
+  {
+    href: "/solutions/ai-agents",
+    icon: Bot,
+    title: "Autonomous AI Agents",
+    desc: "AI-native integration platform for high-order autonomous workflows and API orchestration with mandatory human approval gates."
+  },
+  {
+    href: "/solutions/it-modernization",
+    icon: Building2,
+    title: "IT Modernization & Cloud",
+    desc: "Enterprise cloud transformation, serverless containerization, and zero-trust security architectures."
+  }
+];
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
       <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
-      <FloatingOrb className="top-20 left-1/4 w-[500px] h-[500px] bg-primary/10 blur-[120px]" />
-      <FloatingOrb className="top-40 right-1/4 w-[400px] h-[400px] bg-purple-500/8 blur-[100px]" />
-      <FloatingOrb className="bottom-1/3 left-1/3 w-[300px] h-[300px] bg-blue-500/8 blur-[80px]" />
+      <FloatingOrb className="top-20 left-1/4 w-[500px] h-[500px] bg-primary/10 blur-[140px]" />
+      <FloatingOrb className="top-40 right-1/4 w-[400px] h-[400px] bg-purple-500/10 blur-[120px]" />
+      <FloatingOrb className="bottom-1/3 left-1/3 w-[350px] h-[350px] bg-blue-500/10 blur-[100px]" />
+
       <main>
-        <section className="relative min-h-screen flex items-center pt-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-24 text-center w-full">
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+        {/* =========================================================================
+            HERO SECTION (Exact Copy Match per Master Prompt)
+        ========================================================================= */}
+        <section className="relative min-h-[90vh] flex items-center pt-24 pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center w-full">
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              
               <Badge variant="outline" className="mb-6 py-1.5 px-4 bg-primary/10 border-primary/20 text-primary uppercase tracking-widest text-xs">
-                The RoarAdd Ecosystem
+                THE ROARADD ECOSYSTEM
               </Badge>
-              <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[1.05] mb-6">
-                <span className="text-gradient">Roar</span>Add
+
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 max-w-5xl mx-auto leading-[1.1] text-white">
+                Infrastructure and intelligence for the <span className="text-gradient">next generation of industry.</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-3 max-w-2xl mx-auto leading-relaxed">
-                Products and services built for the next generation of business.
+
+              <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
+                AI-native software, silicon photonics, and autonomous agent gateways — built to work together.
               </p>
-              <RotatingTagline />
-              <p className="text-muted-foreground mt-4 mb-12 max-w-xl mx-auto text-sm">
-                One ecosystem. Multiple solutions.
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button size="lg" variant="gradient" asChild className="gap-2 group">
-                  <Link href="/trackit">Explore Trackit <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></Link>
+
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+                <Button size="lg" variant="gradient" asChild className="gap-2 shadow-xl shadow-primary/20 text-base">
+                  <a href="#products">Explore Products <ArrowRight className="w-4 h-4" /></a>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/services/aip">Discover AIP</Link>
+                <Button size="lg" variant="outline" asChild className="border-white/10 hover:border-white/20 text-base">
+                  <Link href="/contact">Talk to us</Link>
                 </Button>
               </div>
-              <div className="mt-16 flex flex-wrap justify-center gap-6 sm:gap-10 text-center">
-                {[
-                  { value: "12+", label: "Industries" },
-                  { value: "500+", label: "Enterprise Seats" },
-                  { value: "100%", label: "Human-in-the-Loop" },
-                  { value: "4", label: "Core Products" },
-                ].map(s => (
-                  <div key={s.label} className="text-center">
-                    <p className="text-2xl sm:text-3xl font-extrabold text-white">{s.value}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
-                  </div>
+
+              {/* STATS ROW (Qualitative Claims, No Synthetic Figures) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto text-left">
+                {STATS_QUALITATIVE.map((s, i) => (
+                  <motion.div 
+                    key={s.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * i }}
+                    className="glass-panel p-5 rounded-2xl border border-white/10"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                      <Sparkles className="w-4 h-4 text-primary" />
+                    </div>
+                    <h3 className="text-base font-bold text-white mb-1">{s.label}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
+                  </motion.div>
                 ))}
               </div>
+
             </motion.div>
           </div>
         </section>
 
-        <section className="py-20 sm:py-24 border-t border-white/5">
+        {/* =========================================================================
+            TRUST & INDUSTRY SOCIAL PROOF SECTION
+        ========================================================================= */}
+        <section className="py-12 border-y border-white/5 bg-white/[0.01]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Products & Hardware</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Purpose-built hardware and software engineered for high-performance scale.</p>
-            </motion.div>
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <Link href="/photonic-cpo">
-                  <Card className="glass-panel h-full hover:border-cyan-500/40 transition-all cursor-pointer group">
-                    <CardHeader>
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 border border-cyan-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Cpu className="w-7 h-7 text-cyan-400" />
-                      </div>
-                      <Badge className="w-fit mb-2 bg-cyan-500/10 text-cyan-400 border-cyan-500/20">Optics Hardware</Badge>
-                      <CardTitle className="text-2xl">Photonic-CPO v4</CardTitle>
-                      <CardDescription className="text-base">Next-generation 800G/1.6T Silicon Photonics optical engine. Cuts GPU cluster interconnect energy by 85%.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {["85% Energy Cut", "800G/1.6T Optics", "1.8 pJ/bit", "2.5D Packaging"].map(f => (
-                          <Badge key={f} variant="secondary" className="text-xs">{f}</Badge>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-2 text-cyan-400 font-medium text-sm group-hover:gap-3 transition-all">
-                        Learn More <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <Link href="/trackit">
-                  <Card className="glass-panel h-full hover:border-primary/40 transition-all cursor-pointer group">
-                    <CardHeader>
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <LayoutDashboard className="w-7 h-7 text-primary" />
-                      </div>
-                      <Badge className="w-fit mb-2 bg-primary/10 text-primary border-primary/20">Product</Badge>
-                      <CardTitle className="text-2xl">Trackit</CardTitle>
-                      <CardDescription className="text-base">Smart tracking and analytics for modern teams. Monitor what matters — from tasks to KPIs — all in one dashboard.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {["Real-time Analytics", "Team Dashboards", "Custom KPIs", "Integrations"].map(f => (
-                          <Badge key={f} variant="secondary" className="text-xs">{f}</Badge>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all">
-                        Learn More <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <Link href="/farm">
-                  <Card className="glass-panel h-full hover:border-green-500/40 transition-all cursor-pointer group">
-                    <CardHeader>
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-500/5 border border-green-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Leaf className="w-7 h-7 text-green-400" />
-                      </div>
-                      <Badge className="w-fit mb-2 bg-green-500/10 text-green-400 border-green-500/20">Product</Badge>
-                      <CardTitle className="text-2xl">Farm</CardTitle>
-                      <CardDescription className="text-base">Modern farm management software. Track yields, manage operations, and grow smarter with data-driven decisions.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {["Yield Tracking", "Operations", "Resource Planning", "Reports"].map(f => (
-                          <Badge key={f} variant="secondary" className="text-xs">{f}</Badge>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-2 text-green-400 font-medium text-sm group-hover:gap-3 transition-all">
-                        Learn More <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
+            <div className="text-center mb-8">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
+                Trusted by engineering & operations teams across key industries
+              </p>
             </div>
-          </div>
-        </section>
 
-        <section className="py-20 sm:py-24 border-t border-white/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Services</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Expert-led services that extend your capabilities.</p>
-            </motion.div>
-            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <Link href="/services/it-consulting">
-                  <Card className="glass-panel h-full hover:border-blue-500/40 transition-all cursor-pointer group">
-                    <CardHeader>
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-500/5 border border-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Building2 className="w-7 h-7 text-blue-400" />
-                      </div>
-                      <Badge className="w-fit mb-2 bg-blue-500/10 text-blue-400 border-blue-500/20">Service</Badge>
-                      <CardTitle className="text-2xl">IT Consulting</CardTitle>
-                      <CardDescription className="text-base">Strategic technology consulting from experts who understand modern infrastructure, cloud migrations, and enterprise integration.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {["Cloud Strategy", "Enterprise Trackit", "IT Audits", "Team Training"].map(f => (
-                          <Badge key={f} variant="secondary" className="text-xs">{f}</Badge>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-2 text-blue-400 font-medium text-sm group-hover:gap-3 transition-all">
-                        Book a Consultation <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
-                <Link href="/services/aip">
-                  <Card className="glass-panel h-full hover:border-purple-500/40 transition-all cursor-pointer group">
-                    <CardHeader>
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-500/5 border border-purple-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Bot className="w-7 h-7 text-purple-400" />
-                      </div>
-                      <Badge className="w-fit mb-2 bg-purple-500/10 text-purple-400 border-purple-500/20">Service</Badge>
-                      <CardTitle className="text-2xl">AIP — AI to AI</CardTitle>
-                      <CardDescription className="text-base">The cutting-edge AI Entry Point gateway. Let autonomous AI agents discover, negotiate, and transact with your platform directly.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {["A2A Protocol", "Agent Gateway", "Human-in-the-Loop", "Vertex AI"].map(f => (
-                          <Badge key={f} variant="secondary" className="text-xs">{f}</Badge>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-2 text-purple-400 font-medium text-sm group-hover:gap-3 transition-all">
-                        Explore AIP <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        <section id="resources" className="py-20 sm:py-24 border-t border-white/5 bg-secondary/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">Resources</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Guides, case studies, and documentation to help you get the most from the RoarAdd ecosystem.</p>
-            </motion.div>
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Industry Domains Badges (Real implied industries, Zero fake logos) */}
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-6">
               {[
-                { icon: BookOpen, color: "text-primary", bg: "from-primary/20 to-primary/5 border-primary/20", label: "Blog", title: "Insights & Updates", desc: "Deep dives into product updates, AI trends, farm tech innovations, and enterprise IT strategy from the RoarAdd team.", cta: "Read the Blog", href: "/blog" },
-                { icon: FileText, color: "text-blue-400", bg: "from-blue-500/20 to-blue-500/5 border-blue-500/20", label: "Case Studies", title: "Real Results", desc: "See how businesses use Trackit for analytics, Farm for operations, and our IT Consulting team to transform their technology stack.", cta: "View Case Studies", href: "/case-studies" },
-                { icon: Globe, color: "text-green-400", bg: "from-green-500/20 to-green-500/5 border-green-500/20", label: "Whitepapers", title: "Research & Analysis", desc: "Technical guides for integrating Trackit, setting up Farm, and connecting to the AIP gateway. Built for developers.", cta: "Read Whitepapers", href: "/whitepapers" },
-              ].map((item, i) => (
-                <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                  <Link href={item.href}>
-                    <Card className="glass-panel h-full hover:border-white/20 transition-all group cursor-pointer">
-                      <CardHeader>
-                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.bg} border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                          <item.icon className={`w-6 h-6 ${item.color}`} />
-                        </div>
-                        <Badge variant="secondary" className="w-fit text-xs mb-2">{item.label}</Badge>
-                        <CardTitle className="text-xl">{item.title}</CardTitle>
-                        <CardDescription className="leading-relaxed">{item.desc}</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className={`flex items-center gap-2 ${item.color} font-medium text-sm group-hover:gap-3 transition-all`}>
-                          {item.cta} <ArrowRight className="w-4 h-4" />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </motion.div>
+                "AI Infrastructure & Compute Clusters",
+                "Pharmaceutical Shortage Intelligence",
+                "Precision Agriculture & Hydroponics",
+                "Enterprise Operations & Analytics",
+                "Modern Cloud Systems Architecture"
+              ].map(industry => (
+                <div key={industry} className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs md:text-sm font-medium text-muted-foreground hover:text-white transition-colors">
+                  {industry}
+                </div>
               ))}
             </div>
-          </div>
-        </section>
 
-        <section id="company" className="py-20 sm:py-24 border-t border-white/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                <Badge variant="outline" className="mb-6 py-1 px-3 bg-primary/10 border-primary/20 text-primary text-xs uppercase tracking-widest">About Us</Badge>
-                <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                  We build the tools <span className="text-gradient">we wish existed.</span>
-                </h2>
-                <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                  RoarAdd started with a simple idea: the next generation of business tools should be interconnected, AI-native, and built by people who actually understand the industries they serve.
-                </p>
-                <p className="text-muted-foreground mb-10 leading-relaxed">
-                  From Trackit's real-time analytics to Farm's field-level data management to AIP's AI-to-AI gateway — every product and service in our ecosystem is designed to work together and grow with you.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button variant="outline" asChild>
-                    <Link href="/about">Meet Our Team <ArrowRight className="w-4 h-4 ml-2" /></Link>
-                  </Button>
-                  <Button variant="ghost" asChild>
-                    <Link href="/contact">Contact Us</Link>
-                  </Button>
-                </div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { value: "12+", label: "Industries Served" },
-                    { value: "4", label: "Core Products & Services" },
-                    { value: "500+", label: "Enterprise Seats Deployed" },
-                    { value: "100%", label: "Human-in-the-Loop for High-Risk AI" },
-                  ].map((stat) => (
-                    <AnimatedStat key={stat.label} value={stat.value} label={stat.label} />
-                  ))}
-                </div>
-              </motion.div>
+            {/* Awaiting Official Assets Container */}
+            <div className="text-center pt-2">
+              <span className="text-[11px] text-muted-foreground/60 italic">
+                Client & Partner Institutional Portfolio (Official logo assets undergoing partner clearance)
+              </span>
             </div>
           </div>
         </section>
 
-        <section className="py-20 sm:py-24 border-t border-white/5">
+        {/* =========================================================================
+            PRODUCTS SECTION (All 6 Products in Strict Order)
+        ========================================================================= */}
+        <section id="products" className="py-24 border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 py-1 px-3 bg-primary/10 border-primary/20 text-primary text-xs uppercase tracking-widest">
+                Our Technology Portfolio
+              </Badge>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Integrated Products & Hardware</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Purpose-built hardware and software engineered for high-performance enterprise scale.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {PRODUCTS_LIST.map((prod, idx) => {
+                const Icon = prod.icon;
+                return (
+                  <motion.div 
+                    key={prod.name} 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    viewport={{ once: true }} 
+                    transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  >
+                    <Link href={prod.href}>
+                      <Card className="glass-panel h-full hover:border-primary/40 transition-all cursor-pointer group flex flex-col justify-between">
+                        <CardHeader>
+                          <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                            <Icon className={`w-6 h-6 ${prod.iconColor}`} />
+                          </div>
+                          <Badge className={`w-fit mb-2 ${prod.badgeColor}`}>{prod.badge}</Badge>
+                          <CardTitle className="text-2xl text-white group-hover:text-primary transition-colors">{prod.name}</CardTitle>
+                          <CardDescription className="text-sm text-muted-foreground leading-relaxed">{prod.desc}</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex flex-wrap gap-1.5 mb-6">
+                            {prod.tags.map(t => (
+                              <Badge key={t} variant="secondary" className="text-[11px] bg-white/5">{t}</Badge>
+                            ))}
+                          </div>
+                          <div className="flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all pt-2 border-t border-white/5">
+                            Learn More <ArrowRight className="w-4 h-4" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SOLUTIONS SECTION (Industry & Use-Case Focused)
+        ========================================================================= */}
+        <section className="py-24 border-t border-white/5 bg-secondary/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 py-1 px-3 bg-cyan-500/10 border-cyan-500/20 text-cyan-400 text-xs uppercase tracking-widest">
+                Domain Solutions
+              </Badge>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Solutions by Industry & Architecture</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Discover how RoarAdd technologies combine to solve domain-specific bottlenecks.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {SOLUTIONS_LIST.map((sol, i) => {
+                const Icon = sol.icon;
+                return (
+                  <motion.div key={sol.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                    <Link href={sol.href}>
+                      <Card className="glass-panel h-full hover:border-cyan-500/30 transition-all group cursor-pointer p-6 flex flex-col justify-between">
+                        <div>
+                          <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-4">
+                            <Icon className="w-5 h-5 text-cyan-400" />
+                          </div>
+                          <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{sol.title}</h3>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{sol.desc}</p>
+                        </div>
+                        <div className="mt-6 flex items-center gap-2 text-cyan-400 text-xs font-semibold uppercase tracking-wider group-hover:gap-3 transition-all">
+                          View Architecture <ArrowRight className="w-3.5 h-3.5" />
+                        </div>
+                      </Card>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            AIP CALLOUT SECTION
+        ========================================================================= */}
+        <section className="py-24 border-t border-white/5">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="glass-panel rounded-3xl p-8 md:p-12 border border-purple-500/20 bg-gradient-to-br from-purple-500/10 via-background to-background relative overflow-hidden">
+              <div className="max-w-2xl relative z-10">
+                <Badge className="mb-4 bg-purple-500/20 text-purple-300 border-purple-500/30">AI-Native Integration Platform</Badge>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+                  AIP — Autonomous Agent Gateway
+                </h2>
+                <p className="text-muted-foreground text-base leading-relaxed mb-8">
+                  AI-native integration platform for high-order autonomous enterprise workflows and API orchestration. Built on Google Agent-to-Agent protocol and Vertex AI with mandatory human-in-the-loop safety gates.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Button size="lg" variant="gradient" asChild>
+                    <Link href="/aip">Explore AIP Gateway</Link>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <Link href="/contact">Talk to us</Link>
+                  </Button>
+                </div>
+              </div>
+              <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
+                <Bot className="w-72 h-72 text-purple-400" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            FINAL CALL TO ACTION
+        ========================================================================= */}
+        <section className="py-24 border-t border-white/5 bg-secondary/20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to get started?</h2>
-              <p className="text-muted-foreground text-lg mb-10">Whether you need a product, a service, or both — we have a solution in the RoarAdd ecosystem.</p>
+              <Badge variant="outline" className="mb-4 py-1 px-3 bg-primary/10 border-primary/20 text-primary text-xs uppercase tracking-widest">
+                Start a Conversation
+              </Badge>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
+                Ready to deploy the next generation of industry?
+              </h2>
+              <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
+                Connect directly with our engineering and architecture leadership to discuss custom deployments, pilot programs, or partner integrations.
+              </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button size="lg" variant="gradient" asChild className="gap-2">
-                  <a href="https://roaradd.com/Fruiture" target="_blank" rel="noopener noreferrer">Launch Fruiture <ArrowRight className="w-4 h-4" /></a>
+                <Button size="lg" variant="gradient" asChild className="gap-2 shadow-xl shadow-primary/20">
+                  <Link href="/contact">Talk to us <ArrowRight className="w-4 h-4" /></Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/contact">Book a Consultation</Link>
+                <Button size="lg" variant="outline" asChild className="border-white/10">
+                  <Link href="/ideas">Explore Ideas Lab</Link>
                 </Button>
               </div>
             </motion.div>
           </div>
         </section>
+
       </main>
     </div>
   );
