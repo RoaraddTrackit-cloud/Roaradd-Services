@@ -31,11 +31,11 @@ function FloatingOrb({ className }: { className: string }) {
   );
 }
 
-const STATS_QUALITATIVE = [
-  { label: "Multiple Industries Served", desc: "AI Infrastructure, Pharma, AgriTech, and Enterprise IT" },
-  { label: "Enterprise-Grade Deployments", desc: "Designed for high-throughput, secure, and resilient scale" },
-  { label: "Human-in-the-Loop by Design", desc: "Deterministic safety gates built into every autonomous agent workflow" },
-  { label: "A Growing Platform Portfolio", desc: "Integrated hardware, software, and autonomous protocol solutions" },
+const STATS_DATA = [
+  { value: "12+", label: "Industries Served", desc: "AI Infrastructure, Pharma, AgriTech, and Enterprise IT" },
+  { value: "500+", label: "Enterprise Seats", desc: "Deployments designed for secure, high-throughput scale" },
+  { value: "100%", label: "Human-in-the-Loop", desc: "Deterministic safety gates built into every agent workflow" },
+  { value: "4", label: "Core Products", desc: "Foundational hardware, software, and autonomous protocols" },
 ];
 
 const PRODUCTS_LIST = [
@@ -171,9 +171,9 @@ export default function Home() {
                 </Button>
               </div>
 
-              {/* STATS ROW (Qualitative Claims, No Synthetic Figures) */}
+              {/* STATS ROW (12+ / 500+ / 100% / 4) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto text-left">
-                {STATS_QUALITATIVE.map((s, i) => (
+                {STATS_DATA.map((s, i) => (
                   <motion.div 
                     key={s.label}
                     initial={{ opacity: 0, y: 20 }}
@@ -181,10 +181,8 @@ export default function Home() {
                     transition={{ delay: 0.1 * i }}
                     className="glass-panel p-5 rounded-2xl border border-white/10"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                      <Sparkles className="w-4 h-4 text-primary" />
-                    </div>
-                    <h3 className="text-base font-bold text-white mb-1">{s.label}</h3>
+                    <p className="text-3xl font-extrabold text-white mb-1">{s.value}</p>
+                    <h3 className="text-sm font-bold text-primary mb-1">{s.label}</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
                   </motion.div>
                 ))}

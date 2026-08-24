@@ -35,20 +35,22 @@ export default function AIP() {
                   <Bot className="w-8 h-8 text-purple-400" />
                 </div>
               </div>
-              <Badge className="mb-6 bg-purple-500/10 text-purple-400 border-purple-500/20">Service — AI to AI</Badge>
-              <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
-                The <span className="text-gradient">AI Entry Point</span><br />for roaradd.com
+              <Badge className="mb-6 bg-purple-500/10 text-purple-400 border-purple-500/20">AI-Native Integration Platform</Badge>
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                AI-Native <span className="text-gradient">Integration Platform</span>
               </h1>
-              <p className="text-xl text-muted-foreground mb-4 max-w-3xl mx-auto leading-relaxed">
-                Built on Google's Agent-to-Agent (A2A) Protocol and Vertex AI, AIP enables autonomous AI agents to discover, negotiate, and interact with roaradd.com's advertising platform — no human intermediary needed for low-risk actions.
+              <p className="text-xl text-white font-medium mb-4 max-w-3xl mx-auto leading-relaxed">
+                AI-native integration platform for high-order autonomous enterprise workflows and API orchestration.
               </p>
-              <p className="text-muted-foreground mb-12 max-w-xl mx-auto">The internet is going agent-first. We're ready.</p>
+              <p className="text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+                Built on Google's Agent-to-Agent (A2A) Protocol and Vertex AI, AIP enables autonomous software agents to discover, negotiate, and execute complex workflows with strict human-in-the-loop governance.
+              </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button size="lg" variant="gradient" asChild className="gap-2">
-                  <a href="https://roaradd.com/Fruiture" target="_blank" rel="noopener noreferrer">Launch roaradd.com/Fruiture <ArrowRight className="w-4 h-4" /></a>
+                <Button size="lg" variant="gradient" asChild className="gap-2 shadow-xl shadow-primary/20">
+                  <a href="https://roaradd.com/Fruiture" target="_blank" rel="noopener noreferrer">Launch Fruiture <ArrowRight className="w-4 h-4" /></a>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/services/it-consulting">Talk to Our Team</Link>
+                <Button size="lg" variant="outline" asChild className="border-white/10">
+                  <Link href="/contact">Talk to us</Link>
                 </Button>
               </div>
             </motion.div>
