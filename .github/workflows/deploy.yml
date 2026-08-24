@@ -20,7 +20,7 @@ jobs:
           node-version: '20'
       - run: npm install
         working-directory: website
-      - run: npx vite build --config vite.github.config.ts
+      - run: npm run build:github
         working-directory: website
         env:
           BASE_PATH: /
