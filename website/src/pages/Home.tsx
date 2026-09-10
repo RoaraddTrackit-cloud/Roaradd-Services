@@ -9,9 +9,8 @@ import {
   LayoutDashboard, 
   Leaf, 
   Lock, 
-  Network, 
-  Pill, 
-  ShieldCheck, 
+  Network,
+  ShieldCheck,
   Sparkles, 
   Sun, 
   Users, 
@@ -32,10 +31,10 @@ function FloatingOrb({ className }: { className: string }) {
 }
 
 const STATS_DATA = [
-  { value: "12+", label: "Industries Served", desc: "AI Infrastructure, Pharma, AgriTech, and Enterprise IT" },
+  { value: "12+", label: "Industries Served", desc: "AI Infrastructure, AgriTech, and Enterprise IT" },
   { value: "500+", label: "Enterprise Seats", desc: "Deployments designed for secure, high-throughput scale" },
   { value: "100%", label: "Human-in-the-Loop", desc: "Deterministic safety gates built into every agent workflow" },
-  { value: "4", label: "Core Products", desc: "Foundational hardware, software, and autonomous protocols" },
+  { value: "3", label: "Core Products", desc: "Foundational hardware, software, and autonomous protocols" },
 ];
 
 const PRODUCTS_LIST = [
@@ -68,16 +67,6 @@ const PRODUCTS_LIST = [
     name: "Farm",
     desc: "Field-level farm management software. Circular hydroponics, multi-tier canopy sensing, and mycelium substrate telemetry.",
     tags: ["90% Water Savings", "Canopy Sensing", "Yield Tracking", "Root-Zone Telemetry"]
-  },
-  {
-    href: "/pharma-trade",
-    badge: "Life Sciences",
-    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    icon: Pill,
-    iconColor: "text-emerald-400",
-    name: "PharmaTrade",
-    desc: "Pharmaceutical trading platform. Real-time FDA shortage tracking and biopharma supply chain arbitrage intelligence.",
-    tags: ["Shortage Intelligence", "FDA Database Sync", "Institutional Arbitrage", "Verified Suppliers"]
   },
   {
     href: "/ideas/solareye",
@@ -207,7 +196,6 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-6">
               {[
                 "AI Infrastructure & Compute Clusters",
-                "Pharmaceutical Shortage Intelligence",
                 "Precision Agriculture & Hydroponics",
                 "Enterprise Operations & Analytics",
                 "Modern Cloud Systems Architecture"

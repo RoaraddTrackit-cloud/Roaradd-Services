@@ -25,7 +25,7 @@ const team = [
   {
     name: "Marcus T.",
     role: "Principal IT Consultant",
-    bio: "15+ years delivering enterprise infrastructure across healthcare, fintech, and logistics. Led cloud migrations for organizations with 500+ seat deployments.",
+    bio: "15+ years delivering enterprise infrastructure across fintech, logistics, and manufacturing. Led cloud migrations for organizations with 500+ seat deployments.",
     expertise: ["Cloud Architecture", "Enterprise IT", "GCP"],
     initials: "MT",
     color: "from-blue-500/30 to-blue-500/10 border-blue-500/30",
@@ -43,7 +43,7 @@ const team = [
   {
     name: "Jordan K.",
     role: "Security & Compliance Expert",
-    bio: "Certified in CISSP and ISO 27001. Has conducted 80+ IT security audits across regulated industries — finance, healthcare, and government.",
+    bio: "Certified in CISSP and ISO 27001. Has conducted 80+ IT security audits across regulated industries — finance, government, and energy.",
     expertise: ["IT Security", "Compliance", "SOC 2"],
     initials: "JK",
     color: "from-red-500/30 to-red-500/10 border-red-500/30",
@@ -120,7 +120,7 @@ export default function ITConsulting() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">The people behind the work</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Real practitioners — not generalists. Our team brings hands-on experience from industries like fintech, healthcare, agriculture, and enterprise tech.
+                Real practitioners — not generalists. Our team brings hands-on experience from industries like fintech, logistics, agriculture, and enterprise tech.
               </p>
             </motion.div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

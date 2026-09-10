@@ -24,7 +24,6 @@ import {
   Mail, 
   Menu, 
   Network, 
-  Pill, 
   Sun, 
   Users, 
   Users2, 
@@ -34,7 +33,6 @@ import { Button } from "@/components/ui/button";
 
 import Home from "@/pages/Home";
 import PhotonicCPO from "@/pages/PhotonicCPO";
-import PharmaTrade from "@/pages/PharmaTrade";
 import Trackit from "@/pages/Trackit";
 import Farm from "@/pages/Farm";
 import ITConsulting from "@/pages/ITConsulting";
@@ -195,7 +193,6 @@ function Navbar() {
     { href: "/photonic-cpo", icon: Cpu, name: "Photonic-CPO v4", desc: "Silicon Photonics for AI clusters" },
     { href: "/trackit", icon: LayoutDashboard, name: "Trackit", desc: "Real-time analytics & KPI dashboards" },
     { href: "/farm", icon: Leaf, name: "Farm", desc: "Field-level farm management" },
-    { href: "/pharma-trade", icon: Pill, name: "PharmaTrade", desc: "Pharmaceutical trading platform" },
     { href: "/ideas/solareye", icon: Sun, name: "SolarEye", desc: "Road-as-a-sensor fleet intelligence" },
     { href: "/ideas/polehive", icon: Hexagon, name: "PoleHive", desc: "Smart beehive system" },
   ];
@@ -466,7 +463,6 @@ function Footer() {
               <li><Link href="/photonic-cpo" className="hover:text-white transition-colors">Photonic-CPO v4</Link></li>
               <li><Link href="/trackit" className="hover:text-white transition-colors">Trackit</Link></li>
               <li><Link href="/farm" className="hover:text-white transition-colors">Farm</Link></li>
-              <li><Link href="/pharma-trade" className="hover:text-white transition-colors">PharmaTrade</Link></li>
               <li><Link href="/ideas/solareye" className="hover:text-white transition-colors">SolarEye</Link></li>
               <li><Link href="/ideas/polehive" className="hover:text-white transition-colors">PoleHive</Link></li>
             </ul>
@@ -533,8 +529,6 @@ function Router() {
         {/* Products */}
         <Route path="/photonic-cpo" component={PhotonicCPO} />
         <Route path="/products/photonic-cpo" component={PhotonicCPO} />
-        <Route path="/pharma-trade" component={PharmaTrade} />
-        <Route path="/products/pharma-trade" component={PharmaTrade} />
         <Route path="/trackit" component={Trackit} />
         <Route path="/farm" component={Farm} />
         <Route path="/ideas/solareye" component={SolarEye} />
