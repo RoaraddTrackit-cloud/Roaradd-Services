@@ -21,7 +21,6 @@ export default function Farm() {
       <div className="fixed top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-green-500/10 blur-[140px] rounded-full pointer-events-none" />
 
       <main className="pt-20">
-        {/* HERO */}
         <section className="py-24">
           <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
@@ -38,12 +37,16 @@ export default function Farm() {
                 Farm is the modern farm management platform — built for operators who want data-driven decisions, not guesswork.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white gap-2 group">
-                  Get Started Free <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white gap-2 group" asChild>
+                  <Link href="/contact?intent=farm-trial">
+                    Request access <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </Button>
-                <Button size="lg" variant="outline">See How It Works</Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/contact?intent=farm-demo">Request a walkthrough</Link>
+                </Button>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground">Free for small farms. No credit card needed.</p>
+              <p className="mt-4 text-sm text-muted-foreground">Access is provisioned by the RoarAdd team. No public self-serve checkout yet.</p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
@@ -76,7 +79,6 @@ export default function Farm() {
           </div>
         </section>
 
-        {/* FEATURES */}
         <section className="py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
@@ -99,13 +101,14 @@ export default function Farm() {
           </div>
         </section>
 
-        {/* CTA + CROSS-LINK */}
         <section className="py-24 border-t border-white/5">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to modernize your farm?</h2>
-            <p className="text-muted-foreground mb-10">Join thousands of farm operators already using Farm to grow smarter.</p>
-            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white gap-2">
-              Start for Free <ArrowRight className="w-4 h-4" />
+            <p className="text-muted-foreground mb-10">Tell us about your operation and we will set up a Farm workspace if it is a fit.</p>
+            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white gap-2" asChild>
+              <Link href="/contact?intent=farm-trial">
+                Talk about Farm <ArrowRight className="w-4 h-4" />
+              </Link>
             </Button>
             <div className="mt-12 pt-8 border-t border-white/5">
               <p className="text-muted-foreground mb-4">Need custom Farm integration for your operation?</p>
