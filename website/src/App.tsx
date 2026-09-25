@@ -4,30 +4,30 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { 
-  BookOpen, 
-  Bot, 
-  Briefcase, 
-  Building2, 
-  ChevronDown, 
+import {
+  BookOpen,
+  Bot,
+  Briefcase,
+  Building2,
+  ChevronDown,
   ChevronRight,
-  Code2, 
-  Cpu, 
-  FileCode, 
-  FileText, 
-  Hexagon, 
-  History, 
-  LayoutDashboard, 
-  Leaf, 
-  Lightbulb, 
-  Lock, 
-  Mail, 
-  Menu, 
-  Network, 
-  Sun, 
-  Users, 
-  Users2, 
-  X 
+  Code2,
+  Cpu,
+  FileCode,
+  FileText,
+  Hexagon,
+  History,
+  LayoutDashboard,
+  Leaf,
+  Lightbulb,
+  Lock,
+  Mail,
+  Menu,
+  Network,
+  Sun,
+  Users,
+  Users2,
+  X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -50,6 +50,9 @@ import ComingSoon from "@/pages/ComingSoon";
 import SolutionDetail from "@/pages/SolutionDetail";
 import Legal from "@/pages/Legal";
 import NotFound from "@/pages/not-found";
+import Seo from "@/components/Seo";
+import BlogPost from "@/pages/BlogPost";
+import PharmaTrade from "@/pages/PharmaTrade";
 
 const queryClient = new QueryClient();
 
@@ -92,13 +95,13 @@ function NavDropdown({ label, items, currentPath }: DropdownProps) {
   }, []);
 
   return (
-    <div 
-      ref={dropdownRef} 
-      className="relative" 
-      onMouseEnter={() => setOpen(true)} 
+    <div
+      ref={dropdownRef}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button 
+      <button
         className={`flex items-center gap-1.5 text-sm font-medium transition-colors py-2 px-2 rounded-lg cursor-pointer ${
           isActive || open ? "text-white font-semibold" : "text-muted-foreground hover:text-white"
         }`}
@@ -108,7 +111,7 @@ function NavDropdown({ label, items, currentPath }: DropdownProps) {
         aria-expanded={open}
         aria-label={`${label} menu`}
       >
-        {label} 
+        {label}
         <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180 text-primary" : ""}`} />
       </button>
 
@@ -127,11 +130,11 @@ function NavDropdown({ label, items, currentPath }: DropdownProps) {
               const isItemActive = currentPath === item.href;
               const Icon = item.icon;
               return item.href.startsWith("http") ? (
-                <a 
-                  key={item.name} 
-                  href={item.href} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   role="menuitem"
                   className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
                 >
@@ -145,7 +148,7 @@ function NavDropdown({ label, items, currentPath }: DropdownProps) {
                 </a>
               ) : (
                 <Link key={item.name} href={item.href}>
-                  <div 
+                  <div
                     role="menuitem"
                     onClick={() => setOpen(false)}
                     className={`flex items-center gap-3 p-2.5 rounded-xl transition-all group cursor-pointer ${
@@ -188,16 +191,12 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Products (strict order per master spec)
   const products: NavItem[] = [
     { href: "/photonic-cpo", icon: Cpu, name: "Photonic-CPO v4", desc: "Silicon Photonics for AI clusters" },
     { href: "/trackit", icon: LayoutDashboard, name: "Trackit", desc: "Real-time analytics & KPI dashboards" },
     { href: "/farm", icon: Leaf, name: "Farm", desc: "Field-level farm management" },
-    { href: "/ideas/solareye", icon: Sun, name: "SolarEye", desc: "Road-as-a-sensor fleet intelligence" },
-    { href: "/ideas/polehive", icon: Hexagon, name: "PoleHive", desc: "Smart beehive system" },
   ];
 
-  // Solutions (NEW industry / use-case focused)
   const solutions: NavItem[] = [
     { href: "/solutions/ai-infrastructure", icon: Cpu, name: "AI Infrastructure & GPU Clusters", desc: "Sub-picosecond optical cluster fabrics" },
     { href: "/solutions/agriculture", icon: Leaf, name: "Agriculture & Precision Farming", desc: "Circular hydroponics & field telemetry" },
@@ -206,36 +205,29 @@ function Navbar() {
     { href: "/solutions/it-modernization", icon: Building2, name: "IT Modernization & Cloud", desc: "Cloud migration & zero-trust architecture" },
   ];
 
-  // Resources
   const resources: NavItem[] = [
     { href: "/blog", icon: BookOpen, name: "Blog", desc: "Insights & technology deep dives" },
-    { href: "/case-studies", icon: FileText, name: "Case Studies", desc: "Enterprise deployments & results" },
+    { href: "/case-studies", icon: FileText, name: "Field notes", desc: "Pilots, prototypes, and product work" },
     { href: "/whitepapers", icon: FileCode, name: "Whitepapers", desc: "Technical architecture papers" },
-    { href: "/docs", icon: Code2, name: "Documentation", desc: "API reference & developer guides" },
-    { href: "/changelog", icon: History, name: "Changelog", desc: "Platform updates & releases" },
   ];
 
-  // Company
   const company: NavItem[] = [
     { href: "/about", icon: Users, name: "About Us", desc: "Our story, mission & principles" },
     { href: "/team", icon: Users2, name: "Team", desc: "Leadership & engineering practice" },
-    { href: "/careers", icon: Briefcase, name: "Careers", desc: "Join our engineering & product team" },
     { href: "/contact", icon: Mail, name: "Contact", desc: "Get in touch with our team" },
-    { href: "/ideas", icon: Lightbulb, name: "Ideas Lab", desc: "Concepts & innovations" },
+    { href: "/ideas", icon: Lightbulb, name: "Ideas Lab", desc: "Concepts & prototypes" },
   ];
 
   return (
-    <nav 
+    <nav
       aria-label="Main Navigation"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? "border-b border-white/10 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/30" 
+        scrolled
+          ? "border-b border-white/10 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/30"
           : "border-b border-white/5 bg-background/60 backdrop-blur-xl"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        
-        {/* Left: Brand Logo + Primary Nav Links */}
         <div className="flex items-center gap-6 lg:gap-8">
           <Link href="/">
             <div className="flex items-center gap-2.5 cursor-pointer group">
@@ -251,54 +243,38 @@ function Navbar() {
           <div className="hidden lg:flex items-center gap-1 xl:gap-2">
             <NavDropdown label="Products" items={products} currentPath={location} />
             <NavDropdown label="Solutions" items={solutions} currentPath={location} />
-            
-            {/* AIP Top-Level Link */}
             <Link href="/aip">
-              <div 
+              <div
                 className={`text-sm font-medium py-2 px-3 rounded-lg transition-colors cursor-pointer ${
                   location === "/aip" || location === "/services/aip"
                     ? "text-primary font-semibold"
                     : "text-muted-foreground hover:text-white"
                 }`}
-                title="AI-Native Integration Platform — AI-native integration platform for high-order autonomous enterprise workflows and API orchestration."
+                title="AI-Native Integration Platform"
               >
                 AIP
               </div>
             </Link>
-
             <NavDropdown label="Resources" items={resources} currentPath={location} />
             <NavDropdown label="Company" items={company} currentPath={location} />
           </div>
         </div>
 
-        {/* Right Side Action Buttons */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/contact">
-            <span className="text-sm font-medium text-muted-foreground hover:text-white transition-colors cursor-pointer px-2 py-1">
-              Contact
-            </span>
-          </Link>
-
-          <a 
-            href="https://recruit.roaradd.com/login" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-xs font-semibold px-3 py-1.5 rounded-xl border border-purple-500/30 text-purple-300 hover:bg-purple-500/10 transition-all flex items-center gap-1.5"
+          <a
+            href="https://recruit.roaradd.com/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-medium text-muted-foreground hover:text-white transition-colors px-2 py-1"
           >
-            <Lock className="w-3.5 h-3.5" /> Employee Login
+            Staff login
           </a>
-
           <Button size="sm" variant="gradient" asChild className="shadow-lg shadow-primary/20">
             <Link href="/contact">Talk to us</Link>
           </Button>
-
-          <Button size="sm" variant="outline" asChild className="border-white/10 hover:border-white/20">
-            <Link href="/ideas">💡 Ideas Lab</Link>
-          </Button>
         </div>
 
-        {/* Mobile Hamburger Toggle */}
-        <button 
+        <button
           className="lg:hidden text-muted-foreground hover:text-white p-2 rounded-lg hover:bg-white/5 transition-all cursor-pointer"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -308,19 +284,16 @@ function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Slide-Over Menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div 
-            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }} 
-            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, height: "auto" }} 
-            exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }} 
-            transition={{ duration: 0.25, ease: "easeInOut" }} 
+          <motion.div
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, height: "auto" }}
+            exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
             className="lg:hidden border-t border-white/10 bg-background/98 backdrop-blur-2xl max-h-[85vh] overflow-y-auto"
           >
             <div className="px-4 py-5 space-y-6">
-              
-              {/* Products Section */}
               <div>
                 <div className="px-3 pb-2 text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-2">
                   <Cpu className="w-3.5 h-3.5" /> Products
@@ -343,7 +316,6 @@ function Navbar() {
                 </div>
               </div>
 
-              {/* Solutions Section */}
               <div>
                 <div className="px-3 pb-2 text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
                   <Network className="w-3.5 h-3.5" /> Solutions
@@ -366,7 +338,6 @@ function Navbar() {
                 </div>
               </div>
 
-              {/* AIP Section */}
               <div>
                 <Link href="/aip">
                   <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-white hover:bg-purple-500/20 transition-all cursor-pointer">
@@ -382,7 +353,6 @@ function Navbar() {
                 </Link>
               </div>
 
-              {/* Resources & Company Grid */}
               <div className="grid grid-cols-2 gap-4 pt-2">
                 <div>
                   <div className="px-3 pb-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">Resources</div>
@@ -396,7 +366,6 @@ function Navbar() {
                     ))}
                   </div>
                 </div>
-
                 <div>
                   <div className="px-3 pb-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">Company</div>
                   <div className="space-y-1">
@@ -411,26 +380,24 @@ function Navbar() {
                 </div>
               </div>
 
-              {/* Mobile CTA Footer */}
               <div className="pt-4 border-t border-white/10 space-y-2">
                 <Button size="lg" variant="gradient" asChild className="w-full justify-center shadow-xl shadow-primary/20">
                   <Link href="/contact">Talk to us</Link>
                 </Button>
                 <div className="flex items-center justify-between gap-2 pt-1">
                   <Button size="sm" variant="outline" asChild className="flex-1 border-white/10">
-                    <Link href="/ideas">💡 Ideas Lab</Link>
+                    <Link href="/ideas">Ideas Lab</Link>
                   </Button>
-                  <a 
-                    href="https://recruit.roaradd.com/login" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <a
+                    href="https://recruit.roaradd.com/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex-1 text-xs text-center font-semibold py-2 px-3 rounded-md border border-purple-500/30 text-purple-300 hover:bg-purple-500/10 transition-colors"
                   >
-                    🔐 Employee Login
+                    Staff login
                   </a>
                 </div>
               </div>
-
             </div>
           </motion.div>
         )}
@@ -444,7 +411,6 @@ function Footer() {
     <footer className="border-t border-white/5 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
-          
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center">
@@ -456,18 +422,16 @@ function Footer() {
               Infrastructure and intelligence for the next generation of industry.
             </p>
           </div>
-
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Products</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/photonic-cpo" className="hover:text-white transition-colors">Photonic-CPO v4</Link></li>
               <li><Link href="/trackit" className="hover:text-white transition-colors">Trackit</Link></li>
               <li><Link href="/farm" className="hover:text-white transition-colors">Farm</Link></li>
-              <li><Link href="/ideas/solareye" className="hover:text-white transition-colors">SolarEye</Link></li>
-              <li><Link href="/ideas/polehive" className="hover:text-white transition-colors">PoleHive</Link></li>
+              <li><Link href="/aip" className="hover:text-white transition-colors">AIP Gateway</Link></li>
+              <li><Link href="/ideas" className="hover:text-white transition-colors">Ideas Lab</Link></li>
             </ul>
           </div>
-
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Solutions</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -478,31 +442,27 @@ function Footer() {
               <li><Link href="/solutions/it-modernization" className="hover:text-white transition-colors">IT Modernization</Link></li>
             </ul>
           </div>
-
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-              <li><Link href="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
+              <li><Link href="/case-studies" className="hover:text-white transition-colors">Field notes</Link></li>
               <li><Link href="/whitepapers" className="hover:text-white transition-colors">Whitepapers</Link></li>
-              <li><Link href="/docs" className="hover:text-white transition-colors">Documentation</Link></li>
-              <li><Link href="/changelog" className="hover:text-white transition-colors">Changelog</Link></li>
+              <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
+              <li><Link href="/terms" className="hover:text-white transition-colors">Terms</Link></li>
             </ul>
           </div>
-
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Company</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/team" className="hover:text-white transition-colors">Team</Link></li>
-              <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               <li><Link href="/ideas" className="hover:text-white transition-colors">Ideas Lab</Link></li>
+              <li><a href="https://recruit.roaradd.com/login" className="hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Staff login</a></li>
             </ul>
           </div>
-
         </div>
-
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/5 text-sm text-muted-foreground gap-4">
           <p>© {new Date().getFullYear()} RoarAdd LLC. All rights reserved. Loganville, GA.</p>
           <div className="flex flex-wrap gap-6 items-center">
@@ -521,97 +481,39 @@ function Footer() {
 function Router() {
   return (
     <>
+      <Seo />
       <Navbar />
       <Switch>
-        {/* Core & Home */}
         <Route path="/" component={Home} />
-
-        {/* Products */}
         <Route path="/photonic-cpo" component={PhotonicCPO} />
         <Route path="/products/photonic-cpo" component={PhotonicCPO} />
         <Route path="/trackit" component={Trackit} />
+        <Route path="/pharmatrade" component={PharmaTrade} />
         <Route path="/farm" component={Farm} />
         <Route path="/ideas/solareye" component={SolarEye} />
         <Route path="/ideas/polehive" component={PoleHive} />
-
-        {/* Solutions (Industry & Use-Case Focused) */}
-        <Route path="/solutions/ai-infrastructure">
-          {() => <SolutionDetail solutionKey="ai-infrastructure" />}
-        </Route>
-        <Route path="/solutions/agriculture">
-          {() => <SolutionDetail solutionKey="agriculture" />}
-        </Route>
-        <Route path="/solutions/enterprise-ops">
-          {() => <SolutionDetail solutionKey="enterprise-ops" />}
-        </Route>
-        <Route path="/solutions/ai-agents">
-          {() => <SolutionDetail solutionKey="ai-agents" />}
-        </Route>
-        <Route path="/solutions/it-modernization">
-          {() => <SolutionDetail solutionKey="it-modernization" />}
-        </Route>
-
-        {/* AIP & Services */}
+        <Route path="/solutions/ai-infrastructure">{() => <SolutionDetail solutionKey="ai-infrastructure" />}</Route>
+        <Route path="/solutions/agriculture">{() => <SolutionDetail solutionKey="agriculture" />}</Route>
+        <Route path="/solutions/enterprise-ops">{() => <SolutionDetail solutionKey="enterprise-ops" />}</Route>
+        <Route path="/solutions/ai-agents">{() => <SolutionDetail solutionKey="ai-agents" />}</Route>
+        <Route path="/solutions/it-modernization">{() => <SolutionDetail solutionKey="it-modernization" />}</Route>
         <Route path="/aip" component={AIP} />
         <Route path="/services/aip" component={AIP} />
         <Route path="/services/it-consulting" component={ITConsulting} />
-
-        {/* Company */}
         <Route path="/about" component={About} />
         <Route path="/team" component={Team} />
-        <Route path="/careers">
-          {() => (
-            <ComingSoon 
-              title="Careers & Opportunities" 
-              category="Careers" 
-              description="We are actively expanding our engineering, systems architecture, and autonomous AI research teams. Open positions and developer listings will be posted here shortly."
-            />
-          )}
-        </Route>
+        <Route path="/careers">{() => (<ComingSoon title="Careers & Opportunities" category="Careers" description="Open positions will be posted here shortly." />)}</Route>
         <Route path="/contact" component={Contact} />
         <Route path="/ideas" component={Ideas} />
-
-        {/* Resources */}
+        <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/blog" component={Blog} />
         <Route path="/case-studies" component={CaseStudies} />
         <Route path="/whitepapers" component={Whitepapers} />
-        <Route path="/docs">
-          {() => (
-            <ComingSoon 
-              title="Technical Documentation" 
-              category="Documentation" 
-              description="Comprehensive API references, SDK documentation, and architecture integration guides are currently being prepared."
-            />
-          )}
-        </Route>
-        <Route path="/documentation">
-          {() => (
-            <ComingSoon 
-              title="Technical Documentation" 
-              category="Documentation" 
-              description="Comprehensive API references, SDK documentation, and architecture integration guides are currently being prepared."
-            />
-          )}
-        </Route>
-        <Route path="/changelog">
-          {() => (
-            <ComingSoon 
-              title="Platform Changelog" 
-              category="Changelog" 
-              description="Track the latest feature releases, performance improvements, and protocol updates across the RoarAdd ecosystem."
-            />
-          )}
-        </Route>
-
-        {/* Legal */}
-        <Route path="/privacy">
-          {() => <Legal type="privacy" />}
-        </Route>
-        <Route path="/terms">
-          {() => <Legal type="terms" />}
-        </Route>
-
-        {/* 404 Fallback */}
+        <Route path="/docs">{() => (<ComingSoon title="Technical Documentation" category="Documentation" description="API references and integration guides are being prepared." />)}</Route>
+        <Route path="/documentation">{() => (<ComingSoon title="Technical Documentation" category="Documentation" description="API references and integration guides are being prepared." />)}</Route>
+        <Route path="/changelog">{() => (<ComingSoon title="Platform Changelog" category="Changelog" description="Feature releases and protocol updates will be listed here." />)}</Route>
+        <Route path="/privacy">{() => <Legal type="privacy" />}</Route>
+        <Route path="/terms">{() => <Legal type="terms" />}</Route>
         <Route component={NotFound} />
       </Switch>
       <Footer />
