@@ -15,9 +15,9 @@ const features = [
 ];
 
 const pricing = [
-  { name: "Starter", price: "$29", period: "/mo", features: ["Up to 5 users", "10 dashboards", "30-day data history", "Email support"], cta: "Get Started", highlight: false },
-  { name: "Growth", price: "$99", period: "/mo", features: ["Up to 25 users", "Unlimited dashboards", "1-year data history", "Priority support", "API access"], cta: "Start Free Trial", highlight: true },
-  { name: "Enterprise", price: "Custom", period: "", features: ["Unlimited users", "Custom data retention", "Dedicated account manager", "SSO & advanced security", "Custom integrations"], cta: "Contact Sales", highlight: false },
+  { name: "Starter", price: "$29", period: "/mo", features: ["Up to 5 users", "10 dashboards", "30-day data history", "Email support"], cta: "Request Starter", highlight: false },
+  { name: "Growth", price: "$99", period: "/mo", features: ["Up to 25 users", "Unlimited dashboards", "1-year data history", "Priority support", "API access"], cta: "Request Growth", highlight: true },
+  { name: "Enterprise", price: "Custom", period: "", features: ["Unlimited users", "Custom data retention", "Dedicated account manager", "SSO & advanced security", "Custom integrations"], cta: "Talk to sales", highlight: false },
 ];
 
 export default function Trackit() {
@@ -27,7 +27,6 @@ export default function Trackit() {
       <div className="fixed top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/15 blur-[140px] rounded-full pointer-events-none" />
 
       <main className="pt-20">
-        {/* HERO */}
         <section className="py-24">
           <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
@@ -44,12 +43,16 @@ export default function Trackit() {
                 Trackit is the smart analytics and tracking platform for modern teams. From KPIs to daily tasks, get full visibility in one place.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="gradient" className="gap-2 group">
-                  Start Free Trial <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <Button size="lg" variant="gradient" className="gap-2 group" asChild>
+                  <Link href="/contact?intent=trackit-trial">
+                    Request a trial <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </Button>
-                <Button size="lg" variant="outline">Watch Demo</Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/contact?intent=trackit-demo">Request a walkthrough</Link>
+                </Button>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground">No credit card required. 14-day free trial.</p>
+              <p className="mt-4 text-sm text-muted-foreground">Trials are provisioned by the RoarAdd team. No public self-serve checkout yet.</p>
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative">
               <div className="glass-panel rounded-3xl p-6 border border-primary/20">
@@ -80,7 +83,6 @@ export default function Trackit() {
           </div>
         </section>
 
-        {/* FEATURES */}
         <section className="py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
@@ -103,12 +105,11 @@ export default function Trackit() {
           </div>
         </section>
 
-        {/* PRICING */}
         <section className="py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, transparent pricing</h2>
-              <p className="text-muted-foreground text-lg">Start free. Scale as you grow.</p>
+              <p className="text-muted-foreground text-lg">Published list prices. Access is set up after you contact us.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {pricing.map((plan, i) => (
@@ -131,7 +132,9 @@ export default function Trackit() {
                           </li>
                         ))}
                       </ul>
-                      <Button className="w-full" variant={plan.highlight ? "gradient" : "outline"}>{plan.cta}</Button>
+                      <Button className="w-full" variant={plan.highlight ? "gradient" : "outline"} asChild>
+                        <Link href={plan.name === "Enterprise" ? "/contact?intent=trackit-enterprise" : "/contact?intent=trackit-trial"}>{plan.cta}</Link>
+                      </Button>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -140,7 +143,6 @@ export default function Trackit() {
           </div>
         </section>
 
-        {/* CROSS-LINK */}
         <section className="py-16 border-t border-white/5 bg-secondary/30">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <p className="text-muted-foreground mb-4">Need Trackit deployed across your enterprise?</p>
