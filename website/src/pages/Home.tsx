@@ -1,20 +1,20 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { 
-  ArrowRight, 
-  Bot, 
-  Building2, 
-  Cpu, 
-  Hexagon, 
-  LayoutDashboard, 
-  Leaf, 
-  Lock, 
+import {
+  ArrowRight,
+  Bot,
+  Building2,
+  Cpu,
+  Hexagon,
+  LayoutDashboard,
+  Leaf,
+  Lock,
   Network,
   ShieldCheck,
-  Sparkles, 
-  Sun, 
-  Users, 
-  Zap 
+  Sparkles,
+  Sun,
+  Users,
+  Zap
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,10 +31,10 @@ function FloatingOrb({ className }: { className: string }) {
 }
 
 const STATS_DATA = [
-  { value: "12+", label: "Industries Served", desc: "AI Infrastructure, AgriTech, and Enterprise IT" },
-  { value: "500+", label: "Enterprise Seats", desc: "Deployments designed for secure, high-throughput scale" },
-  { value: "100%", label: "Human-in-the-Loop", desc: "Deterministic safety gates built into every agent workflow" },
-  { value: "3", label: "Core Products", desc: "Foundational hardware, software, and autonomous protocols" },
+  { value: "3", label: "Core products", desc: "Photonic-CPO, Trackit, and Farm" },
+  { value: "1", label: "Agent gateway", desc: "AIP for AI-to-AI workflows with human gates" },
+  { value: "100%", label: "Human-in-the-loop", desc: "High-risk agent actions require approval" },
+  { value: "GA", label: "Loganville base", desc: "RoarAdd LLC, United States" },
 ];
 
 const PRODUCTS_LIST = [
@@ -70,22 +70,22 @@ const PRODUCTS_LIST = [
   },
   {
     href: "/ideas/solareye",
-    badge: "Fleet Intelligence",
+    badge: "Ideas Lab",
     badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
     icon: Sun,
     iconColor: "text-amber-400",
     name: "SolarEye",
-    desc: "Road-as-a-sensor fleet intelligence. Turn commercial vehicle fleets into real-time road condition and pavement telemetry networks.",
+    desc: "Research concept — road-as-a-sensor fleet intelligence. Not a shipped product yet.",
     tags: ["Pavement Telemetry", "Fleet Sensor Kits", "Edge Vision", "Municipal Dashboards"]
   },
   {
     href: "/ideas/polehive",
-    badge: "Pollinator Science",
+    badge: "Ideas Lab",
     badgeColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
     icon: Hexagon,
     iconColor: "text-purple-400",
     name: "PoleHive",
-    desc: "Smart beehive system. Acoustic analysis and internal climate sensing to monitor colony health and pollination viability.",
+    desc: "Research concept — modular smart beehive with acoustic analysis. Not a shipped product yet.",
     tags: ["Acoustic Biomarkers", "Brood Temperature", "Cellular Uplink", "Colony Analytics"]
   }
 ];
@@ -130,27 +130,19 @@ export default function Home() {
       <FloatingOrb className="top-20 left-1/4 w-[500px] h-[500px] bg-primary/10 blur-[140px]" />
       <FloatingOrb className="top-40 right-1/4 w-[400px] h-[400px] bg-purple-500/10 blur-[120px]" />
       <FloatingOrb className="bottom-1/3 left-1/3 w-[350px] h-[350px] bg-blue-500/10 blur-[100px]" />
-
       <main>
-        {/* =========================================================================
-            HERO SECTION (Exact Copy Match per Master Prompt)
-        ========================================================================= */}
         <section className="relative min-h-[90vh] flex items-center pt-24 pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center w-full">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              
               <Badge variant="outline" className="mb-6 py-1.5 px-4 bg-primary/10 border-primary/20 text-primary uppercase tracking-widest text-xs">
                 THE ROARADD ECOSYSTEM
               </Badge>
-
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 max-w-5xl mx-auto leading-[1.1] text-white">
                 Infrastructure and intelligence for the <span className="text-gradient">next generation of industry.</span>
               </h1>
-
               <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
                 AI-native software, silicon photonics, and autonomous agent gateways — built to work together.
               </p>
-
               <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
                 <Button size="lg" variant="gradient" asChild className="gap-2 shadow-xl shadow-primary/20 text-base">
                   <a href="#products">Explore Products <ArrowRight className="w-4 h-4" /></a>
@@ -159,11 +151,9 @@ export default function Home() {
                   <Link href="/contact">Talk to us</Link>
                 </Button>
               </div>
-
-              {/* STATS ROW (12+ / 500+ / 100% / 4) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto text-left">
                 {STATS_DATA.map((s, i) => (
-                  <motion.div 
+                  <motion.div
                     key={s.label}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -176,23 +166,17 @@ export default function Home() {
                   </motion.div>
                 ))}
               </div>
-
             </motion.div>
           </div>
         </section>
 
-        {/* =========================================================================
-            TRUST & INDUSTRY SOCIAL PROOF SECTION
-        ========================================================================= */}
         <section className="py-12 border-y border-white/5 bg-white/[0.01]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-8">
               <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                Trusted by engineering & operations teams across key industries
+                Built for engineering and operations work across these domains
               </p>
             </div>
-
-            {/* Industry Domains Badges (Real implied industries, Zero fake logos) */}
             <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-6">
               {[
                 "AI Infrastructure & Compute Clusters",
@@ -205,19 +189,14 @@ export default function Home() {
                 </div>
               ))}
             </div>
-
-            {/* Awaiting Official Assets Container */}
             <div className="text-center pt-2">
               <span className="text-[11px] text-muted-foreground/60 italic">
-                Client & Partner Institutional Portfolio (Official logo assets undergoing partner clearance)
+                Named customer logos will appear here after written permission.
               </span>
             </div>
           </div>
         </section>
 
-        {/* =========================================================================
-            PRODUCTS SECTION (All 6 Products in Strict Order)
-        ========================================================================= */}
         <section id="products" className="py-24 border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-16">
@@ -229,16 +208,15 @@ export default function Home() {
                 Purpose-built hardware and software engineered for high-performance enterprise scale.
               </p>
             </div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {PRODUCTS_LIST.map((prod, idx) => {
                 const Icon = prod.icon;
                 return (
-                  <motion.div 
-                    key={prod.name} 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    viewport={{ once: true }} 
+                  <motion.div
+                    key={prod.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
                   >
                     <Link href={prod.href}>
@@ -270,9 +248,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* =========================================================================
-            SOLUTIONS SECTION (Industry & Use-Case Focused)
-        ========================================================================= */}
         <section className="py-24 border-t border-white/5 bg-secondary/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-16">
@@ -284,7 +259,6 @@ export default function Home() {
                 Discover how RoarAdd technologies combine to solve domain-specific bottlenecks.
               </p>
             </div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {SOLUTIONS_LIST.map((sol, i) => {
                 const Icon = sol.icon;
@@ -311,9 +285,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* =========================================================================
-            AIP CALLOUT SECTION
-        ========================================================================= */}
         <section className="py-24 border-t border-white/5">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="glass-panel rounded-3xl p-8 md:p-12 border border-purple-500/20 bg-gradient-to-br from-purple-500/10 via-background to-background relative overflow-hidden">
@@ -341,9 +312,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* =========================================================================
-            FINAL CALL TO ACTION
-        ========================================================================= */}
         <section className="py-24 border-t border-white/5 bg-secondary/20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -367,7 +335,6 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
-
       </main>
     </div>
   );
