@@ -6,9 +6,9 @@ import { Badge } from "@/components/ui/badge";
 
 const stats = [
   { value: "2023", label: "Founded" },
-  { value: "12+", label: "Industries Served" },
-  { value: "4", label: "Core Products" },
-  { value: "500+", label: "Enterprise Seats" },
+  { value: "3", label: "Core products" },
+  { value: "1", label: "Agent gateway" },
+  { value: "GA", label: "Loganville, USA" },
 ];
 
 const values = [
@@ -32,8 +32,6 @@ export default function About() {
     <div className="relative min-h-screen bg-background overflow-hidden">
       <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
       <main className="pt-16">
-
-        {/* Hero */}
         <section className="py-20 sm:py-28">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -58,7 +56,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Stats */}
         <section className="py-12 border-y border-white/5 bg-secondary/20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -72,7 +69,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Founder Story */}
         <section className="py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -83,7 +79,7 @@ export default function About() {
                   Kalyan is a seasoned IT professional and entrepreneur with deep expertise in enterprise technology, cloud infrastructure, and utility systems. With hands-on experience delivering Oracle Utilities, SAP CRM/Billing, and cloud transformation programs at major utility companies, he brings rare cross-domain technical and operational depth to RoarAdd.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  Based in the Atlanta, Georgia area, Kalyan founded RoarAdd LLC to bridge the gap between cutting-edge AI, sustainable agriculture, and enterprise software — creating an ecosystem of tools that are both technically rigorous and practically useful. From AI-powered bee hive monitoring to enterprise analytics platforms, every product reflects his belief that great technology should work across industries.
+                  Based in Loganville, Georgia, Kalyan founded RoarAdd LLC to bridge the gap between cutting-edge AI, sustainable agriculture, and enterprise software — creating an ecosystem of tools that are both technically rigorous and practically useful. Ideas Lab concepts such as hive monitoring sit beside shipped products; every line of work reflects his belief that great technology should work across industries.
                 </p>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <MapPin className="w-4 h-4 text-primary" />
@@ -116,7 +112,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Mission */}
         <section className="py-20 bg-secondary/20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <Badge variant="outline" className="mb-4">Our Mission</Badge>
@@ -127,7 +122,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Values */}
         <section className="py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-12">
@@ -146,7 +140,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Products Overview */}
         <section className="py-20 bg-secondary/20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-12">
@@ -171,7 +164,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* NVIDIA / Partnership CTA */}
         <section className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <div className="glass-panel rounded-3xl p-8 sm:p-12 text-center border border-primary/20">
@@ -191,7 +183,6 @@ export default function About() {
             </div>
           </div>
         </section>
-
       </main>
     </div>
   );
