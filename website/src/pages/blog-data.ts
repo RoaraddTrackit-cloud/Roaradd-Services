@@ -1,0 +1,45 @@
+export const POSTS = [
+  {
+    slug: "ai-to-ai-transactions",
+    title: "The Future of AI-to-AI Transactions",
+    excerpt: "A protocol layer that lets agents discover capabilities — and still requires a human before money or access moves.",
+    date: "April 12, 2026",
+    category: "AI Infrastructure",
+    author: "Kalyan Modium",
+    readTime: "6 min read",
+    body: [
+      "Most agent demos skip the hard part: what happens when one system can spend money, book inventory, or change production state.",
+      "RoarAdd's AIP design starts from a simple rule. Low-risk reads can be automated. High-risk writes need a human approval gate.",
+      "That is why the public site advertises a handshake and a capability manifest, not a fully autonomous marketplace. The protocol can exist without pretending the governance problem is solved.",
+      "If you are evaluating AIP, the useful question is not whether agents can talk. It is which actions you are willing to let them take without a person in the loop.",
+    ],
+  },
+  {
+    slug: "farm-iot-notes",
+    title: "Modernizing small-scale farming with IoT",
+    excerpt: "Low-power sensors only help if the software still works in a field with bad connectivity.",
+    date: "March 28, 2026",
+    category: "AgriTech",
+    author: "RoarAdd",
+    readTime: "8 min read",
+    body: [
+      "Farm software fails when it assumes warehouse Wi-Fi. Operators need logging that survives slow connections and outdoor use.",
+      "The Farm product is built around yield, field maps, weather correlation, inventory, and equipment hours — the records people already keep on paper or in spreadsheets.",
+      "PoleHive and related pollinator ideas live in the Ideas Lab until they are separately proven. Mixing a hive prototype with farm operations software is how messaging gets sloppy.",
+    ],
+  },
+  {
+    slug: "human-in-the-loop",
+    title: "Why human-in-the-loop is non-negotiable",
+    excerpt: "Automation is useful. Unreviewed side effects in production systems are not.",
+    date: "March 15, 2026",
+    category: "AI Safety",
+    author: "Kalyan Modium",
+    readTime: "5 min read",
+    body: [
+      "RoarAdd puts human-in-the-loop on the homepage because it is a product constraint, not a slogan.",
+      "In AIP, booking or other high-risk actions should stop for review. In enterprise analytics, alerts should be explainable. In farm systems, automated setpoints still need an operator who can override them.",
+      "That stance is slower than fully autonomous marketing copy. It is also the only way we will sell into regulated or safety-sensitive work.",
+    ],
+  },
+];
