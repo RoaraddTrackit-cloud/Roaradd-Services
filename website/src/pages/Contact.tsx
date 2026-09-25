@@ -4,12 +4,35 @@ import { ArrowRight, Bot, Building2, LayoutDashboard, Leaf, Mail, MapPin, Messag
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const intent = params.get("intent");
+    if (!intent) return;
+    const notes: Record<string, string> = {
+      "trackit-trial": "I would like to request a Trackit trial.",
+      "trackit-demo": "I would like a Trackit walkthrough.",
+      "trackit-enterprise": "I would like to talk about Trackit for enterprise.",
+      "farm-trial": "I would like to request Farm access.",
+      "farm-demo": "I would like a Farm walkthrough.",
+    };
+    if (notes[intent]) setForm((f) => ({ ...f, message: notes[intent] }));
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`RoarAdd inquiry from ${form.name || "website"}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company || "—"}\n\n${form.message}`
+    );
+    window.location.href = `mailto:kalyan.modium@roaradd.com?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+  };
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
       <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
@@ -31,8 +54,8 @@ export default function Contact() {
                   {submitted ? (
                     <div className="text-center py-12">
                       <MessageSquare className="w-12 h-12 text-green-400 mx-auto mb-4" />
-                      <h3 className="text-2xl font-bold text-white mb-3">Message sent!</h3>
-                      <p className="text-muted-foreground mb-6">We will get back to you within 1 to 2 business days.</p>
+                      <h3 className="text-2xl font-bold text-white mb-3">Open your email app</h3>
+                      <p className="text-muted-foreground mb-6">Your mail client should open with the message ready. If it does not, write us at kalyan.modium@roaradd.com. We reply within 1 to 2 business days.</p>
                       <Button variant="outline" onClick={() => setSubmitted(false)}>Send another</Button>
                     </div>
                   ) : (
@@ -76,7 +99,7 @@ export default function Contact() {
                       { icon: LayoutDashboard, color: "text-primary", name: "Trackit", href: "/trackit" },
                       { icon: Leaf, color: "text-green-400", name: "Farm", href: "/farm" },
                       { icon: Building2, color: "text-blue-400", name: "IT Consulting", href: "/services/it-consulting" },
-                      { icon: Bot, color: "text-purple-400", name: "AIP", href: "/services/aip" },
+                      { icon: Bot, color: "text-purple-400", name: "AIP", href: "/aip" },
                     ].map(item => (
                       <Link key={item.name} href={item.href}>
                         <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">

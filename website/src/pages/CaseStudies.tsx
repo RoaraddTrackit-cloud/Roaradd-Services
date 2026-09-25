@@ -7,34 +7,37 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 const studies = [
   {
     id: 1,
-    title: "Revolutionizing Beekeeping with PoleHive",
-    excerpt: "How a local apiary increased honey yield by 40% using our autonomous smart hive technology.",
-    date: "April 5, 2026",
-    category: "AgriTech",
-    author: "RoarAdd Team",
-    readTime: "10 min read",
-    href: "/ideas/polehive"
+    title: "PoleHive — prototype notes, not a customer case study",
+    excerpt: "PoleHive is an Ideas Lab concept for modular smart hives. We do not have a published customer deployment or verified yield result to report.",
+    date: "September 2026",
+    category: "Ideas Lab",
+    author: "RoarAdd",
+    readTime: "4 min read",
+    href: "/ideas/polehive",
+    cta: "View concept",
   },
   {
     id: 2,
-    title: "Scaling Enterprise Analytics for Fleet Management",
-    excerpt: "Implementation of SolarEye across a fleet of 500 vehicles to optimize route efficiency.",
-    date: "March 22, 2026",
-    category: "Fleet Intelligence",
+    title: "SolarEye — fleet sensing concept",
+    excerpt: "SolarEye explores turning commercial vehicles into road-condition sensors. This is a research direction, not a completed 500-vehicle rollout.",
+    date: "September 2026",
+    category: "Ideas Lab",
     author: "Kalyan Modium",
-    readTime: "12 min read",
-    href: "/ideas/solareye"
+    readTime: "4 min read",
+    href: "/ideas/solareye",
+    cta: "View concept",
   },
   {
     id: 3,
-    title: "AI-to-AI Transaction Protocol in Fintech",
-    excerpt: "A pilot program using our AIP gateway to automate B2B negotiations and payments.",
-    date: "February 18, 2026",
-    category: "Fintech",
-    author: "Marcus T.",
-    readTime: "15 min read",
-    href: "/services/aip"
-  }
+    title: "AIP human-in-the-loop design",
+    excerpt: "How the AIP gateway is designed so high-risk agent actions require human approval before anything executes.",
+    date: "September 2026",
+    category: "Product design",
+    author: "RoarAdd",
+    readTime: "6 min read",
+    href: "/aip",
+    cta: "Read the AIP overview",
+  },
 ];
 
 export default function CaseStudies() {
@@ -56,13 +59,13 @@ export default function CaseStudies() {
                 </button>
               </Link>
               <Badge variant="outline" className="mb-6 py-1.5 px-4 bg-primary/10 border-primary/20 text-primary uppercase tracking-widest text-xs">
-                Success Stories
+                Field notes
               </Badge>
               <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                Real Results. <br /><span className="text-gradient">Case Studies.</span>
+                Honest notes. <br /><span className="text-gradient">No invented wins.</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-                Detailed breakdowns of how RoarAdd products and services solve complex challenges and drive measurable impact.
+                RoarAdd will publish named customer case studies when we have permission and measured results. Until then, this page points to real product and prototype work only.
               </p>
             </motion.div>
 
@@ -97,7 +100,7 @@ export default function CaseStudies() {
                           <div className="text-xs text-muted-foreground">{study.date}</div>
                         </div>
                         <div className="mt-4 flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all">
-                          Read Case Study <ArrowRight className="w-4 h-4" />
+                          {study.cta} <ArrowRight className="w-4 h-4" />
                         </div>
                       </CardContent>
                     </Card>
