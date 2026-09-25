@@ -10,7 +10,7 @@ export default function Team() {
     {
       name: "Kalyan Modium",
       role: "Founder & Chief Executive Officer",
-      location: "Atlanta, GA",
+      location: "Loganville, GA",
       email: "kalyan.modium@roaradd.com",
       bio: "Enterprise technology architect and entrepreneur with deep expertise in cloud infrastructure, utility platforms (Oracle/SAP), autonomous agent systems, and sustainable hardware innovations.",
       domains: ["Enterprise Systems", "Silicon Photonics", "Autonomous Agents", "Cloud Scale"]
@@ -60,9 +60,8 @@ export default function Team() {
               </p>
             </motion.div>
 
-            {/* Leadership Card */}
             <div className="max-w-3xl mx-auto mb-20">
-              {leadership.map((leader, i) => (
+              {leadership.map((leader) => (
                 <motion.div key={leader.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
                   <Card className="glass-panel border-white/10 p-8">
                     <div className="flex flex-col md:flex-row gap-6 items-start">
@@ -91,7 +90,6 @@ export default function Team() {
               ))}
             </div>
 
-            {/* Practice Areas */}
             <div className="mb-16">
               <div className="text-center mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Core Engineering Disciplines</h2>
@@ -115,7 +113,6 @@ export default function Team() {
               </div>
             </div>
 
-            {/* CTA */}
             <div className="text-center pt-8 border-t border-white/5">
               <p className="text-muted-foreground mb-6">Interested in collaborating or joining our technical advisory network?</p>
               <div className="flex justify-center gap-4">
